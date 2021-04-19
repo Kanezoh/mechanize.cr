@@ -1,0 +1,9 @@
+name: mechanize
+version: 0.1.0
+
+authors:
+  - Kanezoh <asfaltmanta114@gmail.com>
+
+crystal: 0.36.1
+
+license: MIT
