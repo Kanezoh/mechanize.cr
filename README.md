@@ -1,6 +1,6 @@
-# mechanize
+# mechanize(under construction)
 
-TODO: Write a description here
+This project is inspired by Ruby's [mechanize](https://github.com/sparklemotion/mechanize).
 
 ## Installation
 
