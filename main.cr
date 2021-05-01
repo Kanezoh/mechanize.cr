@@ -1,5 +1,6 @@
 require "./src/mechanize.cr"
 
 agent = Mechanize.new
-page = agent.get "http://example.com/"
+agent.request_headers = HTTP::Headers{"Foo" => "Bar"}
+page = agent.get("https://example.com")
 puts page

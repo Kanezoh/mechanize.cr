@@ -14,4 +14,12 @@ class Mechanize
     #yield page if block_given?
     page
   end
+
+  def request_headers
+    @agent.request_headers
+  end
+
+  def request_headers=(request_headers)
+    @agent.request_headers = request_headers
+  end
 end
