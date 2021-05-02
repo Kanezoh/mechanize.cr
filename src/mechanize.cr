@@ -7,9 +7,9 @@ class Mechanize
     @agent = MechanizeCr::HTTP::Agent.new
   end
 
-  def get(uri : String | URI, headers = HTTP::Headers.new)
+  def get(uri : String | URI, headers = HTTP::Headers.new, params : Hash(String, String | Array(String)) = Hash(String,String).new)
     method = :get
-    page = @agent.fetch uri, method, headers
+    page = @agent.fetch uri, method, headers, params
     #add_to_history(page)
     #yield page if block_given?
     page
