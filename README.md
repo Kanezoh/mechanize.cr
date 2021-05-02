@@ -1,6 +1,7 @@
 # mechanize(under construction)
 
 This project is inspired by Ruby's [mechanize](https://github.com/sparklemotion/mechanize).
+The purpose is to cover all the features of original one.
 
 ## Installation
 
