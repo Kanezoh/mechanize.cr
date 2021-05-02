@@ -12,6 +12,7 @@ module MechanizeCr
 
       def fetch(uri, method = :get, headers = HTTP::Headers.new)
         add_request_headers(headers)
+        
         response = http_request uri, method
         puts response.not_nil!.body
       end

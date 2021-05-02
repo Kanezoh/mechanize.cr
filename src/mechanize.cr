@@ -1,4 +1,4 @@
-require "./http/agent"
+require "./mechanize/http/agent"
 
 class Mechanize
   VERSION = "0.1.0"
