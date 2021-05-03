@@ -4,4 +4,5 @@ agent = Mechanize.new
 agent.request_headers = HTTP::Headers{"Foo" => "Bar"}
 params = {"hoge" => "hoge"}
 page = agent.get("http://example.com/", params: params)
-puts page
+puts page.code
+puts page.body
