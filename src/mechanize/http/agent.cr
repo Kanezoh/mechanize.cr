@@ -21,13 +21,13 @@ module MechanizeCr
       end
 
       def http_request(uri, method, params)
-        request = ::HTTP::Client.new(uri.host.not_nil!)
+        client = ::HTTP::Client.new(uri.host.not_nil!)
         path = compose_path(uri, params)
         case uri.scheme.not_nil!.downcase
         when "http", "https" then
           case method
           when :get
-            request.get(path, headers: request_headers)
+            client.get(path, headers: request_headers)
           end
         end
       end
