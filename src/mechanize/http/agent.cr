@@ -4,17 +4,20 @@ require "http/client"
 module MechanizeCr
   module HTTP
     class Agent
-      property :request_headers
+      property :request_headers, :context
 
-      def initialize()
+      def initialize(@context : Mechanize | Nil = nil)
         @request_headers = ::HTTP::Headers.new
+        @context = context
       end
 
       def fetch(uri, method = :get, headers = HTTP::Headers.new, params = Hash(String,String).new)
         add_request_headers(headers)
         params = hash_to_params(params)
         response = http_request uri, method, params
-        puts response.not_nil!.body
+        body = response.not_nil!.body
+        page = response_parse(response, body, uri)
+        puts page.code
       end
 
       def http_request(uri, method, params)
@@ -44,6 +47,10 @@ module MechanizeCr
         path = uri.path
         path += "?#{params}" unless params.empty?
         path
+      end
+
+      private def response_parse (response, body, uri)
+        @context.not_nil!.parse uri, response, body
       end
     end
   end
