@@ -12,16 +12,15 @@ module MechanizeCr
       end
 
       def fetch(uri, method = :get, headers = HTTP::Headers.new, params = Hash(String,String).new)
+        uri = URI.parse(uri)
         add_request_headers(headers)
         params = hash_to_params(params)
         response = http_request uri, method, params
         body = response.not_nil!.body
         page = response_parse(response, body, uri)
-        puts page.code
       end
 
       def http_request(uri, method, params)
-        uri = URI.parse(uri)
         request = ::HTTP::Client.new(uri.host.not_nil!)
         path = compose_path(uri, params)
         case uri.scheme.not_nil!.downcase
@@ -49,7 +48,7 @@ module MechanizeCr
         path
       end
 
-      private def response_parse (response, body, uri)
+      private def response_parse(response, body, uri)
         @context.not_nil!.parse uri, response, body
       end
     end
