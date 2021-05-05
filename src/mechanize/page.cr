@@ -11,4 +11,8 @@ class MechanizeCr::Page < MechanizeCr::File
   def parser : Myhtml::Parser
     @parser ||=  Myhtml::Parser.new(@body)
   end
+
+  def title
+    title = parser.css("title").first.inner_text
+  end
 end
