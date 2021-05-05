@@ -13,11 +13,14 @@ module MechanizeCr
 
       def fetch(uri, method = :get, headers = HTTP::Headers.new, params = Hash(String,String).new)
         uri = URI.parse(uri)
-        add_request_headers(headers)
+        set_request_headers(headers)
         params = hash_to_params(params)
         response = http_request uri, method, params
         body = response.not_nil!.body
         page = response_parse(response, body, uri)
+        # save cookies
+        add_response_cookies(response, uri, page)
+        page
       end
 
       def http_request(uri, method, params)
@@ -32,7 +35,7 @@ module MechanizeCr
         end
       end
 
-      private def add_request_headers(headers)
+      private def set_request_headers(headers)
         headers.each do |k,v|
           request_headers[k] = v
         end
@@ -50,6 +53,20 @@ module MechanizeCr
 
       private def response_parse(response, body, uri)
         @context.not_nil!.parse uri, response, body
+      end
+
+      private def add_response_cookies(response, uri, page)
+        #if page.body =~ /Set-Cookie/
+        #  page.css("//head/meta[@http-equiv=\"Set-Cookie\"]").each do |meta|
+        #    save_cookies(uri, meta["content"])
+        #  end
+        #end
+        header_cookies = response.try &.cookies
+        if header_cookies.try &.empty?
+          request_headers
+        else
+          header_cookies.not_nil!.add_request_headers(request_headers)
+        end
       end
     end
   end
