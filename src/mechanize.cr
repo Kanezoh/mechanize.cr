@@ -23,7 +23,27 @@ class Mechanize
     node["enctype"] = "application/x-www-form-urlencoded"
 
     form = MechanizeCr::Form.new(node)
-    form.fields << MechanizeCr::FormContent::Field.new({"name" => "foo"}, "bar")
+    query.each do |k,v|
+      form.fields << MechanizeCr::FormContent::Field.new({"name" => k}, v)
+    end
+    #post_form(uri, form, headers)
+  end
+
+  def post_form(uri, form, headers)
+    #cur_page = form.page || current_page ||
+    #  Page.new
+
+    request_data = form.request_data
+
+    headers = {
+      "Content-Type"    => form.enctype,
+      "Content-Length"  => request_data.size.to_s,
+    }.merge headers
+
+    # fetch the page
+    page = @agent.fetch uri, :post, headers, [request_data], cur_page
+    add_to_history(page)
+    page
   end
 
   def request_headers
