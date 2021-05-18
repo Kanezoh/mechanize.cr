@@ -1,5 +1,6 @@
 require "./mechanize/http/agent"
 require "./mechanize/form"
+require "./mechanize/node"
 
 class Mechanize
   VERSION = "0.1.0"
@@ -18,7 +19,7 @@ class Mechanize
   end
 
   def post(uri : String | URI, headers = HTTP::Headers.new, query : Hash(String, String | Array(String)) = Hash(String,String).new)
-    node = Hash(String, String).new
+    node = Node.new(fake: true)
     node["method"] = "POST"
     node["enctype"] = "application/x-www-form-urlencoded"
 
