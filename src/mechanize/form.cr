@@ -20,7 +20,6 @@ class MechanizeCr::Form
     #@encoding = node['accept-charset'] || (page && page.encoding) || nil
     #@ignore_encoding_error = false
     parse
-    request_data
   end
 
   def request_data
@@ -31,7 +30,7 @@ class MechanizeCr::Form
     query = [] of String
     successful_controls = Array(MechanizeCr::FormContent::Field | MechanizeCr::FormContent::CheckBox).new
     fields.each do |elm|
-      successful_controls.push(elm)
+      successful_controls << elm
     end
     checkboxes.each do |elm|
       if elm.checked
@@ -41,7 +40,7 @@ class MechanizeCr::Form
   end
 
   def parse
-    @fields =  Array(MechanizeCr::FormContent::Field).new
+    @fields = Array(MechanizeCr::FormContent::Field).new
     @checkboxes = Array(MechanizeCr::FormContent::CheckBox).new
     @node.search("input").not_nil!.each do |node|
     end
