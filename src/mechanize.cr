@@ -25,7 +25,9 @@ class Mechanize
 
     form = MechanizeCr::Form.new(node)
     query.each do |k,v|
-      form.fields << MechanizeCr::FormContent::Field.new({"name" => k}, v)
+      node = Node.new
+      node["name"] = k
+      form.fields << MechanizeCr::FormContent::Field.new(node, v)
     end
     #post_form(uri, form, headers)
   end
