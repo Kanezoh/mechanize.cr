@@ -4,6 +4,7 @@ require "./form/check_box"
 class MechanizeCr::Form
   getter fields : Array(MechanizeCr::FormContent::Field)
   getter checkboxes : Array(MechanizeCr::FormContent::CheckBox)
+  getter enctype : String
 
   def initialize(node : Node)
     @enctype = node["enctype"] || "application/x-www-form-urlencoded"
@@ -24,10 +25,11 @@ class MechanizeCr::Form
 
   def request_data
     query_params = build_query
+    build_query_string(query_params)
   end
 
-  def build_query()
-    query = [] of String
+  def build_query
+    query = [] of Array(String)
     successful_controls = Array(MechanizeCr::FormContent::Field | MechanizeCr::FormContent::CheckBox).new
     fields.each do |elm|
       successful_controls << elm
@@ -37,6 +39,11 @@ class MechanizeCr::Form
         successful_controls << elm
       end
     end
+    successful_controls.each do |ctrl|
+      value = ctrl.query_value
+      query.push(value)
+    end
+    query
   end
 
   def parse
@@ -44,5 +51,12 @@ class MechanizeCr::Form
     @checkboxes = Array(MechanizeCr::FormContent::CheckBox).new
     @node.search("input").not_nil!.each do |node|
     end
+  end
+
+  def build_query_string(params : Array(Array(String)))
+    params.reduce("") do |acc, arr|
+      hash = { arr[0] => arr[1] }
+      acc + URI::Params.encode(hash) + '&'
+    end.rchop
   end
 end

@@ -9,6 +9,6 @@ class MechanizeCr::FormContent::Field
   end
 
   def query_value
-    [[@name, @value || ""]]
+    [@name, @value || ""]
   end
 end

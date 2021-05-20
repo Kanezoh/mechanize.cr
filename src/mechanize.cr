@@ -29,7 +29,7 @@ class Mechanize
       node["name"] = k
       form.fields << MechanizeCr::FormContent::Field.new(node, v)
     end
-    #post_form(uri, form, headers)
+    post_form(uri, form, headers)
   end
 
   def post_form(uri, form, headers)
@@ -37,16 +37,16 @@ class Mechanize
     #  Page.new
 
     request_data = form.request_data
-
-    headers = {
+    content_headers = ::HTTP::Headers{
       "Content-Type"    => form.enctype,
       "Content-Length"  => request_data.size.to_s,
-    }.merge headers
+    }
+    headers.merge!(content_headers)
 
     # fetch the page
-    page = @agent.fetch uri, :post, headers, [request_data], cur_page
-    add_to_history(page)
-    page
+    #page = @agent.fetch uri, :post, headers, [request_data]#, cur_page
+    #add_to_history(page)
+    #page
   end
 
   def request_headers
