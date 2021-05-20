@@ -1,6 +1,7 @@
 require "./mechanize/http/agent"
 require "./mechanize/form"
 require "./mechanize/node"
+require "./mechanize/page"
 
 class Mechanize
   VERSION = "0.1.0"
@@ -44,9 +45,9 @@ class Mechanize
     headers.merge!(content_headers)
 
     # fetch the page
-    #page = @agent.fetch uri, :post, headers, [request_data]#, cur_page
+    page = @agent.fetch uri, :post, headers, [request_data]#, cur_page
     #add_to_history(page)
-    #page
+    page
   end
 
   def request_headers

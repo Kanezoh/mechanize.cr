@@ -14,8 +14,8 @@ module MechanizeCr
       def fetch(uri, method = :get, headers = HTTP::Headers.new, params = Hash(String,String).new)
         uri = URI.parse(uri)
         set_request_headers(headers)
-        params = hash_to_params(params)
-        response = http_request uri, method, params
+        uri, params = resolve_parameters(uri, method, params)
+        response = http_request(uri, method, params)
         body = response.not_nil!.body
         page = response_parse(response, body, uri)
         # save cookies
@@ -24,13 +24,13 @@ module MechanizeCr
       end
 
       def http_request(uri, method, params)
-        client = ::HTTP::Client.new(uri.host.not_nil!)
-        path = compose_path(uri, params)
         case uri.scheme.not_nil!.downcase
         when "http", "https" then
           case method
           when :get
-            client.get(path, headers: request_headers)
+            ::HTTP::Client.get(uri, headers: request_headers)
+          when :post
+            #client.post(path)
           end
         end
       end
@@ -41,14 +41,15 @@ module MechanizeCr
         end
       end
 
-      private def hash_to_params(params)
-        URI::Params.encode(params)
-      end
-
-      private def compose_path(uri, params)
-        path = uri.path
-        path += "?#{params}" unless params.empty?
-        path
+      private def resolve_parameters(uri, method, params)
+        case method
+        when :get
+          query = URI::Params.encode(params)
+          uri.query = query
+          return uri, nil
+        else
+          return uri, params
+        end
       end
 
       private def response_parse(response, body, uri)
