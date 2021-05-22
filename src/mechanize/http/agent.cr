@@ -30,7 +30,7 @@ module MechanizeCr
           when :get
             ::HTTP::Client.get(uri, headers: request_headers)
           when :post
-            #client.post(path)
+            ::HTTP::Client.post(uri, headers: request_headers, form: params.not_nil!.fetch("value", ""))
           end
         end
       end
@@ -47,6 +47,8 @@ module MechanizeCr
           query = URI::Params.encode(params)
           uri.query = query
           return uri, nil
+        when :post
+          return uri, params
         else
           return uri, params
         end

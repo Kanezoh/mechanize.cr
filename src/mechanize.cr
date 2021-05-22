@@ -45,7 +45,7 @@ class Mechanize
     headers.merge!(content_headers)
 
     # fetch the page
-    page = @agent.fetch uri, :post, headers, [request_data]#, cur_page
+    page = @agent.fetch(uri, :post, headers: headers, params: {"value" => request_data })#, cur_page
     #add_to_history(page)
     page
   end
