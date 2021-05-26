@@ -5,13 +5,15 @@ class MechanizeCr::Form
   getter fields : Array(MechanizeCr::FormContent::Field)
   getter checkboxes : Array(MechanizeCr::FormContent::CheckBox)
   getter enctype : String
+  property action : String
 
   def initialize(node : Node | Myhtml::Node)
-    @enctype = node["enctype"] || "application/x-www-form-urlencoded"
+    @enctype = node["enctype"]? ? node["enctype"] : "application/x-www-form-urlencoded"
     @node             = node
     @fields = Array(MechanizeCr::FormContent::Field).new
     @checkboxes = Array(MechanizeCr::FormContent::CheckBox).new
     #@action           = Mechanize::Util.html_unescape(node['action'])
+    @action = node["action"]
     #@method           = (node['method'] || 'GET').upcase
     #@name             = node['name']
     #@clicked_buttons  = []
