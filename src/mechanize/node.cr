@@ -13,4 +13,5 @@ struct Myhtml::Node
   delegate :[], to: attributes
   delegate :[]=, to: attributes
   delegate :[]?, to: attributes
+  delegate :fetch, to: attributes
 end

@@ -3,8 +3,8 @@ require "./src/mechanize.cr"
 agent = Mechanize.new
 agent.request_headers = HTTP::Headers{"Foo" => "Bar"}
 params = {"hoge" => "hoge"}
-page = agent.get("https://kowabana.jp/users/sign_in/", params: params)
-page.forms
+page = agent.get("http://example.com/", params: params)
+form = page.forms[0]
 #query = {"foo" => "foo_value", "bar" => "bar_value"}
 #page = agent.post("http://example.com/", query: query)
 #puts page.code

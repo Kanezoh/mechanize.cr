@@ -51,7 +51,9 @@ class MechanizeCr::Form
   def parse
     @fields = Array(MechanizeCr::FormContent::Field).new
     @checkboxes = Array(MechanizeCr::FormContent::CheckBox).new
-    @node.css("input").not_nil!.each do |node|
+    @node.css("input").not_nil!.each do |html_node|
+      html_node = html_node.as(Myhtml::Node)
+      @fields << MechanizeCr::FormContent::Field.new(html_node)
     end
   end
 
@@ -60,5 +62,25 @@ class MechanizeCr::Form
       hash = { arr[0] => arr[1] }
       acc + URI::Params.encode(hash) + '&'
     end.rchop
+  end
+
+  def fields_with(criteria)
+    value = Hash(String,String).new
+    if String === criteria
+      value = {"name" => criteria}
+    else
+      # TODO
+      # when args whose type isn't String is given
+    end
+    fields.select do |field|
+      value.all? do |k,v|
+        v === field.name
+      end
+    end
+  end
+
+  def field_with(criteria)
+    f = fields_with(criteria)
+    f.empty? ? Array(MechanizeCr::FormContent::Field).new : f.first
   end
 end

@@ -16,16 +16,10 @@ class MechanizeCr::Page < MechanizeCr::File
   end
 
   def forms
-    #@forms ||= css("form").map do |html_form|
-    #  form = Mechanize::Form.new(html_form, @mech, self)
-    #  form.attributes["action"]# ||= @uri.to_s
-    #  form
-    #end
-
-    forms = css("form").each do |html_form|
+    forms = css("form").map do |html_form|
       form = MechanizeCr::Form.new(html_form)
-      puts form.action# ||= @uri.to_s
+      form.action ||= @uri.to_s
       form
-    end
+    end.to_a
   end
 end
