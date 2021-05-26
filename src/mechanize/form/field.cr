@@ -1,6 +1,6 @@
 class MechanizeCr::FormContent::Field
   property :node, :value, :name
-  def initialize(node : Node, value : String = node.fetch("value", ""), name : String = node.fetch("name", ""))
+  def initialize(node : Node | Myhtml::Node, value : String = node.fetch("value", ""), name : String = node.fetch("name", ""))
     @node = node
     @name = name
     #@raw_value = value

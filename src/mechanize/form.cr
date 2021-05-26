@@ -6,7 +6,7 @@ class MechanizeCr::Form
   getter checkboxes : Array(MechanizeCr::FormContent::CheckBox)
   getter enctype : String
 
-  def initialize(node : Node)
+  def initialize(node : Node | Myhtml::Node)
     @enctype = node["enctype"] || "application/x-www-form-urlencoded"
     @node             = node
     @fields = Array(MechanizeCr::FormContent::Field).new
@@ -49,7 +49,7 @@ class MechanizeCr::Form
   def parse
     @fields = Array(MechanizeCr::FormContent::Field).new
     @checkboxes = Array(MechanizeCr::FormContent::CheckBox).new
-    @node.search("input").not_nil!.each do |node|
+    @node.css("input").not_nil!.each do |node|
     end
   end
 

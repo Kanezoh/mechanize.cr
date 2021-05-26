@@ -20,7 +20,7 @@ class Mechanize
   end
 
   def post(uri : String | URI, headers = HTTP::Headers.new, query : Hash(String, String | Array(String)) = Hash(String,String).new)
-    node = Node.new(fake: true)
+    node = Node.new
     node["method"] = "POST"
     node["enctype"] = "application/x-www-form-urlencoded"
 
