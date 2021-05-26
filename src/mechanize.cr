@@ -2,6 +2,7 @@ require "./mechanize/http/agent"
 require "./mechanize/form"
 require "./mechanize/node"
 require "./mechanize/page"
+require "./mechanize/errors/*"
 
 class Mechanize
   VERSION = "0.1.0"

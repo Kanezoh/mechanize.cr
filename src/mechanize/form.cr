@@ -72,15 +72,17 @@ class MechanizeCr::Form
       # TODO
       # when args whose type isn't String is given
     end
-    fields.select do |field|
+    f = fields.select do |field|
       value.all? do |k,v|
         v === field.name
       end
     end
+    f.empty? ? nil : f
   end
 
   def field_with(criteria)
     f = fields_with(criteria)
-    f.empty? ? Array(MechanizeCr::FormContent::Field).new : f.first
+    raise MechanizeCr::ElementNotFoundError.new(:field, criteria) if f.nil?
+    f.first
   end
 end
