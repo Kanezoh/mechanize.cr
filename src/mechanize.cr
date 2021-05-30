@@ -6,7 +6,6 @@ require "./mechanize/errors/*"
 
 class Mechanize
   VERSION = "0.1.0"
-
   def initialize()
     @agent = MechanizeCr::HTTP::Agent.new
     @agent.context = self
@@ -15,7 +14,7 @@ class Mechanize
   def get(uri : String | URI, headers = HTTP::Headers.new, params : Hash(String, String | Array(String)) = Hash(String,String).new)
     method = :get
     page = @agent.fetch uri, method, headers, params
-    #add_to_history(page)
+    add_to_history(page)
     #yield page if block_given?
     page
   end
@@ -49,7 +48,7 @@ class Mechanize
     page = @agent.fetch(uri, :post, headers: headers, params: {"value" => request_data })#, cur_page
     headers.delete("Content-Type")
     headers.delete("Content-Length")
-    #add_to_history(page)
+    add_to_history(page)
     page
   end
 
@@ -64,5 +63,13 @@ class Mechanize
   def parse(uri, response, body)
     code = response.not_nil!.status_code
     MechanizeCr::Page.new(uri, response, body, code)
+  end
+
+  def history
+    @agent.history
+  end
+
+  def add_to_history(page)
+    history.push(page)
   end
 end
