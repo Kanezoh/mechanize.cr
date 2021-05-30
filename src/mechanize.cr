@@ -47,6 +47,8 @@ class Mechanize
 
     # fetch the page
     page = @agent.fetch(uri, :post, headers: headers, params: {"value" => request_data })#, cur_page
+    headers.delete("Content-Type")
+    headers.delete("Content-Length")
     #add_to_history(page)
     page
   end
