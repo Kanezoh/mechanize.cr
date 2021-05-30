@@ -60,6 +60,13 @@ class Mechanize
     @agent.request_headers = request_headers
   end
 
+  def submit(form)
+    case form.method.upcase
+    when "POST"
+      post_form(form.action, form, request_headers)
+    end
+  end
+
   def parse(uri, response, body)
     code = response.not_nil!.status_code
     MechanizeCr::Page.new(uri, response, body, code)

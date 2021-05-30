@@ -13,7 +13,7 @@ module MechanizeCr
       end
 
       def fetch(uri, method = :get, headers = HTTP::Headers.new, params = Hash(String,String).new)
-        uri = URI.parse(uri)
+        uri = resolve(uri)
         set_request_headers(headers)
         uri, params = resolve_parameters(uri, method, params)
         response = http_request(uri, method, params)
@@ -71,6 +71,21 @@ module MechanizeCr
         else
           header_cookies.not_nil!.add_request_headers(request_headers)
         end
+      end
+
+      private def resolve(uri) : URI
+        if uri.class == URI || uri.to_s.includes?("http")
+          URI.parse(uri)
+        else
+          referer_uri = current_page.uri
+          host = referer_uri.host
+          scheme = referer_uri.scheme
+          new_uri = URI.new(scheme: scheme, host: host, path: uri)
+        end
+      end
+
+      private def current_page
+        @history.last
       end
     end
   end

@@ -1,8 +1,8 @@
 require "http/client"
 class MechanizeCr::File
   #property :body, :filename
-  property :body, :code
-  def initialize(uri : URI | Nil, response : ::HTTP::Client::Response | Nil, body : String , code : Int32 | Nil)
+  property :body, :code, uri
+  def initialize(uri : URI, response : ::HTTP::Client::Response | Nil, body : String , code : Int32 | Nil)
     @uri  = uri
     @body = body
     @code = code
