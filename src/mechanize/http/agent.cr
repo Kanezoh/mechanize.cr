@@ -4,17 +4,18 @@ require "http/client"
 module MechanizeCr
   module HTTP
     class Agent
-      property :request_headers, :context
+      property :request_headers, :context, :cookies
       property history : Array(MechanizeCr::Page)
       def initialize(@context : Mechanize | Nil = nil, history = Array(MechanizeCr::Page).new)
         @history = history
         @request_headers = ::HTTP::Headers.new
         @context = context
+        @cookies = Hash(String, ::HTTP::Cookies).new
       end
 
       def fetch(uri, method = :get, headers = HTTP::Headers.new, params = Hash(String,String).new)
         uri = resolve(uri)
-        set_request_headers(headers)
+        set_request_headers(uri, headers)
         uri, params = resolve_parameters(uri, method, params)
         response = http_request(uri, method, params)
         body = response.not_nil!.body
@@ -36,9 +37,15 @@ module MechanizeCr
         end
       end
 
-      private def set_request_headers(headers)
+      private def set_request_headers(uri, headers)
         headers.each do |k,v|
           request_headers[k] = v
+        end
+        if cookies.fetch(uri.host.to_s, nil).nil?
+          return
+        else
+          valid_cookies = cookies[uri.host.to_s]
+          valid_cookies.not_nil!.add_request_headers(request_headers) 
         end
       end
 
@@ -66,10 +73,15 @@ module MechanizeCr
         #  end
         #end
         header_cookies = response.try &.cookies
-        if header_cookies.try &.empty?
+        if (header_cookies.nil?)
           request_headers
         else
-          header_cookies.not_nil!.add_request_headers(request_headers)
+          if cookies.fetch(uri.host.to_s, ::HTTP::Cookies.new).empty?
+            cookies[uri.host.to_s] = ::HTTP::Cookies.new
+          end
+          header_cookies.each do |cookie|
+            cookies[uri.host.to_s] << cookie
+          end
         end
       end
 
