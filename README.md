@@ -10,7 +10,7 @@ The purpose is to cover all the features of original one.
    ```yaml
    dependencies:
      mechanize:
-       github: your-github-user/mechanize
+       github: Kanezoh/mechanize
    ```
 
 2. Run `shards install`
@@ -22,10 +22,6 @@ require "mechanize"
 ```
 
 TODO: Write usage instructions here
-
-## Development
-
-TODO: Write development instructions here
 
 ## Contributing
 
