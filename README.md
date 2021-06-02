@@ -1,8 +1,8 @@
 # mechanize.cr
 
 This project is inspired by Ruby's [mechanize](https://github.com/sparklemotion/mechanize).
-Now, mechanize.cr can automatically store and send cookies, fill and submit forms.
 The purpose is to cover all the features of original one.
+Now, mechanize.cr can automatically store and send cookies, fill and submit forms.
 
 ## Installation
 
