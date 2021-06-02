@@ -81,7 +81,7 @@ form.field_with("email").value = "tester@example.com"
 form.field_with("password").value = "xxxxxx"
 agent.submit(form)
 
-agent.get("#{web page only logged-users can see}"
+agent.get("#{web page only logged-in users can see}"
 ```
 
 ## Contributing
