@@ -45,15 +45,6 @@ page = agent.post("http://example.com/", query: query)
 # => request body is foo=foo_value&bar=bar_value
 ```
 
-### search node
-
-You can use css selector to search html nodes by using `#css` method.
-This method is from [myhtml](https://github.com/sparklemotion/mechanize),so if you want to explore more, please refer the repository.
-
-```crystal
-puts page.css("h1").first.inner_text
-```
-
 ### add query params, request_headers
 
 You can add any query parameters and headers to requests. 
@@ -83,6 +74,15 @@ form.field_with("password").value = "xxxxxx"
 agent.submit(form)
 
 agent.get("#{web page only logged-in users can see}"
+```
+
+### search node
+
+You can use css selector to search html nodes by using `#css` method.
+This method is from [myhtml](https://github.com/sparklemotion/mechanize), so if you want to explore more, please refer the repository.
+
+```crystal
+puts page.css("h1").first.inner_text
 ```
 
 ## Contributing
