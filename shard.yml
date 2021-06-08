@@ -11,3 +11,8 @@ license: MIT
 dependencies:
   myhtml:
     github: kostya/myhtml
+
+development_dependencies:
+  webmock:
+    github: manastech/webmock.cr
+    branch: master
