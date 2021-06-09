@@ -52,6 +52,7 @@ module MechanizeCr
       private def resolve_parameters(uri, method, params)
         case method
         when :get
+          return uri, nil if params.empty?
           query = URI::Params.encode(params)
           uri.query = query
           return uri, nil
