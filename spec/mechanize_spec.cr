@@ -3,11 +3,11 @@ require "webmock"
 WebMock.stub(:any, "example.com")
 
 describe Mechanize do
-  # TODO: Write tests
-
-  it "works" do
-    response = HTTP::Client.get("http://example.com")
-    response.body.should eq ""
-    response.status_code.should eq 200
+  it "simple get" do
+    agent = Mechanize.new
+    uri = "http://example.com/"
+    page = agent.get(uri)
+    page.code.should eq 200
+    page.uri.to_s.should eq uri
   end
 end
