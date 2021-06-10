@@ -3,7 +3,7 @@ require "webmock"
 WebMock.stub(:get, "example.com")
 WebMock.stub(:get, "http://example.com/?foo=bar&foo1=bar2")
 
-describe Mechanize do
+describe "Mechanize HTTP test" do
   it "simple GET" do
     agent = Mechanize.new
     uri = "http://example.com/"
