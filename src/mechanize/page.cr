@@ -12,7 +12,12 @@ class MechanizeCr::Page < MechanizeCr::File
   end
 
   def title
-    title = parser.css("title").first.inner_text
+    title_node = css("title")
+    if title_node.empty?
+      ""
+    else
+      title_node.first.inner_text
+    end
   end
 
   def forms
