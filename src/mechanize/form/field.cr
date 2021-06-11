@@ -1,11 +1,16 @@
 class MechanizeCr::FormContent::Field
-  property :node, :value, :name
-  def initialize(node : Node | Myhtml::Node, value : String = node.fetch("value", ""), name : String = node.fetch("name", ""))
+  getter :node
+  getter value     : String
+  getter name      : String
+  getter type      : String
+  getter raw_value : String
+
+  def initialize(node : Node | Myhtml::Node)
     @node = node
-    @name = name
-    #@raw_value = value
-    @value = value
-    #@type = node['type']
+    @name = node.fetch("name", "")
+    @value = node.fetch("value", "")
+    @type = node.fetch("type", "")
+    @raw_value = value
   end
 
   def query_value
