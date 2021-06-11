@@ -5,10 +5,10 @@ class MechanizeCr::FormContent::Field
   getter type      : String
   getter raw_value : String
 
-  def initialize(node : Node | Myhtml::Node)
+  def initialize(node : Node | Myhtml::Node, value = "")
     @node = node
     @name = node.fetch("name", "")
-    @value = node.fetch("value", "")
+    @value = value || node.fetch("value", "")
     @type = node.fetch("type", "")
     @raw_value = value
   end
