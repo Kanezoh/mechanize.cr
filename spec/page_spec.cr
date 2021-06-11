@@ -10,7 +10,13 @@ WebMock.stub(:get, "html_example.com").to_return(body:
   <head>
     <title>page_title</title>
   </head>
-  <body></body>
+  <body>
+    <form action="post_path">
+      <input type="text" name="name">
+      <input type="text" name="email">
+      <input type="submit" value="">
+    </form>
+  </body>
 </html>
 BODY
 )
@@ -38,5 +44,12 @@ describe "Mechanize Page test" do
     page.title.should eq ""
     page = agent.get("http://html_example.com")
     page.title.should eq "page_title"
+  end
+
+  it "return page forms" do
+    agent = Mechanize.new
+    page = agent.get("http://html_example.com")
+    page.forms.size.should eq 1
+    page.forms.first.action.should eq "post_path"
   end
 end
