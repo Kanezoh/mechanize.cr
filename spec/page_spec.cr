@@ -1,5 +1,4 @@
 require "./spec_helper"
-require "webmock"
 WebMock.stub(:get, "example.com")
 WebMock.stub(:get, "fail_example.com").to_return(status: 500)
 WebMock.stub(:get, "body_example.com").to_return(body: "hello")

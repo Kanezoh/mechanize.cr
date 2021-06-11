@@ -1,5 +1,4 @@
 require "./spec_helper"
-require "webmock"
 WebMock.stub(:get, "example.com")
 WebMock.stub(:get, "http://example.com/?foo=bar&foo1=bar2")
 
