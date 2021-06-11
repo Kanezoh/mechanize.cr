@@ -6,12 +6,5 @@ class MechanizeCr::File
     @uri  = uri
     @body = body
     @code = code
-
-    #@full_path = false unless defined? @full_path
-
-    #fill_header response
-    #extract_filename
-
-    #yield self if block_given?
   end
 end
