@@ -6,6 +6,7 @@ class MechanizeCr::Form
   getter checkboxes : Array(MechanizeCr::FormContent::CheckBox)
   getter enctype    : String
   getter method     : String
+  getter name       : String
   property action   : String
 
   def initialize(node : Node | Myhtml::Node)
@@ -15,7 +16,7 @@ class MechanizeCr::Form
     @checkboxes       = Array(MechanizeCr::FormContent::CheckBox).new
     @action           = node.fetch("action", "")
     @method           = node.fetch("method", "GET").upcase
-    #@name             = node['name']
+    @name             = node.fetch("name", "")
     #@clicked_buttons  = []
     #@page             = page
     #@mech             = mech
