@@ -74,7 +74,7 @@ module MechanizeCr
         #  end
         #end
         header_cookies = response.try &.cookies
-        if (header_cookies.nil?)
+        if (header_cookies.nil? || header_cookies.try &.empty?)
           request_headers
         else
           if cookies.fetch(uri.host.to_s, ::HTTP::Cookies.new).empty?
