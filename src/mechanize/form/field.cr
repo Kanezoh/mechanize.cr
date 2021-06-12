@@ -1,6 +1,6 @@
 class MechanizeCr::FormContent::Field
   getter :node
-  getter value     : String
+  property value     : String
   getter name      : String
   getter type      : String
   getter raw_value : String
