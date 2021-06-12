@@ -93,6 +93,7 @@ module MechanizeCr
           referer_uri = current_page.uri
           host = referer_uri.host
           scheme = referer_uri.scheme
+          uri = "/" + uri unless uri[0] == '/'
           new_uri = URI.new(scheme: scheme, host: host, path: uri)
         end
       end

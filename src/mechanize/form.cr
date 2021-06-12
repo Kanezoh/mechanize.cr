@@ -82,6 +82,7 @@ class MechanizeCr::Form
     end
     successful_controls.each do |ctrl|
       value = ctrl.query_value
+      next if value[0] == ""
       query.push(value)
     end
     query
