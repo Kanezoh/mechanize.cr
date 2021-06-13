@@ -38,14 +38,16 @@ module MechanizeCr
       end
 
       private def set_request_headers(uri, headers)
+        reset_request_header_cookies
+        host = uri.host
         headers.each do |k,v|
           request_headers[k] = v
         end
-        if cookies.fetch(uri.host.to_s, nil).nil?
-          return
+        if cookies.fetch(host, nil).nil?
+          request_headers
         else
-          valid_cookies = cookies[uri.host.to_s]
-          valid_cookies.not_nil!.add_request_headers(request_headers) 
+          valid_cookies = cookies[host]
+          valid_cookies.not_nil!.add_request_headers(request_headers)
         end
       end
 
@@ -75,7 +77,7 @@ module MechanizeCr
         #end
         header_cookies = response.try &.cookies
         if (header_cookies.nil? || header_cookies.try &.empty?)
-          request_headers
+          return
         else
           if cookies.fetch(uri.host.to_s, ::HTTP::Cookies.new).empty?
             cookies[uri.host.to_s] = ::HTTP::Cookies.new
@@ -100,6 +102,10 @@ module MechanizeCr
 
       private def current_page
         @history.last
+      end
+
+      private def reset_request_header_cookies
+        request_headers.delete("Cookie")
       end
     end
   end
