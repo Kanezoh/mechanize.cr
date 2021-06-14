@@ -70,21 +70,19 @@ module MechanizeCr
       end
 
       private def add_response_cookies(response, uri, page)
-        #if page.body =~ /Set-Cookie/
-        #  page.css("//head/meta[@http-equiv=\"Set-Cookie\"]").each do |meta|
-        #    save_cookies(uri, meta["content"])
-        #  end
-        #end
+        if page.body =~ /Set-Cookie/
+          page.css("head meta[http-equiv=\"Set-Cookie\"]").each do |meta|
+            cookie =  meta["content"].split(";")[0]
+            key,value = cookie.split("=")
+            cookie = ::HTTP::Cookie.new(name: key, value: value)
+            save_cookies(uri, [cookie])
+          end
+        end
         header_cookies = response.try &.cookies
         if (header_cookies.nil? || header_cookies.try &.empty?)
           return
         else
-          if cookies.fetch(uri.host.to_s, ::HTTP::Cookies.new).empty?
-            cookies[uri.host.to_s] = ::HTTP::Cookies.new
-          end
-          header_cookies.each do |cookie|
-            cookies[uri.host.to_s] << cookie
-          end
+          save_cookies(uri, header_cookies)
         end
       end
 
@@ -106,6 +104,16 @@ module MechanizeCr
 
       private def reset_request_header_cookies
         request_headers.delete("Cookie")
+      end
+
+      private def save_cookies(uri, header_cookies)
+        host = uri.host.to_s
+        if cookies.fetch(host, ::HTTP::Cookies.new).empty?
+          cookies[host] = ::HTTP::Cookies.new
+        end
+        header_cookies.each do |cookie|
+          cookies[host] << cookie
+        end
       end
     end
   end

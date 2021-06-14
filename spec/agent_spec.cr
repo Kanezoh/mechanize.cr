@@ -3,10 +3,21 @@ WebMock.stub(:get, "example.com/")
 WebMock.stub(:get, "another_domain.com/")
 WebMock.stub(:get, "example.com/cookies1").to_return(headers: {"Set-Cookie" => "id=123"})
 WebMock.stub(:get, "example.com/cookies2").to_return(headers: {"Set-Cookie" => "name=kanezoh"})
-WebMock.stub(:get, "html_example.com").to_return(body: 
+WebMock.stub(:get, "example.com/meta_cookie").to_return(body:
 <<-BODY
 <html>
-  <meta>
+  <head>
+    <title>page_title</title>
+    <meta http-equiv='Set-Cookie' content='id=123;SameSite=None;Secure'>
+  </head>
+  <body>
+  </body>
+</html>
+BODY
+)
+WebMock.stub(:get, "html_example.com").to_return(body:
+<<-BODY
+<html>
   <head>
     <title>page_title</title>
   </head>
@@ -53,6 +64,13 @@ describe "Mechanize Agent test" do
     agent.get("http://example.com/cookies2")
     agent.get("http://example.com/")
     agent.request_headers["Cookie"].should eq "id=123; name=kanezoh"
+  end
+
+  it "get cookie from meta head" do
+    agent = Mechanize.new
+    agent.get("http://example.com/meta_cookie")
+    agent.get("http://example.com/")
+    agent.request_headers["Cookie"].should eq "id=123"
   end
 
   it "don't send cookies to another domain" do
