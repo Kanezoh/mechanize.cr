@@ -25,16 +25,16 @@ WebMock.stub(:post, "http://html_example.com/post_path").
          to_return(body: "success")
 
 describe "Mechanize Agent test" do
-  #it "fill and submit form" do
-  #  agent = Mechanize.new
-  #  page = agent.get("http://html_example.com/")
-  #  form = page.forms[0]
-  #  form.field_with("name").value = "foo"
-  #  form.field_with("email").value = "bar"
-  #  page = agent.submit(form)
-  #  page.not_nil!.code.should eq 200
-  #  page.not_nil!.body.should eq "success"
-  #end
+  it "fill and submit form" do
+    agent = Mechanize.new
+    page = agent.get("http://html_example.com/")
+    form = page.forms[0]
+    form.field_with("name").value = "foo"
+    form.field_with("email").value = "bar"
+    page = agent.submit(form)
+    page.not_nil!.code.should eq 200
+    page.not_nil!.body.should eq "success"
+  end
 
   it "receive and send cookie" do
     agent = Mechanize.new
