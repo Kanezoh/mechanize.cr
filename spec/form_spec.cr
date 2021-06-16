@@ -44,6 +44,23 @@ describe "Mechanize Form test" do
 
   context "Form Fields CheckBox" do
     checkbox = form.checkboxes.first
-    p checkbox.checked?
+    it "returns checkbox status" do
+      checkbox.checked?.should eq true
+    end
+    it "can change check status" do
+      checkbox.checked?.should eq true
+      checkbox.uncheck
+      checkbox.checked?.should eq false
+      checkbox.check
+      checkbox.checked?.should eq true
+      # #click reverses check status 
+      checkbox.click
+      checkbox.checked?.should eq false
+      checkbox.click
+      checkbox.checked?.should eq true
+    end
+    it "returns query value" do
+      p checkbox.query_value
+    end
   end
 end
