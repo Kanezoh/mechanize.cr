@@ -36,7 +36,7 @@ WebMock.stub(:post, "http://html_example.com/post_path").
          to_return(body: "success")
 
 describe "Mechanize Agent test" do
-  it "fill and submit form" do
+  it "can fill and submit form" do
     agent = Mechanize.new
     page = agent.get("http://html_example.com/")
     form = page.forms[0]
@@ -47,7 +47,7 @@ describe "Mechanize Agent test" do
     page.not_nil!.body.should eq "success"
   end
 
-  it "receive and send cookie" do
+  it "can receive and send cookie" do
     agent = Mechanize.new
     # receive cookies
     agent.get("http://example.com/cookies1")
@@ -56,7 +56,7 @@ describe "Mechanize Agent test" do
     agent.request_headers["Cookie"].should eq "id=123"
   end
 
-  it "receive and send multiple cookies" do
+  it "can receive and send multiple cookies" do
     agent = Mechanize.new
     # receive cookies1
     agent.get("http://example.com/cookies1")
@@ -66,19 +66,29 @@ describe "Mechanize Agent test" do
     agent.request_headers["Cookie"].should eq "id=123; name=kanezoh"
   end
 
-  it "get cookie from meta head" do
+  it "can get cookie from meta head" do
     agent = Mechanize.new
     agent.get("http://example.com/meta_cookie")
     agent.get("http://example.com/")
     agent.request_headers["Cookie"].should eq "id=123"
   end
 
-  it "don't send cookies to another domain" do
+  it "doesn't send cookies to another domain" do
     agent = Mechanize.new
     agent.get("http://example.com/cookies1")
     agent.get("http://example.com/")
     agent.request_headers["Cookie"].should eq "id=123"
     agent.get("http://another_domain.com/")
     agent.request_headers.has_key?("Cookie").should eq false
+  end
+
+  it "can save history" do
+    agent = Mechanize.new
+    agent.get("http://example.com/")
+    agent.history.size.should eq 1
+    agent.history.last.title.should eq ""
+    agent.get("http://html_example.com/")
+    agent.history.size.should eq 2
+    agent.history.last.title.should eq "page_title"
   end
 end

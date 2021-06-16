@@ -37,6 +37,10 @@ module MechanizeCr
         end
       end
 
+      def back
+        @history.pop
+      end
+
       private def set_request_headers(uri, headers)
         reset_request_header_cookies
         host = uri.host
