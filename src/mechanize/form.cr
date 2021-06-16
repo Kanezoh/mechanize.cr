@@ -58,7 +58,13 @@ class MechanizeCr::Form
     @checkboxes = Array(MechanizeCr::FormContent::CheckBox).new
     @node.css("input").not_nil!.each do |html_node|
       html_node = html_node.as(Myhtml::Node)
-      @fields << MechanizeCr::FormContent::Field.new(html_node)
+      type = (html_node["type"] || "text").downcase
+      case type
+      when "checkbox"
+        @checkboxes << MechanizeCr::FormContent::CheckBox.new(html_node)
+      else
+        @fields << MechanizeCr::FormContent::Field.new(html_node)
+      end
     end
   end
 
