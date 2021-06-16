@@ -61,7 +61,7 @@ class MechanizeCr::Form
       type = (html_node["type"] || "text").downcase
       case type
       when "checkbox"
-        @checkboxes << MechanizeCr::FormContent::CheckBox.new(html_node)
+        @checkboxes << MechanizeCr::FormContent::CheckBox.new(html_node, self)
       else
         @fields << MechanizeCr::FormContent::Field.new(html_node)
       end
