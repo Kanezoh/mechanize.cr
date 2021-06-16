@@ -60,6 +60,14 @@ class Mechanize
     @agent.request_headers = request_headers
   end
 
+  def current_page
+    @agent.current_page
+  end
+
+  def back
+    @agent.history.pop
+  end
+
   def submit(form)
     case form.method.upcase
     when "POST"

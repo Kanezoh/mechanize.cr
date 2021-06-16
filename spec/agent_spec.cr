@@ -91,4 +91,13 @@ describe "Mechanize Agent test" do
     agent.history.size.should eq 2
     agent.history.last.title.should eq "page_title"
   end
+
+  it "can back previous page" do
+    agent = Mechanize.new
+    agent.get("http://example.com/")
+    agent.get("http://html_example.com/")
+    agent.current_page.title.should eq "page_title"
+    agent.back
+    agent.current_page.title.should eq ""
+  end
 end

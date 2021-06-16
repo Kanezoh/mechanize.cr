@@ -37,6 +37,10 @@ module MechanizeCr
         end
       end
 
+      def current_page
+        @history.last
+      end
+
       def back
         @history.pop
       end
@@ -100,10 +104,6 @@ module MechanizeCr
           uri = "/" + uri unless uri[0] == '/'
           new_uri = URI.new(scheme: scheme, host: host, path: uri)
         end
-      end
-
-      private def current_page
-        @history.last
       end
 
       private def reset_request_header_cookies
