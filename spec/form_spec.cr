@@ -1,8 +1,8 @@
 require "./spec_helper"
-WebMock.stub(:get, "html_example.com").to_return(body: 
+
+WebMock.stub(:get, "example.com/check_form").to_return(body:
 <<-BODY
 <html>
-  <meta>
   <head>
     <title>page_title</title>
   </head>
@@ -10,7 +10,7 @@ WebMock.stub(:get, "html_example.com").to_return(body:
     <form action="post_path" method="post" name="sample_form">
       <input type="text" name="name">
       <input type="text" name="email">
-      <input type="checkbox" id="ababa" name="ababa" checked>
+      <input type="checkbox" id="remember_me" name="remember_me" checked>
     </form>
   </body>
 </html>
@@ -19,7 +19,7 @@ BODY
 
 describe "Mechanize Form test" do
   agent = Mechanize.new
-  uri = "http://html_example.com/"
+  uri = "http://example.com/check_form"
   page = agent.get(uri)
   form = page.forms.first
 
@@ -59,8 +59,10 @@ describe "Mechanize Form test" do
       checkbox.click
       checkbox.checked?.should eq true
     end
-    it "returns query value" do
-      p checkbox.query_value
+    it "doesn't include request data if checkbox isn't checked" do
+      form.request_data.should contain("remember_me=on")
+      checkbox.uncheck
+      form.request_data.should_not contain("remember_me=")
     end
   end
 end

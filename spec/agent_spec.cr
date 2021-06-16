@@ -1,6 +1,4 @@
 require "./spec_helper"
-WebMock.stub(:get, "example.com/")
-WebMock.stub(:get, "another_domain.com/")
 WebMock.stub(:get, "example.com/cookies1").to_return(headers: {"Set-Cookie" => "id=123"})
 WebMock.stub(:get, "example.com/cookies2").to_return(headers: {"Set-Cookie" => "name=kanezoh"})
 WebMock.stub(:get, "example.com/meta_cookie").to_return(body:
@@ -15,30 +13,11 @@ WebMock.stub(:get, "example.com/meta_cookie").to_return(body:
 </html>
 BODY
 )
-WebMock.stub(:get, "html_example.com").to_return(body:
-<<-BODY
-<html>
-  <head>
-    <title>page_title</title>
-  </head>
-  <body>
-    <form action="post_path" method="post" name="sample_form">
-      <input type="text" name="name">
-      <input type="text" name="email">
-      <input type="submit" value="">
-    </form>
-  </body>
-</html>
-BODY
-)
-WebMock.stub(:post, "http://html_example.com/post_path").
-         with(body: "name=foo&email=bar", headers: {"Content-Type" => "application/x-www-form-urlencoded"}).
-         to_return(body: "success")
 
 describe "Mechanize Agent test" do
   it "can fill and submit form" do
     agent = Mechanize.new
-    page = agent.get("http://html_example.com/")
+    page = agent.get("http://example.com/form")
     form = page.forms[0]
     form.field_with("name").value = "foo"
     form.field_with("email").value = "bar"
@@ -55,7 +34,6 @@ describe "Mechanize Agent test" do
     agent.get("http://example.com/")
     agent.request_headers["Cookie"].should eq "id=123"
   end
-
   it "can receive and send multiple cookies" do
     agent = Mechanize.new
     # receive cookies1
@@ -87,7 +65,7 @@ describe "Mechanize Agent test" do
     agent.get("http://example.com/")
     agent.history.size.should eq 1
     agent.history.last.title.should eq ""
-    agent.get("http://html_example.com/")
+    agent.get("http://example.com/form")
     agent.history.size.should eq 2
     agent.history.last.title.should eq "page_title"
   end
@@ -95,7 +73,7 @@ describe "Mechanize Agent test" do
   it "can back previous page" do
     agent = Mechanize.new
     agent.get("http://example.com/")
-    agent.get("http://html_example.com/")
+    agent.get("http://example.com/form")
     agent.current_page.title.should eq "page_title"
     agent.back
     agent.current_page.title.should eq ""

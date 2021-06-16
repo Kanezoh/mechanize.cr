@@ -1,5 +1,4 @@
 require "./spec_helper"
-WebMock.stub(:get, "example.com")
 WebMock.stub(:get, "http://example.com/?foo=bar&foo1=bar2")
 WebMock.stub(:post, "http://example.com/post").
          with(body: "email=foobar", headers: {"Content-Type" => "application/x-www-form-urlencoded"}).
