@@ -22,7 +22,7 @@ class MechanizeCr::Page < MechanizeCr::File
 
   def forms
     forms = css("form").map do |html_form|
-      form = MechanizeCr::Form.new(html_form)
+      form = Form.new(html_form)
       form.action ||= @uri.to_s
       form
     end.to_a

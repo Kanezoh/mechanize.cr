@@ -5,9 +5,9 @@ module MechanizeCr
   module HTTP
     class Agent
       property :request_headers, :context, :cookies
-      property history : Array(MechanizeCr::Page)
+      property history : Array(Page)
       def initialize(@context : Mechanize | Nil = nil)
-        @history = Array(MechanizeCr::Page).new
+        @history = Array(Page).new
         @request_headers = ::HTTP::Headers.new
         @context = context
         @cookies = Hash(String, ::HTTP::Cookies).new

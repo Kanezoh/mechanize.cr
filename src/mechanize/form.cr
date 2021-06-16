@@ -2,8 +2,8 @@ require "./form/field"
 require "./form/check_box"
 
 class MechanizeCr::Form
-  getter fields     : Array(MechanizeCr::FormContent::Field)
-  getter checkboxes : Array(MechanizeCr::FormContent::CheckBox)
+  getter fields     : Array(FormContent::Field)
+  getter checkboxes : Array(FormContent::CheckBox)
   getter enctype    : String
   getter method     : String
   getter name       : String
@@ -12,8 +12,8 @@ class MechanizeCr::Form
   def initialize(node : Node | Myhtml::Node)
     @enctype          = node.fetch("enctype", "application/x-www-form-urlencoded")
     @node             = node
-    @fields           = Array(MechanizeCr::FormContent::Field).new
-    @checkboxes       = Array(MechanizeCr::FormContent::CheckBox).new
+    @fields           = Array(FormContent::Field).new
+    @checkboxes       = Array(FormContent::CheckBox).new
     @action           = node.fetch("action", "")
     @method           = node.fetch("method", "GET").upcase
     @name             = node.fetch("name", "")
@@ -49,21 +49,21 @@ class MechanizeCr::Form
 
   def field_with(criteria)
     f = fields_with(criteria)
-    raise MechanizeCr::ElementNotFoundError.new(:field, criteria) if f.nil?
+    raise ElementNotFoundError.new(:field, criteria) if f.nil?
     f.first
   end
 
   private def parse
-    @fields = Array(MechanizeCr::FormContent::Field).new
-    @checkboxes = Array(MechanizeCr::FormContent::CheckBox).new
+    @fields = Array(FormContent::Field).new
+    @checkboxes = Array(FormContent::CheckBox).new
     @node.css("input").not_nil!.each do |html_node|
       html_node = html_node.as(Myhtml::Node)
       type = (html_node["type"] || "text").downcase
       case type
       when "checkbox"
-        @checkboxes << MechanizeCr::FormContent::CheckBox.new(html_node, self)
+        @checkboxes << FormContent::CheckBox.new(html_node, self)
       else
-        @fields << MechanizeCr::FormContent::Field.new(html_node)
+        @fields << FormContent::Field.new(html_node)
       end
     end
   end
@@ -77,7 +77,7 @@ class MechanizeCr::Form
 
   private def build_query
     query = [] of Array(String)
-    successful_controls = Array(MechanizeCr::FormContent::Field | MechanizeCr::FormContent::CheckBox).new
+    successful_controls = Array(FormContent::Field | FormContent::CheckBox).new
     fields.each do |elm|
       successful_controls << elm
     end
