@@ -1,9 +1,11 @@
 require "./form/field"
 require "./form/check_box"
+require "./form/radio_button"
 
 class MechanizeCr::Form
   getter fields     : Array(FormContent::Field)
   getter checkboxes : Array(FormContent::CheckBox)
+  getter radiobuttons : Array(FormContent::RadioButton)
   getter enctype    : String
   getter method     : String
   getter name       : String
@@ -14,6 +16,7 @@ class MechanizeCr::Form
     @node             = node
     @fields           = Array(FormContent::Field).new
     @checkboxes       = Array(FormContent::CheckBox).new
+    @radiobuttons     = Array(FormContent::RadioButton).new
     @action           = node.fetch("action", "")
     @method           = node.fetch("method", "GET").upcase
     @name             = node.fetch("name", "")
