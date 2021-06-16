@@ -34,27 +34,34 @@ class MechanizeCr::Form
     build_query_string(query_params)
   end
 
-  def fields_with(criteria)
-    value = Hash(String,String).new
-    if String === criteria
-      value = {"name" => criteria}
-    else
-      # TODO
-      # when args whose type isn't String is given
-    end
-    f = fields.select do |field|
-      value.all? do |k,v|
-        v === field.name
-      end
-    end
-    f.empty? ? nil : f
-  end
+  # generate fields_with and field_with methods.
+  # These methods are used for finding nodes that matches conditions.
+  # ex.) field_with(:name, "email") finds <input name="email">
 
-  def field_with(criteria)
-    f = fields_with(criteria)
-    raise ElementNotFoundError.new(:field, criteria) if f.nil?
-    f.first
-  end
+  {% for singular, index in ["field"] %}
+    {% plural = "#{singular.id}s" %}
+    def {{plural.id}}_with(criteria)
+      value = Hash(String,String).new
+      if String === criteria
+        value = {"name" => criteria}
+      else
+        # TODO
+        # when args whose type isn't String is given
+      end
+      f = {{plural.id}}.select do |elm|
+        value.all? do |k,v|
+          v === elm.name
+        end
+      end
+      f.empty? ? nil : f
+    end
+
+    def {{singular.id}}_with(criteria)
+      f = {{plural.id}}_with(criteria)
+      raise ElementNotFoundError.new(:{{singular.id}}, criteria) if f.nil?
+      f.first
+    end
+  {% end %}
 
   private def parse
     @fields = Array(FormContent::Field).new
