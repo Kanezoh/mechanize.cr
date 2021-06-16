@@ -2,10 +2,10 @@ class MechanizeCr::FormContent::CheckBox < MechanizeCr::FormContent::Field
   property :checked
   property :form
 
-  def initialize(node : Node | Myhtml::Node, value : String = node.fetch("value", ""))
+  def initialize(node : Node | Myhtml::Node, value = "")
     @checked = !!node["checked"]
     @form    = form
-    super(node)
+    super(node, value)
   end
 
   def check

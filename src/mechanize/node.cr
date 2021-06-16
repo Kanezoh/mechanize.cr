@@ -6,7 +6,6 @@ class Node < Hash(String,String)
   end
 end
 
-
 # This is a real Node got from html.
 struct Myhtml::Node
   delegate :[], to: attributes
