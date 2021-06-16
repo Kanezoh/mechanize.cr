@@ -36,7 +36,7 @@ class MechanizeCr::Form
 
   # generate fields_with and field_with methods.
   # These methods are used for finding nodes that matches conditions.
-  # ex.) field_with(:name, "email") finds <input name="email">
+  # ex.) field_with("email") finds <input name="email">
 
   {% for singular, index in ["field"] %}
     {% plural = "#{singular.id}s" %}
