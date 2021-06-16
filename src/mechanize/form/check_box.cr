@@ -1,7 +1,7 @@
 class MechanizeCr::FormContent::CheckBox < MechanizeCr::FormContent::Field
   property :checked
 
-  def initialize(node : Node | Myhtml::Node, value = "")
+  def initialize(node : Node | Myhtml::Node, value = nil)
     @checked = !!node["checked"]
     super(node, value)
   end
@@ -21,5 +21,9 @@ class MechanizeCr::FormContent::CheckBox < MechanizeCr::FormContent::Field
 
   def click
     checked ? uncheck : check
+  end
+
+  def query_value
+    [@name, @value || "on"]
   end
 end
