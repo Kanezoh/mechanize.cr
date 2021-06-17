@@ -41,19 +41,7 @@ class MechanizeCr::Form
   {% for singular, index in ["field", "radiobutton"] %}
     {% plural = "#{singular.id}s" %}
     def {{plural.id}}_with(criteria)
-      value = Hash(String,String).new
-      if String === criteria
-        value = {"name" => criteria}
-      else
-        # TODO
-        # when args whose type isn't String is given
-      end
-      f = {{plural.id}}.select do |elm|
-        value.all? do |k,v|
-          v === elm.name
-        end
-      end
-      f.empty? ? nil : f
+      {{plural.id}}_with(criteria){}
     end
 
     def {{plural.id}}_with(criteria, &block)
@@ -69,6 +57,7 @@ class MechanizeCr::Form
           v === elm.name
         end
       end
+      return nil if f.empty?
       yield f
       f
     end
