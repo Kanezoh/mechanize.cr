@@ -70,19 +70,16 @@ class MechanizeCr::Form
   {% end %}
 
   private def parse
-    @fields = Array(FormContent::Field).new
-    @checkboxes = Array(FormContent::CheckBox).new
-    @radiobuttons     = Array(FormContent::RadioButton).new
     @node.css("input").not_nil!.each do |html_node|
       html_node = html_node.as(Myhtml::Node)
       type = (html_node["type"] || "text").downcase
       case type
       when "checkbox"
-        @checkboxes << FormContent::CheckBox.new(html_node, self)
+        checkboxes << FormContent::CheckBox.new(html_node, self)
       when "radio"
-        @radiobuttons << FormContent::RadioButton.new(html_node, self)
+        radiobuttons << FormContent::RadioButton.new(html_node, self)
       else
-        @fields << FormContent::Field.new(html_node)
+        fields << FormContent::Field.new(html_node)
       end
     end
   end
