@@ -11,6 +11,9 @@ WebMock.stub(:get, "example.com/check_form").to_return(body:
       <input type="text" name="name">
       <input type="text" name="email">
       <input type="checkbox" id="remember_me" name="remember_me" checked>
+      <input type="radio" id="contactChoice1" name="contact" value="email">
+      <input type="radio" id="contactChoice2" name="contact" value="phone">
+      <input type="radio" id="contactChoice3" name="contact" value="mail">
     </form>
   </body>
 </html>
@@ -63,6 +66,35 @@ describe "Mechanize Form test" do
       form.request_data.should contain("remember_me=on")
       checkbox.uncheck
       form.request_data.should_not contain("remember_me=")
+    end
+  end
+
+  context "Form Fields RadioButton" do
+    radiobuttons = form.radiobuttons
+    radiobuttons.size.should eq 3
+    it "returns radiobutton check status" do
+      radiobuttons.map(&.checked?).should eq [false,false,false]  
+    end
+    it "can change check status" do
+      radiobutton = radiobuttons.first
+      radiobutton.checked?.should eq false
+      radiobutton.check
+      radiobutton.checked?.should eq true
+      radiobutton.uncheck
+      radiobutton.checked?.should eq false
+      # #click reverses check status 
+      radiobutton.click
+      radiobutton.checked?.should eq true
+      radiobutton.click
+      radiobutton.checked?.should eq false
+    end
+    it "check status is exclusive" do
+      radiobuttons[0].check
+      radiobuttons[0].checked.should eq true
+      radiobuttons[1].checked.should eq false
+      radiobuttons[1].check
+      radiobuttons[1].checked.should eq true
+      radiobuttons[0].checked.should eq false
     end
   end
 end

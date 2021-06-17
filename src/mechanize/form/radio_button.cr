@@ -2,13 +2,13 @@ class MechanizeCr::FormContent::RadioButton < MechanizeCr::FormContent::Field
   property :checked, :form
 
   def initialize(node : Node | Myhtml::Node, form : Form)
-    @checked = !!node["checked"]
+    @checked = !!node.fetch("checked", nil)
     @form = form
     super(node)
   end
 
   def check
-    #uncheck_peers
+    uncheck_peers
     @checked = true
   end
 
@@ -52,11 +52,10 @@ class MechanizeCr::FormContent::RadioButton < MechanizeCr::FormContent::Field
   #alias eql? == # :nodoc:
 
 
-  #private def uncheck_peers
-  #  @form.radiobuttons_with(:name => name).each do |b|
-  #    next if b.value == value
-  #    b.uncheck
-  #  end
-  #end
-
+  private def uncheck_peers
+    form.radiobuttons_with(name).try &.each do |b|
+      next if b.value == value
+      b.uncheck
+    end
+  end
 end
