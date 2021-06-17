@@ -1,4 +1,3 @@
-require "./radio_button"
 class MechanizeCr::FormContent::CheckBox < MechanizeCr::FormContent::RadioButton
   def check
     @checked = true

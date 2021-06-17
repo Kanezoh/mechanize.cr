@@ -1,6 +1,7 @@
 require "./form/field"
-require "./form/check_box"
 require "./form/radio_button"
+require "./form/check_box"
+require "./form/text"
 
 class MechanizeCr::Form
   getter fields     : Array(FormContent::Field)
@@ -78,6 +79,8 @@ class MechanizeCr::Form
         checkboxes << FormContent::CheckBox.new(html_node, self)
       when "radio"
         radiobuttons << FormContent::RadioButton.new(html_node, self)
+      when "text"
+        fields << FormContent::Text.new(html_node)
       else
         fields << FormContent::Field.new(html_node)
       end
