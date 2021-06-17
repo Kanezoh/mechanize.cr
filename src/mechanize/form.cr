@@ -105,6 +105,27 @@ class MechanizeCr::Form
         successful_controls << elm
       end
     end
+    radio_groups = Hash(String, Array(FormContent::RadioButton)).new
+    radiobuttons.each do |radio|
+      name = radio.name
+      radio_groups[name] = Array(FormContent::RadioButton).new unless radio_groups.has_key?(name)
+      radio_groups[name] << radio
+    end
+
+    radio_groups.each_value do |g|
+      checked = g.select(&.checked)
+      if checked.uniq.size > 1
+        #values = checked.map(&.value).join(', ').inspect
+        #name = checked.first.name.inspect
+        #raise Mechanize::Error,
+        #      "radiobuttons #{values} are checked in the #{name} group, " \
+        #      "only one is allowed"
+        raise MechanizeCr::Error.new
+      else
+        successful_controls << checked.first unless checked.empty?
+      end
+    end
+
     successful_controls.each do |ctrl|
       value = ctrl.query_value
       next if value[0] == ""

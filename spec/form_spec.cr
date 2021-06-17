@@ -62,7 +62,7 @@ describe "Mechanize Form test" do
       checkbox.click
       checkbox.checked?.should eq true
     end
-    it "doesn't include request data if checkbox isn't checked" do
+    it "doesn't included in request data if checkbox isn't checked" do
       form.request_data.should contain("remember_me=on")
       checkbox.uncheck
       form.request_data.should_not contain("remember_me=")
@@ -95,6 +95,12 @@ describe "Mechanize Form test" do
       radiobuttons[1].check
       radiobuttons[1].checked.should eq true
       radiobuttons[0].checked.should eq false
+    end
+    it "doesn't included in request data if checkbox isn't checked" do
+      radiobuttons[0].check
+      form.request_data.should contain "contact=email"
+      radiobuttons[0].uncheck
+      form.request_data.should_not contain "contact"
     end
   end
 end
