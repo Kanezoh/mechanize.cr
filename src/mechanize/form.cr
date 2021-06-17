@@ -38,7 +38,7 @@ class MechanizeCr::Form
   # These methods are used for finding nodes that matches conditions.
   # ex.) field_with("email") finds <input name="email">
 
-  {% for singular, index in ["field"] %}
+  {% for singular, index in ["field", "radiobutton"] %}
     {% plural = "#{singular.id}s" %}
     def {{plural.id}}_with(criteria)
       value = Hash(String,String).new
@@ -54,6 +54,23 @@ class MechanizeCr::Form
         end
       end
       f.empty? ? nil : f
+    end
+
+    def {{plural.id}}_with(criteria, &block)
+      value = Hash(String,String).new
+      if String === criteria
+        value = {"name" => criteria}
+      else
+        # TODO
+        # when args whose type isn't String is given
+      end
+      f = {{plural.id}}.select do |elm|
+        value.all? do |k,v|
+          v === elm.name
+        end
+      end
+      yield f
+      f
     end
 
     def {{singular.id}}_with(criteria)
