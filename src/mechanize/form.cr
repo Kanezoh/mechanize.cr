@@ -83,11 +83,11 @@ class MechanizeCr::Form
       when "radio"
         radiobuttons << FormContent::RadioButton.new(html_node, self)
       when "button"
-        @buttons << FormContent::Button.new(html_node)
+        buttons << FormContent::Button.new(html_node)
       when "submit"
-        @buttons << FormContent::SubmitButton.new(html_node)
+        buttons << FormContent::SubmitButton.new(html_node)
       when"reset"
-        @buttons << FormContent::ResetButton.new(html_node)
+        buttons << FormContent::ResetButton.new(html_node)
       when "text"
         fields << FormContent::Text.new(html_node)
       when "hidden"
