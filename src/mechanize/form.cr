@@ -3,15 +3,17 @@ require "./form/radio_button"
 require "./form/check_box"
 require "./form/text"
 require "./form/hidden"
+require "./form/button"
 
 class MechanizeCr::Form
-  getter fields     : Array(FormContent::Field)
-  getter checkboxes : Array(FormContent::CheckBox)
+  getter fields       : Array(FormContent::Field)
+  getter checkboxes   : Array(FormContent::CheckBox)
   getter radiobuttons : Array(FormContent::RadioButton)
-  getter enctype    : String
-  getter method     : String
-  getter name       : String
-  property action   : String
+  getter buttons      : Array(FormContent::Button)
+  getter enctype      : String
+  getter method       : String
+  getter name         : String
+  property action     : String
 
   def initialize(node : Node | Myhtml::Node)
     @enctype          = node.fetch("enctype", "application/x-www-form-urlencoded")
@@ -19,6 +21,7 @@ class MechanizeCr::Form
     @fields           = Array(FormContent::Field).new
     @checkboxes       = Array(FormContent::CheckBox).new
     @radiobuttons     = Array(FormContent::RadioButton).new
+    @buttons          = Array(FormContent::Button).new
     @action           = node.fetch("action", "")
     @method           = node.fetch("method", "GET").upcase
     @name             = node.fetch("name", "")
@@ -80,6 +83,12 @@ class MechanizeCr::Form
         checkboxes << FormContent::CheckBox.new(html_node, self)
       when "radio"
         radiobuttons << FormContent::RadioButton.new(html_node, self)
+      when "button"
+        @buttons << FormContent::Button.new(html_node)
+      when "submit"
+        @buttons << FormContent::SubmitButton.new(html_node)
+      when"reset"
+        @buttons << FormContent::ResetButton.new(html_node)
       when "text"
         fields << FormContent::Text.new(html_node)
       when "hidden"
