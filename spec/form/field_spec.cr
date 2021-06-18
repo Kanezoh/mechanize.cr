@@ -42,6 +42,9 @@ describe "Form Fields" do
   it "can be found by field_with method" do
     name_field = form.field_with("name")
     name_field.name.should eq "name"
+
+    email_field = form.field_with({"id" => "emailID"})
+    email_field.name.should eq "email"
   end
 
   it "can be found by fields_with method" do

@@ -51,15 +51,25 @@ class MechanizeCr::Form
 
     def {{plural.id}}_with(criteria, &block)
       value = Hash(String,String).new
-      if String === criteria
-        value = {"name" => criteria}
+      if criteria.is_a?(String)
+        criteria = {"name" => criteria}
       else
         # TODO
         # when args whose type isn't String is given
+        criteria = criteria.each_with_object(Hash(String,String).new) do |(k, v), h|
+          case k = k.to_s
+          when "id"
+            h["id"] = v
+          when "class"
+            h["class"] = v
+          else
+            h[k] = v
+          end
+        end
       end
       f = {{plural.id}}.select do |elm|
-        value.all? do |k,v|
-          v === elm.name
+        criteria.all? do |k,v|
+          v === elm.node.fetch(k,"x")
         end
       end
       yield f
@@ -68,7 +78,8 @@ class MechanizeCr::Form
 
     def {{singular.id}}_with(criteria)
       f = {{plural.id}}_with(criteria)
-      raise ElementNotFoundError.new(:{{singular.id}}, criteria) if f.empty?
+      # TODO: Write correct error message.
+      raise ElementNotFoundError.new(:{{singular.id}}, "") if f.empty?
       f.first
     end
   {% end %}
