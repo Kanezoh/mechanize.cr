@@ -26,7 +26,7 @@ describe "Mechanize Form test" do
   page = agent.get(uri)
   form = page.forms.first
 
-  it "retrun form attribute" do
+  it "returns form attribute" do
     form.action.should eq "post_path"
     form.method.should eq "POST"
     form.enctype.should eq "application/x-www-form-urlencoded"
@@ -47,9 +47,11 @@ describe "Mechanize Form test" do
 
   context "Form Fields CheckBox" do
     checkbox = form.checkboxes.first
+
     it "returns checkbox status" do
       checkbox.checked?.should eq true
     end
+
     it "can change check status" do
       checkbox.checked?.should eq true
       checkbox.uncheck
@@ -62,6 +64,7 @@ describe "Mechanize Form test" do
       checkbox.click
       checkbox.checked?.should eq true
     end
+
     it "doesn't included in request data if checkbox isn't checked" do
       form.request_data.should contain("remember_me=on")
       checkbox.uncheck
@@ -72,9 +75,11 @@ describe "Mechanize Form test" do
   context "Form Fields RadioButton" do
     radiobuttons = form.radiobuttons
     radiobuttons.size.should eq 3
+
     it "returns radiobutton check status" do
       radiobuttons.map(&.checked?).should eq [false,false,false]  
     end
+
     it "can change check status" do
       radiobutton = radiobuttons.first
       radiobutton.checked?.should eq false
@@ -88,6 +93,7 @@ describe "Mechanize Form test" do
       radiobutton.click
       radiobutton.checked?.should eq false
     end
+
     it "check status is exclusive" do
       radiobuttons[0].check
       radiobuttons[0].checked.should eq true
@@ -96,11 +102,25 @@ describe "Mechanize Form test" do
       radiobuttons[1].checked.should eq true
       radiobuttons[0].checked.should eq false
     end
+
     it "doesn't included in request data if checkbox isn't checked" do
       radiobuttons[0].check
       form.request_data.should contain "contact=email"
       radiobuttons[0].uncheck
       form.request_data.should_not contain "contact"
+    end
+
+    it "can be found by radiobutton_with method" do
+      radiobutton = form.radiobutton_with("contact")
+      radiobutton.value.should eq "email"
+    end
+
+    it "can be found by radiobuttons_with method" do
+      radiobuttons = form.radiobuttons_with("contact")
+      radiobuttons.size.should eq 3
+      radiobuttons[0].value.should eq "email"
+      radiobuttons[1].value.should eq "phone"
+      radiobuttons[2].value.should eq "mail"
     end
   end
 end

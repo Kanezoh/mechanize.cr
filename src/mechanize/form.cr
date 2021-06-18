@@ -62,14 +62,13 @@ class MechanizeCr::Form
           v === elm.name
         end
       end
-      return nil if f.empty?
       yield f
       f
     end
 
     def {{singular.id}}_with(criteria)
       f = {{plural.id}}_with(criteria)
-      raise ElementNotFoundError.new(:{{singular.id}}, criteria) if f.nil?
+      raise ElementNotFoundError.new(:{{singular.id}}, criteria) if f.empty?
       f.first
     end
   {% end %}
