@@ -9,7 +9,7 @@ WebMock.stub(:get, "example.com/form/fields").to_return(body:
   <body>
     <form action="post_path" method="post" name="sample_form">
       <input type="text" name="name" value="kanezoh">
-      <input type="text" name="email">
+      <input type="text" name="email" class="emailClass" id="emailID">
     </form>
   </body>
 </html>
@@ -26,5 +26,15 @@ describe "Form Fields" do
     field.name.should eq "name"
     field.value.should eq "kanezoh"
     field.raw_value.should eq "kanezoh"
+  end
+
+  it "returns DOM id and class" do
+    field = form.fields.first
+    # dom_id and class returns empty string if there are no id, class
+    field.dom_id.should eq ""
+    field.dom_class.should eq ""
+    field = form.fields[1]
+    field.dom_id.should eq "emailID"
+    field.dom_class.should eq "emailClass"
   end
 end
