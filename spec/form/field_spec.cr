@@ -8,7 +8,7 @@ WebMock.stub(:get, "example.com/form/fields").to_return(body:
   </head>
   <body>
     <form action="post_path" method="post" name="sample_form">
-      <input type="text" name="name">
+      <input type="text" name="name" value="kanezoh">
       <input type="text" name="email">
     </form>
   </body>
@@ -24,5 +24,7 @@ describe "Form Fields" do
     field = form.fields.first
     field.type.should eq "text"
     field.name.should eq "name"
+    field.value.should eq "kanezoh"
+    field.raw_value.should eq "kanezoh"
   end
 end
