@@ -4,8 +4,11 @@ require "./form/check_box"
 require "./form/text"
 require "./form/hidden"
 require "./form/button"
+require "./utils/element_matcher"
 
 class MechanizeCr::Form
+  include MechanzeCr::ElementMatcher
+
   getter fields       : Array(FormContent::Field)
   getter checkboxes   : Array(FormContent::CheckBox)
   getter radiobuttons : Array(FormContent::RadioButton)
@@ -43,46 +46,8 @@ class MechanizeCr::Form
   # These methods are used for finding nodes that matches conditions.
   # ex.) field_with("email") finds <input name="email">
 
-  {% for singular, index in ["field", "radiobutton"] %}
-    {% plural = "#{singular.id}s" %}
-    def {{plural.id}}_with(criteria)
-      {{plural.id}}_with(criteria){}
-    end
-
-    def {{plural.id}}_with(criteria, &block)
-      value = Hash(String,String).new
-      if criteria.is_a?(String)
-        criteria = {"name" => criteria}
-      else
-        # TODO
-        # when args whose type isn't String is given
-        criteria = criteria.each_with_object(Hash(String,String).new) do |(k, v), h|
-          case k = k.to_s
-          when "id"
-            h["id"] = v
-          when "class"
-            h["class"] = v
-          else
-            h[k] = v
-          end
-        end
-      end
-      f = {{plural.id}}.select do |elm|
-        criteria.all? do |k,v|
-          v === elm.node.fetch(k,"x")
-        end
-      end
-      yield f
-      f
-    end
-
-    def {{singular.id}}_with(criteria)
-      f = {{plural.id}}_with(criteria)
-      # TODO: Write correct error message.
-      raise ElementNotFoundError.new(:{{singular.id}}, "") if f.empty?
-      f.first
-    end
-  {% end %}
+  elements_with "field"
+  elements_with "radiobutton"
 
   private def parse
     @node.css("input").not_nil!.each do |html_node|
