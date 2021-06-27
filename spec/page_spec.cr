@@ -29,6 +29,13 @@ describe "Mechanize Page test" do
     agent = Mechanize.new
     page = agent.get("http://example.com/form")
     page.forms.size.should eq 1
-    page.forms.first.action.should eq "post_path"
+    page.forms.first.name.should eq "sample_form"
+  end
+
+  it "can detect form by using form_with method" do
+    agent = Mechanize.new
+    page = agent.get("http://example.com/form")
+    form = page.form_with({"name" => "sample_form" })
+    form.name.should eq "sample_form"
   end
 end
