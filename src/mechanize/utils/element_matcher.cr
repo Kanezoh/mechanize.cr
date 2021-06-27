@@ -10,9 +10,9 @@ module MechanzeCr::ElementMatcher
       if criteria.is_a?(String)
         criteria = {"name" => criteria}
       else
-        # now,
         criteria = criteria.each_with_object(Hash(String,String).new) do |(k, v), h|
           h[k] = v
+          # TODO: to deal with when key is "text"
           #case k = k.to_s
           #when "id"
           #  h["id"] = v
@@ -25,7 +25,7 @@ module MechanzeCr::ElementMatcher
       end
       f = {{plural.id}}.select do |elm|
         criteria.all? do |k,v|
-          v === elm.node.fetch(k,"x")
+          v === elm.node.fetch(k,"")
         end
       end
       yield f

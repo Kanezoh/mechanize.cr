@@ -9,6 +9,7 @@ require "./utils/element_matcher"
 class MechanizeCr::Form
   include MechanzeCr::ElementMatcher
 
+  getter node         : Node | Myhtml::Node
   getter fields       : Array(FormContent::Field)
   getter checkboxes   : Array(FormContent::CheckBox)
   getter radiobuttons : Array(FormContent::RadioButton)
