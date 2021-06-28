@@ -4,6 +4,10 @@ class Node < Hash(String,String)
   def css(str)
     [] of Hash(String,String)
   end
+
+  def inner_text
+    ""
+  end
 end
 
 # This is a real Node got from html.

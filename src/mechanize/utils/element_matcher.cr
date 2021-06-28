@@ -6,26 +6,21 @@ module MechanzeCr::ElementMatcher
     end
 
     def {{plural.id}}_with(criteria, &block)
-      value = Hash(String,String).new
       if criteria.is_a?(String)
         criteria = {"name" => criteria}
       else
         criteria = criteria.each_with_object(Hash(String,String).new) do |(k, v), h|
+          k = k.to_s
           h[k] = v
-          # TODO: to deal with when key is "text"
-          #case k = k.to_s
-          #when "id"
-          #  h["id"] = v
-          #when "class"
-          #  h["class"] = v
-          #else
-          #  h[k] = v
-          #end
         end
       end
       f = {{plural.id}}.select do |elm|
         criteria.all? do |k,v|
-          v === elm.node.fetch(k,"")
+          if k == "text"
+            v == elm.node.inner_text
+          else
+            v == elm.node.fetch(k,"")
+          end
         end
       end
       yield f
