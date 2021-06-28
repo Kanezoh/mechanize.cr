@@ -49,6 +49,7 @@ class MechanizeCr::Form
 
   elements_with "field"
   elements_with "radiobutton"
+  elements_with "checkbox", "checkboxes"
 
   private def parse
     @node.css("input").not_nil!.each do |html_node|
