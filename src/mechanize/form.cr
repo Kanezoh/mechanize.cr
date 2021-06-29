@@ -61,11 +61,11 @@ class MechanizeCr::Form
       when "radio"
         radiobuttons << FormContent::RadioButton.new(html_node, self)
       when "button"
-        buttons << FormContent::Button.new(html_node)
+        buttons << FormContent::Button.new(html_node, @node)
       when "submit"
-        buttons << FormContent::SubmitButton.new(html_node)
+        buttons << FormContent::SubmitButton.new(html_node, @node)
       when"reset"
-        buttons << FormContent::ResetButton.new(html_node)
+        buttons << FormContent::ResetButton.new(html_node, @node)
       when "text"
         fields << FormContent::Text.new(html_node)
       when "hidden"
@@ -130,13 +130,13 @@ class MechanizeCr::Form
   # This method adds a button to the query.  If the form needs to be
   # submitted with multiple buttons, pass each button to this method.
   def add_button_to_query(button)
-    #unless button.node == @node
-    #  message = ""
-    #    "#{button.inspect} does not belong to the same page as " \
-    #    "the form #{@name.inspect} in #{@page.uri}"
-#
-    #  raise ArgumentError, message
-    #end
+    unless button.form_node == @node
+      #message = ""
+      #  "#{button.inspect} does not belong to the same page as " \
+      #  "the form #{@name.inspect} in #{@page.uri}"
+      message = "not a valid button"
+      raise ArgumentError.new(message)
+    end
 
     @clicked_buttons << button
   end
