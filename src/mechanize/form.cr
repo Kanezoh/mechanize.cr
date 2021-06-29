@@ -52,6 +52,11 @@ class MechanizeCr::Form
   elements_with "radiobutton"
   elements_with "checkbox", "checkboxes"
 
+  # Returns all fields of type Textarea
+  def textareas
+    fields.select { |f| f.class == FormContent::Textarea }.map &.as(FormContent::Textarea)
+  end
+
   private def parse
     @node.css("input").not_nil!.each do |html_node|
       html_node = html_node.as(Myhtml::Node)
@@ -72,7 +77,7 @@ class MechanizeCr::Form
       when "hidden"
         fields << FormContent::Hidden.new(html_node)
       when "textarea"
-        @fields << FormContent::Textarea.new(html_node)
+        fields << FormContent::Textarea.new(html_node)
       else
         fields << FormContent::Field.new(html_node)
       end
