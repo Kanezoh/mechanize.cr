@@ -129,14 +129,14 @@ class MechanizeCr::Form
 
   # This method adds a button to the query.  If the form needs to be
   # submitted with multiple buttons, pass each button to this method.
-  private def add_button_to_query(button)
-    unless button.node == @node
-      message =
-        "#{button.inspect} does not belong to the same page as " \
-        "the form #{@name.inspect} in #{@page.uri}"
-
-      raise ArgumentError, message
-    end
+  def add_button_to_query(button)
+    #unless button.node == @node
+    #  message = ""
+    #    "#{button.inspect} does not belong to the same page as " \
+    #    "the form #{@name.inspect} in #{@page.uri}"
+#
+    #  raise ArgumentError, message
+    #end
 
     @clicked_buttons << button
   end

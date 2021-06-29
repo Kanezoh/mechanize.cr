@@ -18,7 +18,7 @@ WebMock.stub(:get, "example.com/form").to_return(body:
     <form action="post_path" method="post" name="sample_form">
       <input type="text" name="name">
       <input type="text" name="email">
-      <input type="submit" value="">
+      <input type="submit" name="commit" value="submit">
     </form>
   </body>
 </html>
@@ -27,3 +27,7 @@ BODY
 WebMock.stub(:post, "example.com/post_path").
          with(body: "name=foo&email=bar", headers: {"Content-Type" => "application/x-www-form-urlencoded"}).
          to_return(body: "success")
+
+WebMock.stub(:post, "example.com/post_path").
+         with(body: "name=foo&email=bar&commit=submit", headers: {"Content-Type" => "application/x-www-form-urlencoded"}).
+         to_return(body: "success with button")

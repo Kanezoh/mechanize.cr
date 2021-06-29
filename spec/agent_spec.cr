@@ -26,6 +26,18 @@ describe "Mechanize Agent test" do
     page.not_nil!.body.should eq "success"
   end
 
+  it "can fill and submit form with submit button" do
+    agent = Mechanize.new
+    page = agent.get("http://example.com/form")
+    form = page.forms[0]
+    form.field_with("name").value = "foo"
+    form.field_with("email").value = "bar"
+    submit_button = form.buttons[0]
+    page = agent.submit(form, submit_button)
+    page.not_nil!.code.should eq 200
+    page.not_nil!.body.should eq "success with button"
+  end
+
   it "can receive and send cookie" do
     agent = Mechanize.new
     # receive cookies
