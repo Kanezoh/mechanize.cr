@@ -29,7 +29,7 @@ class MechanizeCr::Form
     @action           = node.fetch("action", "")
     @method           = node.fetch("method", "GET").upcase
     @name             = node.fetch("name", "")
-    #@clicked_buttons  = []
+    @clicked_buttons  = Array(FormContent::Button).new
     #@page             = page
     #@mech             = mech
 
@@ -115,11 +115,29 @@ class MechanizeCr::Form
       end
     end
 
+    @clicked_buttons.each do |b|
+      successful_controls << b
+    end
+
     successful_controls.each do |ctrl|
       value = ctrl.query_value
       next if value[0] == ""
       query.push(value)
     end
     query
+  end
+
+  # This method adds a button to the query.  If the form needs to be
+  # submitted with multiple buttons, pass each button to this method.
+  private def add_button_to_query(button)
+    unless button.node == @node
+      message =
+        "#{button.inspect} does not belong to the same page as " \
+        "the form #{@name.inspect} in #{@page.uri}"
+
+      raise ArgumentError, message
+    end
+
+    @clicked_buttons << button
   end
 end

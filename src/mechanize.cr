@@ -68,7 +68,8 @@ class Mechanize
     @agent.history.pop
   end
 
-  def submit(form)
+  def submit(form, button=nil)
+    form.add_button_to_query(button) if button
     case form.method.upcase
     when "POST"
       post_form(form.action, form, request_headers)
