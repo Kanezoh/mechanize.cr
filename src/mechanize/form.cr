@@ -2,6 +2,7 @@ require "./form/field"
 require "./form/radio_button"
 require "./form/check_box"
 require "./form/text"
+require "./form/textarea"
 require "./form/hidden"
 require "./form/button"
 require "./utils/element_matcher"
@@ -70,9 +71,18 @@ class MechanizeCr::Form
         fields << FormContent::Text.new(html_node)
       when "hidden"
         fields << FormContent::Hidden.new(html_node)
+      when "textarea"
+        @fields << FormContent::Textarea.new(html_node)
       else
         fields << FormContent::Field.new(html_node)
       end
+    end
+
+    # Find all textarea tags
+    @node.css("textarea").each do |node|
+      node = node.as(Myhtml::Node)
+      next if node["name"].empty?
+      @fields << FormContent::Textarea.new(node, node.inner_text)
     end
   end
 
