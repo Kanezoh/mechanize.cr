@@ -26,4 +26,11 @@ class MechanizeCr::FormContent::Field
   def dom_class
     node.fetch("class", "")
   end
+
+  def inspect # :nodoc:
+    "[%s:0x%x type: %s name: %s value: %s]" % [
+      self.class.name.sub(/Mechanize::FormContent::/, "").downcase,
+      object_id, type, name, value
+    ]
+  end
 end

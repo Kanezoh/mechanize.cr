@@ -20,7 +20,7 @@ class MechanizeCr::Form
   getter name         : String
   property action     : String
 
-  def initialize(node : Node | Myhtml::Node)
+  def initialize(node : Node | Myhtml::Node, page : Page? = nil)
     @enctype          = node.fetch("enctype", "application/x-www-form-urlencoded")
     @node             = node
     @fields           = Array(FormContent::Field).new
@@ -31,7 +31,7 @@ class MechanizeCr::Form
     @method           = node.fetch("method", "GET").upcase
     @name             = node.fetch("name", "")
     @clicked_buttons  = Array(FormContent::Button).new
-    #@page             = page
+    @page             = page
     #@mech             = mech
 
     #@encoding = node['accept-charset'] || (page && page.encoding) || nil
@@ -156,9 +156,9 @@ class MechanizeCr::Form
   # submitted with multiple buttons, pass each button to this method.
   def add_button_to_query(button)
     unless button.form_node == @node
-      #message = ""
-      #  "#{button.inspect} does not belong to the same page as " \
-      #  "the form #{@name.inspect} in #{@page.uri}"
+      message = ""
+        "#{button.inspect} does not belong to the same page as " \
+        "the form #{@name.inspect} in #{@page.try &.uri}"
       message = "not a valid button"
       raise ArgumentError.new(message)
     end
