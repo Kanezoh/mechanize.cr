@@ -23,6 +23,7 @@ WebMock.stub(:get, "example.com/check_form").to_return(body:
       <input type="button" value="pushit">
       <input type="reset" value="no">
       <input type="submit" value="submit">
+      <input type="image" src="images/kaeru.png" alt="gerogero">
     </form>
   </body>
 </html>
@@ -47,6 +48,6 @@ describe "Mechanize Form test" do
     form.fields.size.should eq 4
     form.checkboxes.size.should eq 1
     form.radiobuttons.size.should eq 3
-    form.buttons.size.should eq 3
+    form.buttons.size.should eq 4
   end
 end
