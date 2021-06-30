@@ -91,6 +91,13 @@ class MechanizeCr::Form
       next if node["name"].empty?
       @fields << FormContent::Textarea.new(node, node.inner_text)
     end
+
+    @node.css("button").each do |node|
+      node = node.as(Myhtml::Node)
+      type = node.fetch("type", "submit").downcase
+      next if type == "reset"
+      @buttons << FormContent::Button.new(node, @node)
+    end
   end
 
   private def build_query_string(params : Array(Array(String)))
