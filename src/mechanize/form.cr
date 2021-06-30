@@ -72,6 +72,8 @@ class MechanizeCr::Form
         buttons << FormContent::SubmitButton.new(html_node, @node)
       when"reset"
         buttons << FormContent::ResetButton.new(html_node, @node)
+      when "image"
+        buttons << FormContent::ImageButton.new(html_node, @node)
       when "text"
         fields << FormContent::Text.new(html_node)
       when "hidden"
