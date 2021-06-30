@@ -51,6 +51,7 @@ class MechanizeCr::Form
   elements_with "field"
   elements_with "radiobutton"
   elements_with "checkbox", "checkboxes"
+  elements_with "button"
 
   # Returns all fields of type Textarea
   def textareas
