@@ -34,7 +34,7 @@ class MechanizeCr::FormContent::Option
   end
 
   private def unselect_peers
-    return unless SelectList === @select_list
+    return if MultiSelectList === @select_list
 
     @select_list.select_none
   end

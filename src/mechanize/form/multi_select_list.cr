@@ -19,17 +19,17 @@ class MechanizeCr::FormContent::MultiSelectList
   end
 
   def select_none
-    @value = Array(String).new
-    options.each &.unclick
+    @values = Array(String).new
+    options.each &.unselect
   end
 
   def select_all
-    @value = Array(String).new
-    options.each &.click
+    @values = Array(String).new
+    options.each &.select
   end
 
   def selected_options
-    options.find_all(&:selected?)
+    options.select &.selected?
   end
 
   def values=(raw_values)
@@ -45,7 +45,7 @@ class MechanizeCr::FormContent::MultiSelectList
   end
 
   def values
-    @values + selected_options.map(&:value)
+    @values + selected_options.map &.value
   end
 
   #def inspect # :nodoc:
