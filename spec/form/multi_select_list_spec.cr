@@ -42,4 +42,9 @@ describe "Form Fields Multiple Select List" do
     selectbox.select_none
     selectbox.values.empty?.should eq true
   end
+
+  it "returns multiple selected values" do
+    selectbox.select_all
+    form.request_data.should eq "pets=dog&pets=cat&pets=hamster"
+  end
 end
