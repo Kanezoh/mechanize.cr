@@ -6,9 +6,14 @@ require "./mechanize/errors/*"
 
 class Mechanize
   VERSION = "0.1.0"
+
+  AGENT = {
+    "Mechanize" => "Mechanize/#{VERSION} Crystal/#{Crystal::VERSION} (https://github.com/Kanezoh/mechanize.cr)",
+  }
   def initialize()
     @agent = MechanizeCr::HTTP::Agent.new
     @agent.context = self
+    @agent.user_agent = AGENT["Mechanize"]
   end
 
   def get(uri : String | URI, headers = HTTP::Headers.new, params : Hash(String, String | Array(String)) = Hash(String,String).new)

@@ -6,16 +6,20 @@ module MechanizeCr
     class Agent
       property :request_headers, :context, :cookies
       property history : Array(Page)
+      property user_agent : String
+
       def initialize(@context : Mechanize | Nil = nil)
         @history = Array(Page).new
         @request_headers = ::HTTP::Headers.new
         @context = context
         @cookies = Hash(String, ::HTTP::Cookies).new
+        @user_agent = ""
       end
 
       def fetch(uri, method = :get, headers = HTTP::Headers.new, params = Hash(String,String).new)
         uri = resolve(uri)
         set_request_headers(uri, headers)
+        request_user_agent
         uri, params = resolve_parameters(uri, method, params)
         response = http_request(uri, method, params)
         body = response.not_nil!.body
@@ -117,6 +121,12 @@ module MechanizeCr
         end
         header_cookies.each do |cookie|
           cookies[host] << cookie
+        end
+      end
+
+      private def request_user_agent
+        unless user_agent == ""
+          request_headers["User-Agent"] = user_agent
         end
       end
     end
