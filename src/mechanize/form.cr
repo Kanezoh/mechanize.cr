@@ -5,6 +5,7 @@ require "./form/text"
 require "./form/textarea"
 require "./form/hidden"
 require "./form/button"
+require "./form/multi_select_list"
 require "./utils/element_matcher"
 
 class MechanizeCr::Form
@@ -14,6 +15,7 @@ class MechanizeCr::Form
   getter fields       : Array(FormContent::Field)
   getter checkboxes   : Array(FormContent::CheckBox)
   getter radiobuttons : Array(FormContent::RadioButton)
+  getter selectboxes  : Array(FormContent::MultiSelectList)
   getter buttons      : Array(FormContent::Button)
   getter enctype      : String
   getter method       : String
@@ -26,6 +28,7 @@ class MechanizeCr::Form
     @fields           = Array(FormContent::Field).new
     @checkboxes       = Array(FormContent::CheckBox).new
     @radiobuttons     = Array(FormContent::RadioButton).new
+    @selectboxes      = Array(FormContent::MultiSelectList).new
     @buttons          = Array(FormContent::Button).new
     @action           = node.fetch("action", "")
     @method           = node.fetch("method", "GET").upcase
@@ -98,6 +101,17 @@ class MechanizeCr::Form
       type = node.fetch("type", "submit").downcase
       next if type == "reset"
       @buttons << FormContent::Button.new(node, @node)
+    end
+
+    # Find all select tags
+    @node.css("select").each do |node|
+      node = node.as(Myhtml::Node)
+      next if node["name"].empty?
+      if node.has_key?("multiple")
+        @selectboxes << FormContent::MultiSelectList.new(node)
+      else
+        #@fields << SelectList.new(node)
+      end
     end
   end
 
