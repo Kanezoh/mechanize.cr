@@ -163,6 +163,16 @@ class MechanizeCr::Form
       next if value[0] == ""
       query.push(value)
     end
+
+    @selectboxes.each do |s|
+      value = s.query_value
+      if value
+        value.each do |v|
+          query.push(v)
+        end
+      end
+    end
+
     query
   end
 
