@@ -52,10 +52,10 @@ class MechanizeCr::FormContent::MultiSelectList
     values ? values.map { |v| [name, v] } : nil
   end
 
-  #def inspect # :nodoc:
-  #  "[%s:0x%x type: %s name: %s value: %s]" % [
-  #    self.class.name.sub(/MechanizeCr::FormContent::/, "").downcase,
-  #    object_id, type, name, value
-  #  ]
-  #end
+  def inspect # :nodoc:
+    "[%s:0x%x type: %s name: %s values: [%s]]" % [
+      self.class.name.sub(/MechanizeCr::FormContent::/, "").downcase,
+      object_id, type, name, values.join(',')
+    ]
+  end
 end
