@@ -5,7 +5,7 @@ require "./form/text"
 require "./form/textarea"
 require "./form/hidden"
 require "./form/button"
-require "./form/multi_select_list"
+require "./form/select_list"
 require "./utils/element_matcher"
 
 class MechanizeCr::Form
@@ -110,7 +110,7 @@ class MechanizeCr::Form
       if node.has_key?("multiple")
         @selectboxes << FormContent::MultiSelectList.new(node)
       else
-        #@fields << SelectList.new(node)
+        @selectboxes << FormContent::SelectList.new(node)
       end
     end
   end

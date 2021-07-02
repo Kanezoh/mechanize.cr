@@ -32,9 +32,9 @@ class MechanizeCr::FormContent::MultiSelectList
     options.select &.selected?
   end
 
-  def values=(raw_values)
+  def values=(new_values)
     select_none
-    raw_values.each do |value|
+    new_values.each do |value|
       option = options.find { |o| o.value == value }
       if option.nil?
         @value.push(value)
