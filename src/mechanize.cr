@@ -83,7 +83,7 @@ class Mechanize
 
   def parse(uri, response, body)
     code = response.not_nil!.status_code
-    MechanizeCr::Page.new(uri, response, body, code)
+    MechanizeCr::Page.new(uri, response, body, code, self)
   end
 
   def history
