@@ -3,7 +3,7 @@ class MechanizeCr::FormContent::RadioButton < MechanizeCr::FormContent::Field
 
   def initialize(node : Node | Myhtml::Node, form : Form)
     @checked = !!node.fetch("checked", nil)
-    @form = form
+    @form    = form
     super(node)
   end
 

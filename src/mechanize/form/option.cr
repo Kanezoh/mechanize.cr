@@ -1,14 +1,15 @@
 class MechanizeCr::FormContent::Option
   getter select_list : FormContent::MultiSelectList
-  getter node : Myhtml::Node
-  getter text : String
-  getter value : String
-  getter selected : Bool
+  getter node        : Myhtml::Node
+  getter text        : String
+  getter value       : String
+  getter selected    : Bool
+
   def initialize(node, select_list)
-    @node     = node
-    @text     = node.inner_text
-    @value    = (node["value"] || node.inner_text)
-    @selected = node.has_key?("selected")
+    @node        = node
+    @text        = node.inner_text
+    @value       = (node["value"] || node.inner_text)
+    @selected    = node.has_key?("selected")
     @select_list = select_list # The select list this option belongs to
   end
 
