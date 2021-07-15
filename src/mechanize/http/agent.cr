@@ -78,7 +78,7 @@ module MechanizeCr
       end
 
       private def response_parse(response, body, uri)
-        @context.not_nil!.parse uri, response, body
+        @context.not_nil!.parse(uri, response, body)
       end
 
       private def add_response_cookies(response, uri, page)
