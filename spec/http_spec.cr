@@ -47,4 +47,12 @@ describe "Mechanize HTTP test" do
     page.body.should eq "success"
     page.code.should eq 200
   end
+
+  it "can set user agent" do
+    agent = Mechanize.new
+    mac_chrome_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36"
+    agent.user_agent = mac_chrome_agent
+    page = agent.get("http://example.com/")
+    agent.request_headers["User-Agent"].should eq mac_chrome_agent
+  end
 end

@@ -65,6 +65,14 @@ class Mechanize
     @agent.request_headers = request_headers
   end
 
+  def user_agent
+    @agent.user_agent
+  end
+
+  def user_agent=(user_agent)
+    @agent.user_agent = user_agent
+  end
+
   def current_page
     @agent.current_page
   end
