@@ -4,9 +4,10 @@ require "http/client"
 module MechanizeCr
   module HTTP
     class Agent
-      property :request_headers, :context, :cookies
+      property :request_headers, :context
       property history : Array(Page)
       property user_agent : String
+      property cookies : Hash(String, ::HTTP::Cookies)
 
       def initialize(@context : Mechanize | Nil = nil)
         @history = Array(Page).new
@@ -19,13 +20,13 @@ module MechanizeCr
       def fetch(uri, method = :get, headers = HTTP::Headers.new, params = Hash(String,String).new)
         uri = resolve(uri)
         set_request_headers(uri, headers)
-        request_user_agent
+        set_user_agent
         uri, params = resolve_parameters(uri, method, params)
         response = http_request(uri, method, params)
         body = response.not_nil!.body
         page = response_parse(response, body, uri)
         # save cookies
-        add_response_cookies(response, uri, page)
+        save_response_cookies(response, uri, page)
         page
       end
 
@@ -59,7 +60,13 @@ module MechanizeCr
           request_headers
         else
           valid_cookies = cookies[host]
-          valid_cookies.not_nil!.add_request_headers(request_headers)
+          valid_cookies.try &.add_request_headers(request_headers)
+        end
+      end
+
+      private def set_user_agent
+        unless user_agent == ""
+          request_headers["User-Agent"] = user_agent
         end
       end
 
@@ -81,7 +88,7 @@ module MechanizeCr
         @context.not_nil!.parse(uri, response, body)
       end
 
-      private def add_response_cookies(response, uri, page)
+      private def save_response_cookies(response, uri, page)
         if page.body =~ /Set-Cookie/
           page.css("head meta[http-equiv=\"Set-Cookie\"]").each do |meta|
             cookie =  meta["content"].split(";")[0]
@@ -110,10 +117,14 @@ module MechanizeCr
         end
       end
 
+      # reset request cookie before setting headers.
       private def reset_request_header_cookies
         request_headers.delete("Cookie")
       end
 
+      # save cookies as Hash(String, HTTP::Cookies)
+      # String means url's domain.
+      # ex) Hash("example.com" => HTTP::Cookies)
       private def save_cookies(uri, header_cookies)
         host = uri.host.to_s
         if cookies.fetch(host, ::HTTP::Cookies.new).empty?
@@ -121,12 +132,6 @@ module MechanizeCr
         end
         header_cookies.each do |cookie|
           cookies[host] << cookie
-        end
-      end
-
-      private def request_user_agent
-        unless user_agent == ""
-          request_headers["User-Agent"] = user_agent
         end
       end
     end
