@@ -130,8 +130,8 @@ module MechanizeCr
       private def valid_cookies(uri)
         host = uri.host
         valid_cookies = ::HTTP::Cookies.new
-        request_cookies.select do |cookie|
-          valid_cookies << cookie if cookie.origin == host || cookie.domain.try &.=~(/.*#{host}/)
+        request_cookies.each do |cookie|
+          valid_cookies << cookie if cookie.origin == host || (cookie.domain && host.try &.=~(/.*#{cookie.domain.try &.gsub(".", "\.")}$/))
         end
         valid_cookies
       end
