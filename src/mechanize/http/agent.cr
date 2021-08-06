@@ -7,13 +7,13 @@ module MechanizeCr
       property :request_headers, :context
       property history : Array(Page)
       property user_agent : String
-      property cookies : Hash(String, ::HTTP::Cookies)
+      property request_cookies : ::HTTP::Cookies
 
       def initialize(@context : Mechanize | Nil = nil)
         @history = Array(Page).new
         @request_headers = ::HTTP::Headers.new
         @context = context
-        @cookies = Hash(String, ::HTTP::Cookies).new
+        @request_cookies = ::HTTP::Cookies.new
         @user_agent = ""
       end
 
@@ -52,16 +52,10 @@ module MechanizeCr
 
       private def set_request_headers(uri, headers)
         reset_request_header_cookies
-        host = uri.host
         headers.each do |k,v|
           request_headers[k] = v
         end
-        if cookies.fetch(host, nil).nil?
-          request_headers
-        else
-          valid_cookies = cookies[host]
-          valid_cookies.try &.add_request_headers(request_headers)
-        end
+        valid_cookies(uri).add_request_headers(request_headers)
       end
 
       private def set_user_agent
@@ -88,6 +82,8 @@ module MechanizeCr
         @context.not_nil!.parse(uri, response, body)
       end
 
+      # save cookies from response.
+      # parse Set-Cookie meta tag and "Cookie" header.
       private def save_response_cookies(response, uri, page)
         if page.body =~ /Set-Cookie/
           page.css("head meta[http-equiv=\"Set-Cookie\"]").each do |meta|
@@ -122,18 +118,42 @@ module MechanizeCr
         request_headers.delete("Cookie")
       end
 
-      # save cookies as Hash(String, HTTP::Cookies)
-      # String means url's domain.
-      # ex) Hash("example.com" => HTTP::Cookies)
       private def save_cookies(uri, header_cookies)
-        host = uri.host.to_s
-        if cookies.fetch(host, ::HTTP::Cookies.new).empty?
-          cookies[host] = ::HTTP::Cookies.new
-        end
+        host = uri.host
         header_cookies.each do |cookie|
-          cookies[host] << cookie
+          cookie.origin = host
+          request_cookies << cookie
         end
       end
+
+      # extract valid cookies according to URI
+      private def valid_cookies(uri)
+        host = uri.host
+        valid_cookies = ::HTTP::Cookies.new
+        request_cookies.select do |cookie|
+          valid_cookies << cookie if cookie.origin == host || cookie.domain.try &.=~(/.*#{host}/)
+        end
+        valid_cookies
+      end
     end
+  end
+end
+
+# open HTTP::Cookie class to add origin property.
+# origin property represents the origin of the resource.
+# if cookie's domain attribute isn't designated,
+# this property is used to send cookies to same origin resource.
+class HTTP::Cookie
+  property origin : String?
+  def initialize(name : String, value : String, @path : String? = nil,
+    @expires : Time? = nil, @domain : String? = nil,
+    @secure : Bool = false, @http_only : Bool = false,
+    @samesite : SameSite? = nil, @extension : String? = nil,
+    @origin : String? = nil)
+    validate_name(name)
+    @name = name
+    validate_value(value)
+    @value = value
+    @origin = origin
   end
 end
