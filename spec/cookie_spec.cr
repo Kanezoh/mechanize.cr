@@ -4,6 +4,9 @@ WebMock.stub(:get, "example.com/cookies1").to_return(headers: {"Set-Cookie" => "
 WebMock.stub(:get, "example.com/cookies1_domain").to_return(headers: {"Set-Cookie" => "id=123; Domain=example.com"})
 WebMock.stub(:get, "example.com/cookies2").to_return(headers: {"Set-Cookie" => "name=kanezoh"})
 WebMock.stub(:get, "example.com/cookies3").to_return(headers: {"Set-Cookie" => "id=456"})
+WebMock.stub(:get, "example.com/paths").to_return(headers: {"Set-Cookie" => "id=123; Path=/paths"})
+WebMock.stub(:get, "example.com/paths/hoge").to_return()
+WebMock.stub(:get, "example.com/hoge/paths").to_return()
 WebMock.stub(:get, "www.example.com").to_return()
 WebMock.stub(:get, "example.com/meta_cookie").to_return(body:
 <<-BODY
@@ -73,5 +76,18 @@ describe "Mechanize Cookie test" do
     agent.get("http://example.com/cookies1_domain")
     agent.get("http://www.example.com/")
     agent.request_headers.has_key?("Cookie").should eq true
+  end
+
+  it "doesn't send not-matched path if path attribute is set" do
+    agent = Mechanize.new
+    agent.get("http://example.com/paths")
+    agent.get("http://example.com/")
+    agent.request_headers.has_key?("Cookie").should eq false
+    agent.get("http://example.com/paths")
+    agent.request_headers.has_key?("Cookie").should eq true
+    agent.get("http://example.com/paths/hoge")
+    agent.request_headers.has_key?("Cookie").should eq true
+    agent.get("http://example.com/hoge/paths")
+    agent.request_headers.has_key?("Cookie").should eq false
   end
 end
