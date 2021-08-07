@@ -4,8 +4,10 @@ WebMock.stub(:get, "example.com/cookies1").to_return(headers: {"Set-Cookie" => "
 WebMock.stub(:get, "example.com/cookies1_domain").to_return(headers: {"Set-Cookie" => "id=123; Domain=example.com"})
 WebMock.stub(:get, "example.com/cookies2").to_return(headers: {"Set-Cookie" => "name=kanezoh"})
 WebMock.stub(:get, "example.com/cookies3").to_return(headers: {"Set-Cookie" => "id=456"})
+WebMock.stub(:get, "example.com/secure_cookies").to_return(headers: {"Set-Cookie" => "id=123; Secure"})
 WebMock.stub(:get, "example.com/paths").to_return(headers: {"Set-Cookie" => "id=123; Path=/paths"})
 WebMock.stub(:get, "example.com/paths/hoge").to_return()
+WebMock.stub(:get, "https://example.com/").to_return()
 WebMock.stub(:get, "example.com/hoge/paths").to_return()
 WebMock.stub(:get, "www.example.com").to_return()
 WebMock.stub(:get, "example.com/meta_cookie").to_return(body:
@@ -89,5 +91,15 @@ describe "Mechanize Cookie test" do
     agent.request_headers.has_key?("Cookie").should eq true
     agent.get("http://example.com/hoge/paths")
     agent.request_headers.has_key?("Cookie").should eq false
+  end
+
+  it "doesn't send cookie to http protocol if secure attribute is set" do
+    agent = Mechanize.new
+    agent.get("http://example.com/secure_cookies")
+    agent.get("http://example.com/")
+    agent.request_headers.has_key?("Cookie").should eq false
+    agent.get("https://example.com/")
+    agent.request_headers.has_key?("Cookie").should eq true
+    agent.request_headers["Cookie"].should eq "id=123"
   end
 end

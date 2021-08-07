@@ -164,6 +164,10 @@ class HTTP::Cookie
       return false if bool.nil?
     end
 
+    if secure
+      return false if uri.scheme == "http"
+    end
+
     if domain
       host.try &.=~(/.*#{domain.try &.gsub(".", "\.")}$/)
     else
