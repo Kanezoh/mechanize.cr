@@ -38,9 +38,9 @@ class Mechanize
     post_form(uri, form, headers)
   end
 
+  # send POST request from form.
   def post_form(uri, form, headers)
-    #cur_page = form.page || current_page ||
-    #  Page.new
+    cur_page = form.page || (current_page unless history.empty?)
 
     request_data = form.request_data
     content_headers = ::HTTP::Headers{

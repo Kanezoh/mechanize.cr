@@ -20,6 +20,7 @@ class MechanizeCr::Form
   getter enctype      : String
   getter method       : String
   getter name         : String
+  getter page         : Page?
   property action     : String
 
   def initialize(node : Node | Myhtml::Node, page : Page? = nil)

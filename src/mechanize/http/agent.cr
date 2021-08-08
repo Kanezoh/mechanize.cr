@@ -18,7 +18,9 @@ module MechanizeCr
         @user_agent = ""
       end
 
-      def fetch(uri, method = :get, headers = HTTP::Headers.new, params = Hash(String,String).new)
+      def fetch(uri, method = :get, headers = HTTP::Headers.new, params = Hash(String,String).new,
+                )#referer = current_page)
+        #referer_uri = referer.uri
         uri = resolve(uri)
         set_request_headers(uri, headers)
         set_user_agent
