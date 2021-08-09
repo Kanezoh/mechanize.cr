@@ -19,9 +19,8 @@ module MechanizeCr
       end
 
       def fetch(uri, method = :get, headers = HTTP::Headers.new, params = Hash(String,String).new,
-                )#referer = current_page)
-        #referer_uri = referer.uri
-        uri = resolve(uri)
+                referer = (current_page unless history.empty?))
+        uri = resolve_url(uri, referer)
         set_request_headers(uri, headers)
         set_user_agent
         uri, params = resolve_parameters(uri, method, params)
@@ -104,16 +103,35 @@ module MechanizeCr
         end
       end
 
-      private def resolve(uri) : URI
-        if uri.class == URI || uri.to_s.includes?("http")
-          URI.parse(uri)
+      private def resolve_url(uri, referer) : URI
+        if uri.is_a?(URI)
+          target_url = uri.dup
         else
-          referer_uri = current_page.uri
-          host = referer_uri.host
-          scheme = referer_uri.scheme
-          uri = "/" + uri unless uri[0] == '/'
-          new_uri = URI.new(scheme: scheme, host: host, path: uri)
+          target_url = uri.to_s.strip
+          referer_uri = referer.uri if referer
+          if target_url.empty?
+            raise ArgumentError.new("absolute URL needed")
+          end
+          # escape non-ascii character
+          target_url = target_url.gsub(/[^#{0.chr}-#{126.chr}]/) { |match|
+            URI.encode(match)
+          }
+          target_url = URI.parse(target_url)
         end
+
+        # fill host if host isn't set
+        if  target_url.host.nil? && referer && referer_uri.try &.host
+          target_url.host = referer_uri.not_nil!.host
+        end
+        # fill scheme if scheme isn't set
+        if target_url.relative?
+          target_url.scheme = "http"
+        end
+        # fill path's slash if there's no slash.
+        if target_url.path && (target_url.path.empty? || target_url.path[0] != '/')
+          target_url.path = "/#{target_url.path}"
+        end
+        target_url
       end
 
       # reset request cookie before setting headers.
