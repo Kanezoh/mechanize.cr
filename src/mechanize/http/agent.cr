@@ -1,17 +1,18 @@
 require "uri"
 require "http/client"
 require "../cookie"
+require "../history"
 
 module MechanizeCr
   module HTTP
     class Agent
       property :request_headers, :context
-      property history : Array(Page)
+      property history : MechanizeCr::History
       property user_agent : String
       property request_cookies : ::HTTP::Cookies
 
       def initialize(@context : Mechanize | Nil = nil)
-        @history = Array(Page).new
+        @history = MechanizeCr::History.new
         @request_headers = ::HTTP::Headers.new
         @context = context
         @request_cookies = ::HTTP::Cookies.new
