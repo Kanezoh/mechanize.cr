@@ -101,4 +101,14 @@ class Mechanize
   def add_to_history(page)
     history.push(page)
   end
+
+  # Get maximum number of items allowed in the history.  The default setting is 100 pages. 
+  def max_history
+    history.max_size
+  end
+
+  # Set maximum number of items allowed in the history.
+  def max_history=(length)
+    history.max_size = length
+  end
 end

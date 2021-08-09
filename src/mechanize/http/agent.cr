@@ -53,6 +53,16 @@ module MechanizeCr
         @history.pop
       end
 
+      # Get maximum number of items allowed in the history.  The default setting is 100 pages. 
+      def max_history
+        @history.max_size
+      end
+
+      # Set maximum number of items allowed in the history.
+      def max_history=(length)
+        @history.max_size = length
+      end
+
       private def set_request_headers(uri, headers)
         reset_request_header_cookies
         headers.each do |k,v|
