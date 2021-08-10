@@ -47,9 +47,17 @@ describe "Form Fields" do
     email_field.name.should eq "email"
   end
 
-  it "can be found by fields_with method" do
+  it "can be found by fields_with method, argument type: Hash" do
     name_fields = form.fields_with("name")
     name_fields.size.should eq 2
     name_fields[0].name.should eq "name"
+  end
+
+  it "can be found by fields_with method, argument type: NamedTuple" do
+    name_field = form.field_with("name")
+    name_field.name.should eq "name"
+
+    email_field = form.field_with({id: "emailID"})
+    email_field.name.should eq "email"
   end
 end

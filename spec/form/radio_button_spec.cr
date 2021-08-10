@@ -71,4 +71,14 @@ describe "Form Fields RadioButton" do
     radiobuttons[1].value.should eq "phone"
     radiobuttons[2].value.should eq "mail"
   end
+
+  it "can be found by radiobutton_with method, argument type: Hash" do
+    radiobutton = form.radiobutton_with({"id": "contactChoice1"})
+    radiobutton.value.should eq "email"
+  end
+
+  it "can be found by radiobutton_with method, argument type: NamedTuple" do
+    radiobutton = form.radiobutton_with({id: "contactChoice1"})
+    radiobutton.value.should eq "email"
+  end
 end

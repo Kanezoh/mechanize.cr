@@ -52,8 +52,15 @@ describe "Form Fields CheckBox" do
     checkbox.name.should eq "remember_me"
   end
 
-  it "can be found by checkboxes_with method" do
+  it "can be found by checkboxes_with method, argument type: Hash" do
     checkboxes = form.checkboxes_with({"class" => "some_checkbox"})
+    checkboxes.size.should eq 2
+    checkboxes[0].name.should eq "remember_me"
+    checkboxes[1].name.should eq "forget_me"
+  end
+
+  it "can be found by checkboxes_with method, argument type: NamedTuple" do
+    checkboxes = form.checkboxes_with({class: "some_checkbox"})
     checkboxes.size.should eq 2
     checkboxes[0].name.should eq "remember_me"
     checkboxes[1].name.should eq "forget_me"

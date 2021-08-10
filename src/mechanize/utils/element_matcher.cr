@@ -6,6 +6,9 @@ module MechanzeCr::ElementMatcher
     end
 
     def {{plural.id}}_with(criteria, &block)
+      if criteria.is_a?(NamedTuple)
+        criteria = criteria.to_h
+      end
       if criteria.is_a?(String)
         criteria = {"name" => criteria}
       else

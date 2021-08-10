@@ -26,8 +26,13 @@ describe "Form Fields CheckBox" do
     form.buttons.size.should eq 2
   end
 
-  it "can be found by button_with method" do
+  it "can be found by button_with method, argument type: Hash" do
     button2 = form.button_with({"class" => "sndButton"})
+    button2.value.should eq "sndButtonValue"
+  end
+
+  it "can be found by button_with method, argument type: NamedTuple" do
+    button2 = form.button_with({class: "sndButton"})
     button2.value.should eq "sndButtonValue"
   end
 end
