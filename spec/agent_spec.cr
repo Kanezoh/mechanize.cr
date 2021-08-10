@@ -42,4 +42,18 @@ describe "Mechanize Agent test" do
     agent.back
     agent.current_page.title.should eq ""
   end
+
+  it "can set maximum number of items allowed in the history" do
+    agent1 = Mechanize.new
+    agent1.get("http://example.com/")
+    agent1.get("http://example.com/form")
+    agent1.history.size.should eq 2
+    # set max size
+    agent2 = Mechanize.new
+    agent2.max_history = 1
+    agent2.get("http://example.com/")
+    agent2.get("http://example.com/form")
+    agent2.history.size.should eq 1
+    agent2.history.pop.uri.to_s.should eq "http://example.com/form"
+  end
 end
