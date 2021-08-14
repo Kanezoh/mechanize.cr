@@ -1,13 +1,13 @@
 require "./option"
 
 class MechanizeCr::FormContent::MultiSelectList
-  getter node       : Myhtml::Node
+  getter node       : Lexbor::Node
   getter name       : String
   getter type       : String
   property values   : Array(String)
   property options  : Array(FormContent::Option)
 
-  def initialize(node : Myhtml::Node)
+  def initialize(node : Lexbor::Node)
     @node    = node
     @name    = node.fetch("name", "")
     @type    = node.fetch("type", "")

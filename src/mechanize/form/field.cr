@@ -3,9 +3,9 @@ class MechanizeCr::FormContent::Field
   getter name      : String
   getter type      : String
   getter raw_value : String?
-  getter node      : Node | Myhtml::Node
+  getter node      : Node | Lexbor::Node
 
-  def initialize(node : Node | Myhtml::Node, value=nil)
+  def initialize(node : Node | Lexbor::Node, value=nil)
     @node      = node
     @name      = node.fetch("name", "")
     @value     = value || node.fetch("value", nil)
@@ -17,12 +17,12 @@ class MechanizeCr::FormContent::Field
     [@name, @value || ""]
   end
 
-  # returns DOM 'id' value 
+  # returns DOM 'id' value
   def dom_id
     node.fetch("id", "")
   end
 
-  # returns DOM 'class' value 
+  # returns DOM 'class' value
   def dom_class
     node.fetch("class", "")
   end
