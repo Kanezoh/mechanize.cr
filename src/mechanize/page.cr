@@ -12,8 +12,8 @@ class MechanizeCr::Page < MechanizeCr::File
     super(uri, response, body, code)
   end
 
-  def parser : Myhtml::Parser
-    @parser ||=  Myhtml::Parser.new(@body)
+  def parser : Lexbor::Parser
+    @parser ||= Lexbor::Parser.new(@body)
   end
 
   def title

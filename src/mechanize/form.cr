@@ -11,7 +11,7 @@ require "./utils/element_matcher"
 class MechanizeCr::Form
   include MechanzeCr::ElementMatcher
 
-  getter node         : Node | Myhtml::Node
+  getter node         : Node | Lexbor::Node
   getter fields       : Array(FormContent::Field)
   getter checkboxes   : Array(FormContent::CheckBox)
   getter radiobuttons : Array(FormContent::RadioButton)
@@ -23,7 +23,7 @@ class MechanizeCr::Form
   getter page         : Page?
   property action     : String
 
-  def initialize(node : Node | Myhtml::Node, page : Page? = nil)
+  def initialize(node : Node | Lexbor::Node, page : Page? = nil)
     @enctype          = node.fetch("enctype", "application/x-www-form-urlencoded")
     @node             = node
     @fields           = Array(FormContent::Field).new
@@ -64,7 +64,7 @@ class MechanizeCr::Form
 
   private def parse
     @node.css("input").not_nil!.each do |html_node|
-      html_node = html_node.as(Myhtml::Node)
+      html_node = html_node.as(Lexbor::Node)
       type = (html_node["type"] || "text").downcase
       case type
       when "checkbox"
@@ -92,13 +92,13 @@ class MechanizeCr::Form
 
     # Find all textarea tags
     @node.css("textarea").each do |node|
-      node = node.as(Myhtml::Node)
+      node = node.as(Lexbor::Node)
       next if node["name"].empty?
       @fields << FormContent::Textarea.new(node, node.inner_text)
     end
 
     @node.css("button").each do |node|
-      node = node.as(Myhtml::Node)
+      node = node.as(Lexbor::Node)
       type = node.fetch("type", "submit").downcase
       next if type == "reset"
       @buttons << FormContent::Button.new(node, @node)
@@ -106,7 +106,7 @@ class MechanizeCr::Form
 
     # Find all select tags
     @node.css("select").each do |node|
-      node = node.as(Myhtml::Node)
+      node = node.as(Lexbor::Node)
       next if node["name"].empty?
       if node.has_key?("multiple")
         @selectboxes << FormContent::MultiSelectList.new(node)

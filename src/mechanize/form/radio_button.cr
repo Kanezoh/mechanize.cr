@@ -1,7 +1,7 @@
 class MechanizeCr::FormContent::RadioButton < MechanizeCr::FormContent::Field
   property :checked, :form
 
-  def initialize(node : Node | Myhtml::Node, form : Form)
+  def initialize(node : Node | Lexbor::Node, form : Form)
     @checked = !!node.fetch("checked", nil)
     @form    = form
     super(node)

@@ -1,6 +1,6 @@
 class MechanizeCr::FormContent::Option
   getter select_list : FormContent::MultiSelectList
-  getter node        : Myhtml::Node
+  getter node        : Lexbor::Node
   getter text        : String
   getter value       : String
   getter selected    : Bool
