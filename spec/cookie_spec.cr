@@ -6,12 +6,11 @@ WebMock.stub(:get, "example.com/cookies2").to_return(headers: {"Set-Cookie" => "
 WebMock.stub(:get, "example.com/cookies3").to_return(headers: {"Set-Cookie" => "id=456"})
 WebMock.stub(:get, "example.com/secure_cookies").to_return(headers: {"Set-Cookie" => "id=123; Secure"})
 WebMock.stub(:get, "example.com/paths").to_return(headers: {"Set-Cookie" => "id=123; Path=/paths"})
-WebMock.stub(:get, "example.com/paths/hoge").to_return()
-WebMock.stub(:get, "https://example.com/").to_return()
-WebMock.stub(:get, "example.com/hoge/paths").to_return()
-WebMock.stub(:get, "www.example.com").to_return()
-WebMock.stub(:get, "example.com/meta_cookie").to_return(body:
-<<-BODY
+WebMock.stub(:get, "example.com/paths/hoge").to_return
+WebMock.stub(:get, "https://example.com/").to_return
+WebMock.stub(:get, "example.com/hoge/paths").to_return
+WebMock.stub(:get, "www.example.com").to_return
+WebMock.stub(:get, "example.com/meta_cookie").to_return(body: <<-BODY
 <html>
   <head>
     <title>page_title</title>

@@ -1,8 +1,8 @@
 require "./spec_helper"
 WebMock.stub(:get, "http://example.com/?foo=bar&foo1=bar2")
-WebMock.stub(:post, "http://example.com/post").
-         with(body: "email=foobar", headers: {"Content-Type" => "application/x-www-form-urlencoded"}).
-         to_return(body: "success")
+WebMock.stub(:post, "http://example.com/post")
+  .with(body: "email=foobar", headers: {"Content-Type" => "application/x-www-form-urlencoded"})
+  .to_return(body: "success")
 WebMock.stub(:get, "example.com/%E3%81%82%E3%81%82%E3%81%82")
 
 describe "Mechanize HTTP test" do
@@ -49,7 +49,7 @@ describe "Mechanize HTTP test" do
 
   it "simple POST" do
     agent = Mechanize.new
-    query = { "email" => "foobar" }
+    query = {"email" => "foobar"}
     page = agent.post("http://example.com/post", query: query)
     page.body.should eq "success"
     page.code.should eq 200

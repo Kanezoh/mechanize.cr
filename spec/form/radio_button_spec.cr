@@ -1,7 +1,6 @@
 require "../spec_helper.cr"
 
-WebMock.stub(:get, "example.com/form/radio_button").to_return(body:
-<<-BODY
+WebMock.stub(:get, "example.com/form/radio_button").to_return(body: <<-BODY
 <html>
   <head>
     <title>page_title</title>
@@ -26,7 +25,7 @@ describe "Form Fields RadioButton" do
   radiobuttons.size.should eq 3
 
   it "returns radiobutton check status" do
-    radiobuttons.map(&.checked?).should eq [false,false,false]  
+    radiobuttons.map(&.checked?).should eq [false, false, false]
   end
 
   it "can change check status" do
@@ -36,7 +35,7 @@ describe "Form Fields RadioButton" do
     radiobutton.checked?.should eq true
     radiobutton.uncheck
     radiobutton.checked?.should eq false
-    # #click reverses check status 
+    # #click reverses check status
     radiobutton.click
     radiobutton.checked?.should eq true
     radiobutton.click

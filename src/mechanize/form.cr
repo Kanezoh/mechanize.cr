@@ -11,35 +11,35 @@ require "./utils/element_matcher"
 class MechanizeCr::Form
   include MechanzeCr::ElementMatcher
 
-  getter node         : Node | Lexbor::Node
-  getter fields       : Array(FormContent::Field)
-  getter checkboxes   : Array(FormContent::CheckBox)
+  getter node : Node | Lexbor::Node
+  getter fields : Array(FormContent::Field)
+  getter checkboxes : Array(FormContent::CheckBox)
   getter radiobuttons : Array(FormContent::RadioButton)
-  getter selectboxes  : Array(FormContent::MultiSelectList)
-  getter buttons      : Array(FormContent::Button)
-  getter enctype      : String
-  getter method       : String
-  getter name         : String
-  getter page         : Page?
-  property action     : String
+  getter selectboxes : Array(FormContent::MultiSelectList)
+  getter buttons : Array(FormContent::Button)
+  getter enctype : String
+  getter method : String
+  getter name : String
+  getter page : Page?
+  property action : String
 
   def initialize(node : Node | Lexbor::Node, page : Page? = nil)
-    @enctype          = node.fetch("enctype", "application/x-www-form-urlencoded")
-    @node             = node
-    @fields           = Array(FormContent::Field).new
-    @checkboxes       = Array(FormContent::CheckBox).new
-    @radiobuttons     = Array(FormContent::RadioButton).new
-    @selectboxes      = Array(FormContent::MultiSelectList).new
-    @buttons          = Array(FormContent::Button).new
-    @action           = node.fetch("action", "")
-    @method           = node.fetch("method", "GET").upcase
-    @name             = node.fetch("name", "")
-    @clicked_buttons  = Array(FormContent::Button).new
-    @page             = page
-    #@mech             = mech
+    @enctype = node.fetch("enctype", "application/x-www-form-urlencoded")
+    @node = node
+    @fields = Array(FormContent::Field).new
+    @checkboxes = Array(FormContent::CheckBox).new
+    @radiobuttons = Array(FormContent::RadioButton).new
+    @selectboxes = Array(FormContent::MultiSelectList).new
+    @buttons = Array(FormContent::Button).new
+    @action = node.fetch("action", "")
+    @method = node.fetch("method", "GET").upcase
+    @name = node.fetch("name", "")
+    @clicked_buttons = Array(FormContent::Button).new
+    @page = page
+    # @mech             = mech
 
-    #@encoding = node['accept-charset'] || (page && page.encoding) || nil
-    #@ignore_encoding_error = false
+    # @encoding = node['accept-charset'] || (page && page.encoding) || nil
+    # @ignore_encoding_error = false
     parse
   end
 
@@ -75,7 +75,7 @@ class MechanizeCr::Form
         buttons << FormContent::Button.new(html_node, @node)
       when "submit"
         buttons << FormContent::SubmitButton.new(html_node, @node)
-      when"reset"
+      when "reset"
         buttons << FormContent::ResetButton.new(html_node, @node)
       when "image"
         buttons << FormContent::ImageButton.new(html_node, @node)
@@ -118,7 +118,7 @@ class MechanizeCr::Form
 
   private def build_query_string(params : Array(Array(String)))
     params.reduce("") do |acc, arr|
-      hash = { arr[0] => arr[1] }
+      hash = {arr[0] => arr[1]}
       acc + URI::Params.encode(hash) + '&'
     end.rchop
   end
@@ -144,9 +144,9 @@ class MechanizeCr::Form
     radio_groups.each_value do |g|
       checked = g.select(&.checked)
       if checked.uniq.size > 1
-        #values = checked.map(&.value).join(', ').inspect
-        #name = checked.first.name.inspect
-        #raise Mechanize::Error,
+        # values = checked.map(&.value).join(', ').inspect
+        # name = checked.first.name.inspect
+        # raise Mechanize::Error,
         #      "radiobuttons #{values} are checked in the #{name} group, " \
         #      "only one is allowed"
         raise MechanizeCr::Error.new
@@ -182,8 +182,8 @@ class MechanizeCr::Form
   def add_button_to_query(button)
     unless button.form_node == @node
       message = ""
-        "#{button.inspect} does not belong to the same page as " \
-        "the form #{@name.inspect} in #{@page.try &.uri}"
+      "#{button.inspect} does not belong to the same page as " \
+      "the form #{@name.inspect} in #{@page.try &.uri}"
       message = "not a valid button"
       raise ArgumentError.new(message)
     end

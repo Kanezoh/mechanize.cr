@@ -3,7 +3,7 @@ class MechanizeCr::FormContent::RadioButton < MechanizeCr::FormContent::Field
 
   def initialize(node : Node | Lexbor::Node, form : Form)
     @checked = !!node.fetch("checked", nil)
-    @form    = form
+    @form = form
     super(node)
   end
 
@@ -24,33 +24,32 @@ class MechanizeCr::FormContent::RadioButton < MechanizeCr::FormContent::Field
     checked
   end
 
-  #def hash # :nodoc:
+  # def hash # :nodoc:
   #  @form.hash ^ @name.hash ^ @value.hash
-  #end
-#
-  #def label
+  # end
+  #
+  # def label
   #  (id = self['id']) && @form.page.labels_hash[id] || nil
-  #end
-#
-  #def text
+  # end
+  #
+  # def text
   #  label.text rescue nil
-  #end
-#
-  #def [](key)
+  # end
+  #
+  # def [](key)
   #  @node[key]
-  #end
+  # end
 
   # alias checked? checked
 
-  #def == other # :nodoc:
+  # def == other # :nodoc:
   #  self.class === other and
   #    other.form  == @form and
   #    other.name  == @name and
   #    other.value == @value
-  #end
-#
-  #alias eql? == # :nodoc:
-
+  # end
+  #
+  # alias eql? == # :nodoc:
 
   private def uncheck_peers
     form.radiobuttons_with(name).try &.each do |b|

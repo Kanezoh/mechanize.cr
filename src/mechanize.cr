@@ -10,27 +10,28 @@ class Mechanize
   AGENT = {
     "Mechanize" => "Mechanize/#{VERSION} Crystal/#{Crystal::VERSION} (https://github.com/Kanezoh/mechanize.cr)",
   }
-  def initialize()
+
+  def initialize
     @agent = MechanizeCr::HTTP::Agent.new
     @agent.context = self
     @agent.user_agent = AGENT["Mechanize"]
   end
 
-  def get(uri : String | URI, headers = HTTP::Headers.new, params : Hash(String, String | Array(String)) = Hash(String,String).new)
+  def get(uri : String | URI, headers = HTTP::Headers.new, params : Hash(String, String | Array(String)) = Hash(String, String).new)
     method = :get
     page = @agent.fetch uri, method, headers, params
     add_to_history(page)
-    #yield page if block_given?
+    # yield page if block_given?
     page
   end
 
-  def post(uri : String | URI, headers = HTTP::Headers.new, query : Hash(String, String | Array(String)) = Hash(String,String).new)
+  def post(uri : String | URI, headers = HTTP::Headers.new, query : Hash(String, String | Array(String)) = Hash(String, String).new)
     node = Node.new
     node["method"] = "POST"
     node["enctype"] = "application/x-www-form-urlencoded"
 
     form = MechanizeCr::Form.new(node)
-    query.each do |k,v|
+    query.each do |k, v|
       node = Node.new
       node["name"] = k
       form.fields << MechanizeCr::FormContent::Field.new(node, v)
@@ -44,13 +45,13 @@ class Mechanize
 
     request_data = form.request_data
     content_headers = ::HTTP::Headers{
-      "Content-Type"    => form.enctype,
-      "Content-Length"  => request_data.size.to_s,
+      "Content-Type"   => form.enctype,
+      "Content-Length" => request_data.size.to_s,
     }
     headers.merge!(content_headers)
 
     # fetch the page
-    page = @agent.fetch(uri, :post, headers: headers, params: {"value" => request_data }, referer: cur_page)
+    page = @agent.fetch(uri, :post, headers: headers, params: {"value" => request_data}, referer: cur_page)
     headers.delete("Content-Type")
     headers.delete("Content-Length")
     add_to_history(page)
@@ -81,7 +82,7 @@ class Mechanize
     @agent.history.pop
   end
 
-  def submit(form, button=nil)
+  def submit(form, button = nil)
     form.add_button_to_query(button) if button
     case form.method.upcase
     when "POST"
@@ -102,8 +103,8 @@ class Mechanize
     history.push(page)
   end
 
-  # Get maximum number of items allowed in the history. 
-  # The default setting is 100 pages. 
+  # Get maximum number of items allowed in the history.
+  # The default setting is 100 pages.
   def max_history
     history.max_size
   end

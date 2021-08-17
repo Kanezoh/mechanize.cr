@@ -2,14 +2,12 @@ require "spec"
 require "webmock"
 require "../src/mechanize"
 
-
 WebMock.stub(:get, "example.com")
 WebMock.stub(:get, "fail_example.com").to_return(status: 500)
 WebMock.stub(:get, "body_example.com").to_return(body: "hello")
 WebMock.stub(:get, "another_domain.com/")
 
-WebMock.stub(:get, "example.com/form").to_return(body:
-<<-BODY
+WebMock.stub(:get, "example.com/form").to_return(body: <<-BODY
 <html>
   <head>
     <title>page_title</title>
@@ -24,10 +22,10 @@ WebMock.stub(:get, "example.com/form").to_return(body:
 </html>
 BODY
 )
-WebMock.stub(:post, "example.com/post_path").
-         with(body: "name=foo&email=bar", headers: {"Content-Type" => "application/x-www-form-urlencoded"}).
-         to_return(body: "success")
+WebMock.stub(:post, "example.com/post_path")
+  .with(body: "name=foo&email=bar", headers: {"Content-Type" => "application/x-www-form-urlencoded"})
+  .to_return(body: "success")
 
-WebMock.stub(:post, "example.com/post_path").
-         with(body: "name=foo&email=bar&commit=submit", headers: {"Content-Type" => "application/x-www-form-urlencoded"}).
-         to_return(body: "success with button")
+WebMock.stub(:post, "example.com/post_path")
+  .with(body: "name=foo&email=bar&commit=submit", headers: {"Content-Type" => "application/x-www-form-urlencoded"})
+  .to_return(body: "success with button")
