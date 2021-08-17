@@ -32,15 +32,15 @@ module MechanizeCr
         save_response_cookies(response, uri, page)
 
         if response && response.status.redirection?
-          return follow_redirect(response, headers)
+          return follow_redirect(response, headers, page)
         end
 
         page
       end
 
-      private def follow_redirect(response, headers)
+      private def follow_redirect(response, headers, referer)
         redirect_url = response.headers["location"]
-        uri = URI.parse(redirect_url)
+        uri = resolve_url(redirect_url, referer)
 
         # Make sure we are not copying over the POST headers from the original request
         headers.delete("Content-MD5")
