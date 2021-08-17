@@ -1,5 +1,7 @@
 # mechanize.cr
 
+[![Crystal CI](https://github.com/Kanezoh/mechanize.cr/actions/workflows/crystal.yml/badge.svg)](https://github.com/Kanezoh/mechanize.cr/actions/workflows/crystal.yml)
+
 This project is inspired by Ruby's [mechanize](https://github.com/sparklemotion/mechanize).
 The purpose is to cover all the features of original one.
 Now, mechanize.cr can automatically store and send cookies, fill and submit forms.
