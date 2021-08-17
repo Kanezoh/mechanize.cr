@@ -5,9 +5,9 @@ class MechanizeCr::Page < MechanizeCr::File
   include MechanzeCr::ElementMatcher
   delegate :css, to: parser
 
-  property mech : Mechanize?
+  property mech : Mechanize
 
-  def initialize(uri, response, body, code, mech=nil)
+  def initialize(uri, response, body, code, mech)
     @mech = mech
     super(uri, response, body, code)
   end
