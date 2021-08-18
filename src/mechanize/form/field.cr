@@ -1,15 +1,15 @@
 class MechanizeCr::FormContent::Field
-  property value   : String?
-  getter name      : String
-  getter type      : String
+  property value : String?
+  getter name : String
+  getter type : String
   getter raw_value : String?
-  getter node      : Node | Lexbor::Node
+  getter node : Node | Lexbor::Node
 
-  def initialize(node : Node | Lexbor::Node, value=nil)
-    @node      = node
-    @name      = node.fetch("name", "")
-    @value     = value || node.fetch("value", nil)
-    @type      = node.fetch("type", "")
+  def initialize(node : Node | Lexbor::Node, value = nil)
+    @node = node
+    @name = node.fetch("name", "")
+    @value = value || node.fetch("value", nil)
+    @type = node.fetch("type", "")
     @raw_value = @value
   end
 
@@ -30,7 +30,7 @@ class MechanizeCr::FormContent::Field
   def inspect # :nodoc:
     "[%s:0x%x type: %s name: %s value: %s]" % [
       self.class.name.sub(/MechanizeCr::FormContent::/, "").downcase,
-      object_id, type, name, value
+      object_id, type, name, value,
     ]
   end
 end

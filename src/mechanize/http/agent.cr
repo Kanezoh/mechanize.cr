@@ -19,7 +19,7 @@ module MechanizeCr
         @user_agent = ""
       end
 
-      def fetch(uri, method = :get, headers = HTTP::Headers.new, params = Hash(String,String).new,
+      def fetch(uri, method = :get, headers = HTTP::Headers.new, params = Hash(String, String).new,
                 referer = (current_page unless history.empty?))
         uri = resolve_url(uri, referer)
         set_request_headers(uri, headers)
@@ -52,7 +52,7 @@ module MechanizeCr
 
       def http_request(uri, method, params)
         case uri.scheme.not_nil!.downcase
-        when "http", "https" then
+        when "http", "https"
           case method
           when :get
             ::HTTP::Client.get(uri, headers: request_headers)
@@ -70,7 +70,7 @@ module MechanizeCr
         @history.pop
       end
 
-      # Get maximum number of items allowed in the history.  The default setting is 100 pages. 
+      # Get maximum number of items allowed in the history.  The default setting is 100 pages.
       def max_history
         @history.max_size
       end
@@ -82,7 +82,7 @@ module MechanizeCr
 
       private def set_request_headers(uri, headers)
         reset_request_header_cookies
-        headers.each do |k,v|
+        headers.each do |k, v|
           request_headers[k] = v
         end
         valid_cookies(uri).add_request_headers(request_headers)
@@ -117,8 +117,8 @@ module MechanizeCr
       private def save_response_cookies(response, uri, page)
         if page.body =~ /Set-Cookie/
           page.css("head meta[http-equiv=\"Set-Cookie\"]").each do |meta|
-            cookie =  meta["content"].split(";")[0]
-            key,value = cookie.split("=")
+            cookie = meta["content"].split(";")[0]
+            key, value = cookie.split("=")
             cookie = ::HTTP::Cookie.new(name: key, value: value)
             save_cookies(uri, [cookie])
           end
@@ -148,7 +148,7 @@ module MechanizeCr
         end
 
         # fill host if host isn't set
-        if  target_url.host.nil? && referer && referer_uri.try &.host
+        if target_url.host.nil? && referer && referer_uri.try &.host
           target_url.host = referer_uri.not_nil!.host
         end
         # fill scheme if scheme isn't set

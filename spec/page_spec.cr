@@ -35,14 +35,14 @@ describe "Mechanize Page test" do
   it "can detect form by using form_with method, argument type: Hash" do
     agent = Mechanize.new
     page = agent.get("http://example.com/form")
-    form = page.form_with({"name" => "sample_form" })
+    form = page.form_with({"name" => "sample_form"})
     form.name.should eq "sample_form"
   end
 
   it "can detect form by using form_with method, argument type: NamedTuple" do
     agent = Mechanize.new
     page = agent.get("http://example.com/form")
-    form = page.form_with({name: "sample_form" })
+    form = page.form_with({name: "sample_form"})
     form.name.should eq "sample_form"
   end
 end

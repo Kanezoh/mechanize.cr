@@ -1,5 +1,5 @@
 module MechanzeCr::ElementMatcher
-  macro elements_with(singular, plural="")
+  macro elements_with(singular, plural = "")
     {% plural = "#{singular.id}s" if plural.empty? %}
     def {{plural.id}}_with(criteria)
       {{plural.id}}_with(criteria){}

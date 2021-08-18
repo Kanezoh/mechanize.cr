@@ -1,9 +1,9 @@
 require "lexbor"
 
 # This is a fake node used when sending post request.
-class Node < Hash(String,String)
+class Node < Hash(String, String)
   def css(str)
-    [] of Hash(String,String)
+    [] of Hash(String, String)
   end
 
   def inner_text

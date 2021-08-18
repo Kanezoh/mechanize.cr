@@ -6,11 +6,12 @@
 # this property is used to send cookies to same origin resource.
 class ::HTTP::Cookie
   property origin : String?
+
   def initialize(name : String, value : String, @path : String? = nil,
-    @expires : Time? = nil, @domain : String? = nil,
-    @secure : Bool = false, @http_only : Bool = false,
-    @samesite : SameSite? = nil, @extension : String? = nil,
-    @origin : String? = nil)
+                 @expires : Time? = nil, @domain : String? = nil,
+                 @secure : Bool = false, @http_only : Bool = false,
+                 @samesite : SameSite? = nil, @extension : String? = nil,
+                 @origin : String? = nil)
     validate_name(name)
     @name = name
     validate_value(value)
@@ -30,7 +31,7 @@ class ::HTTP::Cookie
     end
 
     if domain
-      host.try &.=~(/.*#{domain.try &.gsub(".", "\.")}$/)
+      host.try &.=~(/.*#{domain.try &.gsub(".", ".")}$/)
     else
       origin == host
     end

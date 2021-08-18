@@ -1,7 +1,6 @@
 require "../spec_helper"
 
-WebMock.stub(:get, "example.com/form/select_list").to_return(body:
-<<-BODY
+WebMock.stub(:get, "example.com/form/select_list").to_return(body: <<-BODY
 <html>
   <head>
     <title>page_title</title>
