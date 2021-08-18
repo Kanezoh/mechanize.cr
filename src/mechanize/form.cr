@@ -65,7 +65,7 @@ class MechanizeCr::Form
   private def parse
     @node.css("input").not_nil!.each do |html_node|
       html_node = html_node.as(Lexbor::Node)
-      type = (html_node["type"] || "text").downcase
+      type = (html_node["type"]? || "text").downcase
       case type
       when "checkbox"
         checkboxes << FormContent::CheckBox.new(html_node, self)

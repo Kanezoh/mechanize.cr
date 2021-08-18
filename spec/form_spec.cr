@@ -8,7 +8,7 @@ WebMock.stub(:get, "example.com/check_form").to_return(body: <<-BODY
   <body>
     <form action="post_path" method="post" name="sample_form">
       <!-- fields -->
-      <input type="text" name="name">
+      <input name="name">
       <input type="text" name="email">
       <input type="hidden" name="userid" value="12345">
       <input type="password" id="pass" name="password">
