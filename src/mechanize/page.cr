@@ -1,5 +1,6 @@
 require "./file"
 require "./utils/element_matcher"
+require "./page/link"
 
 class MechanizeCr::Page < MechanizeCr::File
   include MechanzeCr::ElementMatcher
@@ -31,6 +32,14 @@ class MechanizeCr::Page < MechanizeCr::File
       form.action ||= @uri.to_s
       form
     end.to_a
+  end
+
+  def links
+    links = %w{a area}.map do |tag|
+      css(tag).map do |node|
+        PageContent::Link.new(node, @mech, self)
+      end
+    end.flatten
   end
 
   # generate form_with, forms_with methods
