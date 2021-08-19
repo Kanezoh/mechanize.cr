@@ -30,6 +30,10 @@ WebMock.stub(:get, "example.com/link").to_return(body: <<-BODY
   </head>
   <body>
     <a href="http://example.com/">link text</a>
+    <map>
+      <area shape="rect" coords="184,6,253,27"
+      href="http://example.com" />
+    </map>
   </body>
 </html>
 BODY
