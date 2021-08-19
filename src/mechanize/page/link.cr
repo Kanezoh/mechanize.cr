@@ -12,4 +12,9 @@ class MechanizeCr::PageContent::Link
     @href = node.fetch("href", "")
     @text = node.inner_text
   end
+
+  # click on this link
+  def click
+    @mech.click self
+  end
 end

@@ -113,4 +113,10 @@ class Mechanize
   def max_history=(length)
     history.max_size = length
   end
+
+  # click link, and return page.
+  def click(link)
+    href = link.href
+    get href
+  end
 end
