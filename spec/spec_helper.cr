@@ -22,6 +22,19 @@ WebMock.stub(:get, "example.com/form").to_return(body: <<-BODY
 </html>
 BODY
 )
+
+WebMock.stub(:get, "example.com/link").to_return(body: <<-BODY
+<html>
+  <head>
+    <title>page_title</title>
+  </head>
+  <body>
+    <a href="http://example.com/">ページのリンク</a>
+  </body>
+</html>
+BODY
+)
+
 WebMock.stub(:post, "example.com/post_path")
   .with(body: "name=foo&email=bar", headers: {"Content-Type" => "application/x-www-form-urlencoded"})
   .to_return(body: "success")
