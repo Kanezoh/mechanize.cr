@@ -29,7 +29,7 @@ WebMock.stub(:get, "example.com/link").to_return(body: <<-BODY
     <title>page_title</title>
   </head>
   <body>
-    <a href="http://example.com/">ページのリンク</a>
+    <a href="http://example.com/">link text</a>
   </body>
 </html>
 BODY
