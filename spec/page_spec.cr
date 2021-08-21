@@ -45,4 +45,10 @@ describe "Mechanize Page test" do
     form = page.form_with({name: "sample_form"})
     form.name.should eq "sample_form"
   end
+
+  it "return page links, links means <a> and <area>" do
+    agent = Mechanize.new
+    page = agent.get("http://example.com/link")
+    page.links.size.should eq 2
+  end
 end
