@@ -56,4 +56,11 @@ describe "Mechanize Agent test" do
     agent2.history.size.should eq 1
     agent2.history.pop.uri.to_s.should eq "http://example.com/form"
   end
+
+  it "can download page" do
+    agent = Mechanize.new
+    agent.download("http://example.com", "mechanizecr_example.html")
+    File.exists?("mechanizecr_example.html").should eq true
+    File.delete("mechanizecr_example.html")
+  end
 end
