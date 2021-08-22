@@ -126,7 +126,7 @@ class Mechanize
 
   # download page body from given uri.
   # TODO: except this request from history.
-  def download(uri, 
+  def download(uri,
                filename,
                headers = HTTP::Headers.new,
                params : Hash(String, String | Array(String)) = Hash(String, String).new)
