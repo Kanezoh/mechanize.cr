@@ -130,13 +130,13 @@ class Mechanize
                filename,
                headers = HTTP::Headers.new,
                params : Hash(String, String | Array(String)) = Hash(String, String).new)
-    page = get(uri, headers, params)
-
-    case page
-    when MechanizeCr::File
-      File.write(filename, page.body)
+    transact do
+      page = get(uri, headers, params)
+      case page
+      when MechanizeCr::File
+        File.write(filename, page.body)
+      end
     end
-    page
   end
 
   # Runs given block, then resets the page history as it was before.
