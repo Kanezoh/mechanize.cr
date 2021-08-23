@@ -63,4 +63,14 @@ describe "Mechanize Agent test" do
     File.exists?("mechanizecr_example.html").should eq true
     File.delete("mechanizecr_example.html")
   end
+
+  it "doesn't add page to history within transact block" do
+    agent = Mechanize.new
+    agent.get("http://example.com/")
+    agent.history.size.should eq 1
+    agent.transact do
+      agent.get("http://example.com/")
+    end
+    agent.history.size.should eq 1
+  end
 end

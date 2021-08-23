@@ -138,4 +138,16 @@ class Mechanize
     end
     page
   end
+
+  # Runs given block, then resets the page history as it was before.
+  def transact
+    # save the previous history status.
+    history_backup = MechanizeCr::History.new(@agent.history.max_size, @agent.history.array.dup)
+    begin
+      yield self
+    ensure
+      # restore the previous history.
+      @agent.history = history_backup
+    end
+  end
 end

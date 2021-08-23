@@ -4,11 +4,11 @@ class MechanizeCr::History
   property max_size : Int32
   property array : Array(MechanizeCr::Page)
 
-  forward_missing_to @array
+  delegate :size, :empty?, :last, to: array
 
-  def initialize(max_size = 100)
+  def initialize(max_size = 100, array = Array(MechanizeCr::Page).new)
     @max_size = max_size
-    @array = Array(MechanizeCr::Page).new
+    @array = array
   end
 
   def push(page, uri = nil)
