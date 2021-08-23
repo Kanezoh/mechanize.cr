@@ -2,7 +2,7 @@ require "./page"
 
 class MechanizeCr::History
   property max_size : Int32
-  property array    : Array(MechanizeCr::Page)
+  property array : Array(MechanizeCr::Page)
 
   forward_missing_to @array
 
