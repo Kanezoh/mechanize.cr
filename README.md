@@ -98,3 +98,4 @@ puts page.css("h1").first.inner_text
 ## Contributors
 
 - [Kanezoh](https://github.com/Kanezoh) - creator and maintainer
+- [mamantoha](https://github.com/mamantoha) - contributor
