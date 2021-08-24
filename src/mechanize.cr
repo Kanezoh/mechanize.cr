@@ -17,7 +17,9 @@ class Mechanize
     @agent.user_agent = AGENT["Mechanize"]
   end
 
-  def get(uri : String | URI, headers = HTTP::Headers.new, params : Hash(String, String | Array(String)) = Hash(String, String).new)
+  def get(uri : String | URI,
+          headers = HTTP::Headers.new,
+          params : Hash(String, String | Array(String)) = Hash(String, String).new)
     method = :get
     page = @agent.fetch uri, method, headers, params
     add_to_history(page)
@@ -25,7 +27,9 @@ class Mechanize
     page
   end
 
-  def post(uri : String | URI, headers = HTTP::Headers.new, query : Hash(String, String | Array(String)) = Hash(String, String).new)
+  def post(uri : String | URI,
+           headers = HTTP::Headers.new,
+           query : Hash(String, String | Array(String)) = Hash(String, String).new)
     node = Node.new
     node["method"] = "POST"
     node["enctype"] = "application/x-www-form-urlencoded"
@@ -118,5 +122,32 @@ class Mechanize
   def click(link)
     href = link.href
     get href
+  end
+
+  # download page body from given uri.
+  # TODO: except this request from history.
+  def download(uri,
+               filename,
+               headers = HTTP::Headers.new,
+               params : Hash(String, String | Array(String)) = Hash(String, String).new)
+    transact do
+      page = get(uri, headers, params)
+      case page
+      when MechanizeCr::File
+        File.write(filename, page.body)
+      end
+    end
+  end
+
+  # Runs given block, then resets the page history as it was before.
+  def transact
+    # save the previous history status.
+    history_backup = MechanizeCr::History.new(@agent.history.max_size, @agent.history.array.dup)
+    begin
+      yield self
+    ensure
+      # restore the previous history.
+      @agent.history = history_backup
+    end
   end
 end
