@@ -20,7 +20,12 @@ jobs:
   test:
     strategy:
       fail-fast: false
-    runs-on: ubuntu-latest
+      matrix:
+        include:
+          - {os: ubuntu-latest, crystal: latest}
+          - {os: ubuntu-latest, crystal: nightly}
+          - {os: macos-latest}
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Install Crystal
         uses: crystal-lang/install-crystal@v1
