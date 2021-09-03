@@ -11,7 +11,7 @@ class ::HTTP::Cookie
                  @expires : Time? = nil, @domain : String? = nil,
                  @secure : Bool = false, @http_only : Bool = false,
                  @samesite : SameSite? = nil, @extension : String? = nil,
-                 @origin : String? = nil)
+                 @origin : String? = nil, @creation_time = Time.utc)
     validate_name(name)
     @name = name
     validate_value(value)
