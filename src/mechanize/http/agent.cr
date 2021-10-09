@@ -151,10 +151,16 @@ module MechanizeCr
         if target_url.host.nil? && referer && referer_uri.try &.host
           target_url.host = referer_uri.not_nil!.host
         end
+
         # fill scheme if scheme isn't set
         if target_url.relative?
-          target_url.scheme = "http"
+          if referer && referer_uri.try &.scheme
+            target_url.scheme = referer_uri.not_nil!.scheme
+          else
+            target_url.scheme = "http"
+          end
         end
+
         # fill path's slash if there's no slash.
         if target_url.path && (target_url.path.empty? || target_url.path[0] != '/')
           target_url.path = "/#{target_url.path}"
