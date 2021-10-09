@@ -4,6 +4,8 @@ WebMock.stub(:post, "http://example.com/post")
   .with(body: "email=foobar", headers: {"Content-Type" => "application/x-www-form-urlencoded"})
   .to_return(body: "success")
 WebMock.stub(:get, "example.com/%E3%81%82%E3%81%82%E3%81%82")
+WebMock.stub(:get, "https://example.com/")
+WebMock.stub(:get, "https://example.com/post")
 
 describe "Mechanize HTTP test" do
   it "simple GET" do
@@ -61,5 +63,12 @@ describe "Mechanize HTTP test" do
     agent.user_agent = mac_chrome_agent
     page = agent.get("http://example.com/")
     agent.request_headers["User-Agent"].should eq mac_chrome_agent
+  end
+
+  it "can complete uri when uri is relative" do
+    agent = Mechanize.new
+    agent.get("https://example.com/")
+    page = agent.get("/post")
+    page.uri.to_s.should eq "https://example.com/post"
   end
 end
