@@ -27,7 +27,7 @@ require "./mechanize/errors/*"
 #           query: {"foo" => "bar"})
 # ```
 class Mechanize
-  VERSION = "0.1.0"
+  VERSION = "0.2.0"
 
   AGENT = {
     "Mechanize" => "Mechanize/#{VERSION} Crystal/#{Crystal::VERSION} (https://github.com/Kanezoh/mechanize.cr)",
