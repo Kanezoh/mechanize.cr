@@ -4,6 +4,28 @@ require "./mechanize/node"
 require "./mechanize/page"
 require "./mechanize/errors/*"
 
+# This class is main class of Mechanize.cr,
+# using this class' instance to start web interaction.
+# 
+# now only supports GET, POST. other HTTP methods will be implemented soon...
+#
+# Examples:
+#
+# ```
+# # GET
+# agent = Mechanize.new
+# agent.get("http://example.com",
+#           params: {"foo" => "bar"},
+#           headers: HTTP::Headers{"Foo" => "Bar"})
+# ```
+# 
+# ```
+# # POST
+# # sending post request whose post body is "foo=bar"
+# agent = Mechanize.new
+# agent.post("http://example.com",
+#           query: {"foo" => "bar"})
+# ```
 class Mechanize
   VERSION = "0.1.0"
 
