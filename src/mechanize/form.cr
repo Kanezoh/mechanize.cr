@@ -9,7 +9,7 @@ require "./form/select_list"
 require "./utils/element_matcher"
 
 class MechanizeCr::Form
-  include MechanzeCr::ElementMatcher
+  include MechanizeCr::ElementMatcher
 
   getter node : Node | Lexbor::Node
   getter fields : Array(FormContent::Field)

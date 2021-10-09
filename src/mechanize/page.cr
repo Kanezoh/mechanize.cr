@@ -3,7 +3,7 @@ require "./utils/element_matcher"
 require "./page/link"
 
 class MechanizeCr::Page < MechanizeCr::File
-  include MechanzeCr::ElementMatcher
+  include MechanizeCr::ElementMatcher
   delegate :css, to: parser
 
   property mech : Mechanize
