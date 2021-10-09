@@ -29,14 +29,14 @@ require "./mechanize/errors/*"
 class Mechanize
   VERSION = "0.2.0"
 
-  AGENT = {
+  USER_AGENT = {
     "Mechanize" => "Mechanize/#{VERSION} Crystal/#{Crystal::VERSION} (https://github.com/Kanezoh/mechanize.cr)",
   }
 
   def initialize
     @agent = MechanizeCr::HTTP::Agent.new
     @agent.context = self
-    @agent.user_agent = AGENT["Mechanize"]
+    @agent.user_agent = USER_AGENT["Mechanize"]
   end
 
   def get(uri : String | URI,
@@ -125,17 +125,27 @@ class Mechanize
     @agent.history
   end
 
+  # add page to history(MechanizeCr::History).
+  # if you send request, mechanize calls this method and records page,
+  # so you don't need to call this on your own.
   def add_to_history(page)
     history.push(page)
   end
 
-  # Get maximum number of items allowed in the history.
+  # Get maximum number of pages allowed in the history.
   # The default setting is 100 pages.
+  # ```
+  # agent.max_history # => 100
+  # ```
   def max_history
     history.max_size
   end
 
-  # Set maximum number of items allowed in the history.
+  # Set maximum number of pages allowed in the history.
+  # The default setting is 100 pages.
+  # ```
+  # agent.max_history = 150
+  # ```
   def max_history=(length)
     history.max_size = length
   end
