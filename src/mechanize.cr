@@ -106,8 +106,8 @@ class Mechanize
   # get the value of user agent.
   #
   # ```
-  # agent.user_agent #=> "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; NP06; rv:11.0) like Gecko"
-  #```
+  # agent.user_agent # => "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; NP06; rv:11.0) like Gecko"
+  # ```
   def user_agent : String
     @agent.user_agent
   end
@@ -116,16 +116,22 @@ class Mechanize
   #
   # ```
   # agent.user_agent = "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; NP06; rv:11.0) like Gecko"
-  #```
+  # ```
   def user_agent=(user_agent : String)
     @agent.user_agent = user_agent
   end
 
-  def current_page
+  # get the page mechanize last visited.
+  #
+  # ```
+  # agent.current_page
+  # ```
+  def current_page : MechanizeCr::Page
     @agent.current_page
   end
 
-  def back
+  # get the latest page recorded in history, and the page is deleted from history.
+  def back : MechanizeCr::Page
     @agent.history.pop
   end
 
