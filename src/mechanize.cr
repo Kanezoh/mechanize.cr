@@ -39,9 +39,19 @@ class Mechanize
     @agent.user_agent = USER_AGENT["Mechanize"]
   end
 
+  # Send GET request to specified uri with headers, and parameters.
+  #
+  # Examples (send request to http://example.com/?foo=bar)
+  #
+  # ```
+  # agent = Mechanize.new
+  # agent.get("http://example.com",
+  #   params: {"foo" => "bar"},
+  #   headers: HTTP::Headers{"Foo" => "Bar"})
+  # ```
   def get(uri : String | URI,
           headers = HTTP::Headers.new,
-          params : Hash(String, String | Array(String)) = Hash(String, String).new)
+          params : Hash(String, String | Array(String)) = Hash(String, String).new) : MechanizeCr::Page
     method = :get
     page = @agent.fetch uri, method, headers, params
     add_to_history(page)
@@ -49,9 +59,19 @@ class Mechanize
     page
   end
 
+  # Send POST request to specified uri with headers, and query.
+  #
+  # Examples (send post request whose post body is "foo=bar")
+  #
+  # ```
+  # agent = Mechanize.new
+  # agent.post("http://example.com",
+  #   query: {"foo" => "bar"},
+  #   headers: HTTP::Headers{"Foo" => "Bar"})
+  # ```
   def post(uri : String | URI,
            headers = HTTP::Headers.new,
-           query : Hash(String, String | Array(String)) = Hash(String, String).new)
+           query : Hash(String, String | Array(String)) = Hash(String, String).new) : MechanizeCr::Page
     node = Node.new
     node["method"] = "POST"
     node["enctype"] = "application/x-www-form-urlencoded"
@@ -65,38 +85,39 @@ class Mechanize
     post_form(uri, form, headers)
   end
 
-  # send POST request from form.
-  def post_form(uri, form, headers)
-    cur_page = form.page || (current_page unless history.empty?)
-
-    request_data = form.request_data
-    content_headers = ::HTTP::Headers{
-      "Content-Type"   => form.enctype,
-      "Content-Length" => request_data.size.to_s,
-    }
-    headers.merge!(content_headers)
-
-    # fetch the page
-    page = @agent.fetch(uri, :post, headers: headers, params: {"value" => request_data}, referer: cur_page)
-    headers.delete("Content-Type")
-    headers.delete("Content-Length")
-    add_to_history(page)
-    page
-  end
-
-  def request_headers
+  # get the value of request headers.
+  #
+  # ```
+  # agent.request_headers # => HTTP::Headers{"Foo" => "Bar"}
+  # ```
+  def request_headers : ::HTTP::Headers
     @agent.request_headers
   end
 
-  def request_headers=(request_headers)
+  # set the value of request headers.
+  #
+  # ```
+  # agent.request_headers = HTTP::Headers{"Foo" => "Bar"}
+  # ```
+  def request_headers=(request_headers : ::HTTP::Headers)
     @agent.request_headers = request_headers
   end
 
-  def user_agent
+  # get the value of user agent.
+  #
+  # ```
+  # agent.user_agent #=> "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; NP06; rv:11.0) like Gecko"
+  #```
+  def user_agent : String
     @agent.user_agent
   end
 
-  def user_agent=(user_agent)
+  # set the value of user agent.
+  #
+  # ```
+  # agent.user_agent = "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; NP06; rv:11.0) like Gecko"
+  #```
+  def user_agent=(user_agent : String)
     @agent.user_agent = user_agent
   end
 
@@ -108,7 +129,7 @@ class Mechanize
     @agent.history.pop
   end
 
-  def submit(form, button = nil)
+  def submit(form, button = nil) : MechanizeCr::Page?
     form.add_button_to_query(button) if button
     case form.method.upcase
     when "POST"
@@ -125,7 +146,8 @@ class Mechanize
     @agent.history
   end
 
-  # add page to history(MechanizeCr::History).
+  # add page to history(`MechanizeCr::History`).
+  #
   # if you send request, mechanize calls this method and records page,
   # so you don't need to call this on your own.
   def add_to_history(page)
@@ -181,5 +203,24 @@ class Mechanize
       # restore the previous history.
       @agent.history = history_backup
     end
+  end
+
+  # send POST request from form.
+  private def post_form(uri, form, headers) : MechanizeCr::Page
+    cur_page = form.page || (current_page unless history.empty?)
+
+    request_data = form.request_data
+    content_headers = ::HTTP::Headers{
+      "Content-Type"   => form.enctype,
+      "Content-Length" => request_data.size.to_s,
+    }
+    headers.merge!(content_headers)
+
+    # fetch the page
+    page = @agent.fetch(uri, :post, headers: headers, params: {"value" => request_data}, referer: cur_page)
+    headers.delete("Content-Type")
+    headers.delete("Content-Length")
+    add_to_history(page)
+    page
   end
 end
