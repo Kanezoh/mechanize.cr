@@ -14,6 +14,7 @@ require "./mechanize/errors/*"
 # ```
 # # GET
 # agent = Mechanize.new
+# # send GET request to http://example.com/?foo=bar
 # agent.get("http://example.com",
 #   params: {"foo" => "bar"},
 #   headers: HTTP::Headers{"Foo" => "Bar"})
@@ -21,7 +22,7 @@ require "./mechanize/errors/*"
 #
 # ```
 # # POST
-# # sending post request whose post body is "foo=bar"
+# # send POST request whose post body is "foo=bar"
 # agent = Mechanize.new
 # agent.post("http://example.com",
 #   query: {"foo" => "bar"})
@@ -124,17 +125,32 @@ class Mechanize
   # get the page mechanize last visited.
   #
   # ```
-  # agent.current_page
+  # agent.current_page => #<MechanizeCr::Page>
   # ```
   def current_page : MechanizeCr::Page
     @agent.current_page
   end
 
   # get the latest page recorded in history, and the page is deleted from history.
+  #
+  # ```
+  # agent.back => #<MechanizeCr::Page>
+  # ```
   def back : MechanizeCr::Page
     @agent.history.pop
   end
 
+  # send request from form. 'form' args is necessary, but 'button' is optional.
+  # you can specify button if you want to use other button which is not in the form.
+  # TODO: now only supports POST. other HTTP methods should be supported.
+  #
+  # ```
+  # page = agent.get("http://example.com")
+  # form = page.forms[0]
+  # # set field value
+  # form.field_with("foo").value = "bar"
+  # agent.submit(form)
+  # ```
   def submit(form, button = nil) : MechanizeCr::Page?
     form.add_button_to_query(button) if button
     case form.method.upcase
@@ -148,11 +164,16 @@ class Mechanize
     MechanizeCr::Page.new(uri, response, body, code, self)
   end
 
+  # get the history (`MechanizeCr::History`).
+  # the requests mechanize send is recorded in this history.
+  # ```
+  # agent.history => #<MechanizeCr::History>
+  # ```
   def history
     @agent.history
   end
 
-  # add page to history(`MechanizeCr::History`).
+  # add page to history (`MechanizeCr::History`).
   #
   # if you send request, mechanize calls this method and records page,
   # so you don't need to call this on your own.
