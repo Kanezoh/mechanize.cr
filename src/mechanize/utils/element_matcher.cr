@@ -1,7 +1,20 @@
 module MechanizeCr::ElementMatcher
   macro elements_with(singular, plural = "")
     {% plural = "#{singular.id}s" if plural.empty? %}
-    def {{plural.id}}_with(criteria)
+    # search {{ singular.id }} which matches condition.
+    # 
+    # Examples
+    # ```
+    # # if you specify String like "foo", it searches form which name is "foo".
+    # # like {<form name="foo"></form>}
+    # page.form_with("foo") 
+    # 
+    # # you can specify tag's attribute and its' value by NamedTuple or Hash(String, String).
+    # ex) <form class="foo"></form>
+    # page.form_with("class" => "foo")
+    # page.form_with(class: "foo")
+    # ```
+    def {{plural.id}}_with(criteria : String | NamedTuple | Hash(String,String))
       {{plural.id}}_with(criteria){}
     end
 

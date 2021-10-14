@@ -159,6 +159,7 @@ class Mechanize
     end
   end
 
+  # parse response. it is used internally.
   def parse(uri, response, body)
     code = response.not_nil!.status_code
     MechanizeCr::Page.new(uri, response, body, code, self)
@@ -169,7 +170,7 @@ class Mechanize
   # ```
   # agent.history => #<MechanizeCr::History>
   # ```
-  def history
+  def history : MechanizeCr::History
     @agent.history
   end
 
@@ -186,29 +187,38 @@ class Mechanize
   # ```
   # agent.max_history # => 100
   # ```
-  def max_history
+  def max_history : Int32
     history.max_size
   end
 
-  # Set maximum number of pages allowed in the history.
-  # The default setting is 100 pages.
+  # set maximum number of pages allowed in the history.
+  # the default value is 100.
   # ```
   # agent.max_history = 150
   # ```
-  def max_history=(length)
+  def max_history=(length : Int32)
     history.max_size = length
   end
 
-  # click link, and return page.
-  def click(link)
+  # click link, and transit page.
+  #
+  # ```
+  # page = agent.get("http://example.com")
+  # link = page.links.first
+  # page2 = agent.click(link)
+  # ```
+  def click(link : MechanizeCr::PageContent::Link) : MechanizeCr::Page
     href = link.href
     get href
   end
 
   # download page body from given uri.
-  # TODO: except this request from history.
-  def download(uri,
-               filename,
+  # ```
+  # # make download.html whose content is http://example.com's html.
+  # agent.download("http://example.com", "download.html")
+  # ```
+  def download(uri : URI | String,
+               filename : String,
                headers = HTTP::Headers.new,
                params : Hash(String, String | Array(String)) = Hash(String, String).new)
     transact do
