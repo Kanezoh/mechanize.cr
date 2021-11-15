@@ -1,2 +1,2 @@
-class MechanizeCr::FormContent::Text < MechanizeCr::FormContent::Field
+class Mechanize::FormContent::Text < Mechanize::FormContent::Field
 end

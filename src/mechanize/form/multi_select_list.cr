@@ -1,6 +1,6 @@
 require "./option"
 
-class MechanizeCr::FormContent::MultiSelectList
+class Mechanize::FormContent::MultiSelectList
   getter node : Lexbor::Node
   getter name : String
   getter type : String
@@ -54,7 +54,7 @@ class MechanizeCr::FormContent::MultiSelectList
 
   def inspect # :nodoc:
     "[%s:0x%x type: %s name: %s values: [%s]]" % [
-      self.class.name.sub(/MechanizeCr::FormContent::/, "").downcase,
+      self.class.name.sub(/Mechanize::FormContent::/, "").downcase,
       object_id, type, name, values.join(','),
     ]
   end

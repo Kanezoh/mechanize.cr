@@ -1,2 +1,2 @@
-class MechanizeCr::FormContent::SubmitButton < MechanizeCr::FormContent::Button
+class Mechanize::FormContent::SubmitButton < Mechanize::FormContent::Button
 end

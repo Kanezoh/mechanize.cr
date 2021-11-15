@@ -35,7 +35,7 @@ class Mechanize
   }
 
   def initialize
-    @agent = MechanizeCr::HTTP::Agent.new
+    @agent = Mechanize::HTTP::Agent.new
     @agent.context = self
     @agent.user_agent = USER_AGENT["Mechanize"]
   end
@@ -51,8 +51,8 @@ class Mechanize
   #   headers: HTTP::Headers{"Foo" => "Bar"})
   # ```
   def get(uri : String | URI,
-          headers = HTTP::Headers.new,
-          params : Hash(String, String | Array(String)) = Hash(String, String).new) : MechanizeCr::Page
+          headers = ::HTTP::Headers.new,
+          params : Hash(String, String | Array(String)) = Hash(String, String).new) : Mechanize::Page
     method = :get
     page = @agent.fetch uri, method, headers, params
     add_to_history(page)
@@ -71,17 +71,17 @@ class Mechanize
   #   headers: HTTP::Headers{"Foo" => "Bar"})
   # ```
   def post(uri : String | URI,
-           headers = HTTP::Headers.new,
-           query : Hash(String, String | Array(String)) = Hash(String, String).new) : MechanizeCr::Page
+           headers = ::HTTP::Headers.new,
+           query : Hash(String, String | Array(String)) = Hash(String, String).new) : Mechanize::Page
     node = Node.new
     node["method"] = "POST"
     node["enctype"] = "application/x-www-form-urlencoded"
 
-    form = MechanizeCr::Form.new(node)
+    form = Mechanize::Form.new(node)
     query.each do |k, v|
       node = Node.new
       node["name"] = k
-      form.fields << MechanizeCr::FormContent::Field.new(node, v)
+      form.fields << Mechanize::FormContent::Field.new(node, v)
     end
     post_form(uri, form, headers)
   end
@@ -125,18 +125,18 @@ class Mechanize
   # get the page mechanize last visited.
   #
   # ```
-  # agent.current_page => #<MechanizeCr::Page>
+  # agent.current_page => #<Mechanize::Page>
   # ```
-  def current_page : MechanizeCr::Page
+  def current_page : Mechanize::Page
     @agent.current_page
   end
 
   # get the latest page recorded in history, and the page is deleted from history.
   #
   # ```
-  # agent.back => #<MechanizeCr::Page>
+  # agent.back => #<Mechanize::Page>
   # ```
-  def back : MechanizeCr::Page
+  def back : Mechanize::Page
     @agent.history.pop
   end
 
@@ -151,7 +151,7 @@ class Mechanize
   # form.field_with("foo").value = "bar"
   # agent.submit(form)
   # ```
-  def submit(form, button = nil) : MechanizeCr::Page?
+  def submit(form, button = nil) : Mechanize::Page?
     form.add_button_to_query(button) if button
     case form.method.upcase
     when "POST"
@@ -162,19 +162,19 @@ class Mechanize
   # parse response. it is used internally.
   def parse(uri, response, body)
     code = response.not_nil!.status_code
-    MechanizeCr::Page.new(uri, response, body, code, self)
+    Mechanize::Page.new(uri, response, body, code, self)
   end
 
-  # get the history (`MechanizeCr::History`).
+  # get the history (`Mechanize::History`).
   # the requests mechanize send is recorded in this history.
   # ```
-  # agent.history => #<MechanizeCr::History>
+  # agent.history => #<Mechanize::History>
   # ```
-  def history : MechanizeCr::History
+  def history : Mechanize::History
     @agent.history
   end
 
-  # add page to history (`MechanizeCr::History`).
+  # add page to history (`Mechanize::History`).
   #
   # if you send request, mechanize calls this method and records page,
   # so you don't need to call this on your own.
@@ -207,7 +207,7 @@ class Mechanize
   # link = page.links.first
   # page2 = agent.click(link)
   # ```
-  def click(link : MechanizeCr::PageContent::Link) : MechanizeCr::Page
+  def click(link : Mechanize::PageContent::Link) : Mechanize::Page
     href = link.href
     get href
   end
@@ -219,13 +219,13 @@ class Mechanize
   # ```
   def download(uri : URI | String,
                filename : String,
-               headers = HTTP::Headers.new,
+               headers = ::HTTP::Headers.new,
                params : Hash(String, String | Array(String)) = Hash(String, String).new)
     transact do
       page = get(uri, headers, params)
       case page
-      when MechanizeCr::File
-        File.write(filename, page.body)
+      when Mechanize::File
+        ::File.write(filename, page.body)
       end
     end
   end
@@ -233,7 +233,7 @@ class Mechanize
   # Runs given block, then resets the page history as it was before.
   private def transact
     # save the previous history status.
-    history_backup = MechanizeCr::History.new(@agent.history.max_size, @agent.history.array.dup)
+    history_backup = Mechanize::History.new(@agent.history.max_size, @agent.history.array.dup)
     begin
       yield self
     ensure
@@ -243,7 +243,7 @@ class Mechanize
   end
 
   # send POST request from form.
-  private def post_form(uri, form, headers) : MechanizeCr::Page
+  private def post_form(uri, form, headers) : Mechanize::Page
     cur_page = form.page || (current_page unless history.empty?)
 
     request_data = form.request_data

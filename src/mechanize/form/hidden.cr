@@ -1,2 +1,2 @@
-class MechanizeCr::FormContent::Hidden < MechanizeCr::FormContent::Field
+class Mechanize::FormContent::Hidden < Mechanize::FormContent::Field
 end

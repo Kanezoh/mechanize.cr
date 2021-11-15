@@ -1,4 +1,4 @@
-class MechanizeCr::FormContent::Option
+class Mechanize::FormContent::Option
   getter select_list : FormContent::MultiSelectList
   getter node : Lexbor::Node
   getter text : String

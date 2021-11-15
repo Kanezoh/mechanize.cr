@@ -27,7 +27,7 @@ describe "Form Fields Select List" do
     form.selectboxes.size.should eq 1
   end
 
-  selectbox = form.selectboxes[0].as(MechanizeCr::FormContent::SelectList)
+  selectbox = form.selectboxes[0].as(Mechanize::FormContent::SelectList)
 
   it "returns selectbox options size" do
     selectbox.options.size.should eq 3
