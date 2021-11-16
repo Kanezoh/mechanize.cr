@@ -3,27 +3,28 @@ require "http/client"
 require "../cookie"
 require "../history"
 
-module MechanizeCr
+class Mechanize
   module HTTP
     class Agent
       property :request_headers, :context
-      property history : MechanizeCr::History
+      property history : Mechanize::History
       property user_agent : String
       property request_cookies : ::HTTP::Cookies
 
       def initialize(@context : Mechanize | Nil = nil)
-        @history = MechanizeCr::History.new
+        @history = Mechanize::History.new
         @request_headers = ::HTTP::Headers.new
         @context = context
         @request_cookies = ::HTTP::Cookies.new
         @user_agent = ""
       end
 
-      def fetch(uri, method = :get, headers = HTTP::Headers.new, params = Hash(String, String).new,
+      def fetch(uri, method = :get, headers = ::HTTP::Headers.new, params = Hash(String, String).new,
                 referer = (current_page unless history.empty?))
         uri = resolve_url(uri, referer)
         set_request_headers(uri, headers)
         set_user_agent
+        set_request_referer(referer)
         uri, params = resolve_parameters(uri, method, params)
         response = http_request(uri, method, params)
         body = response.not_nil!.body
@@ -47,7 +48,7 @@ module MechanizeCr
         headers.delete("Content-Type")
         headers.delete("Content-Length")
 
-        @context.not_nil!.get(uri)
+        fetch(uri)
       end
 
       def http_request(uri, method, params)
@@ -92,6 +93,13 @@ module MechanizeCr
         unless user_agent == ""
           request_headers["User-Agent"] = user_agent
         end
+      end
+
+      # Sets a Referer header.
+      def set_request_referer(referer : Mechanize::Page?)
+        return unless referer
+
+        request_headers["Referer"] = referer.uri.to_s
       end
 
       private def resolve_parameters(uri, method, params)

@@ -1,4 +1,4 @@
-class MechanizeCr::FormContent::CheckBox < MechanizeCr::FormContent::RadioButton
+class Mechanize::FormContent::CheckBox < Mechanize::FormContent::RadioButton
   def check
     @checked = true
   end

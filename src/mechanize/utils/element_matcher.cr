@@ -1,5 +1,6 @@
-module MechanizeCr::ElementMatcher
-  macro elements_with(singular, plural = "")
+class Mechanize
+  module ElementMatcher
+    macro elements_with(singular, plural = "")
     {% plural = "#{singular.id}s" if plural.empty? %}
     # search {{ plural.id }} which match condition.
     # 
@@ -62,8 +63,9 @@ module MechanizeCr::ElementMatcher
     def {{singular.id}}_with(criteria)
       f = {{plural.id}}_with(criteria)
       # TODO: Write correct error message.
-      raise ElementNotFoundError.new(:{{singular.id}}, "") if f.empty?
+      raise Mechanize::ElementNotFoundError.new(:{{singular.id}}, "") if f.empty?
       f.first
     end
+  end
   end
 end

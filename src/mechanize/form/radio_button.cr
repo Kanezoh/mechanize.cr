@@ -1,4 +1,4 @@
-class MechanizeCr::FormContent::RadioButton < MechanizeCr::FormContent::Field
+class Mechanize::FormContent::RadioButton < Mechanize::FormContent::Field
   property :checked, :form
 
   def initialize(node : Node | Lexbor::Node, form : Form)

@@ -3,26 +3,22 @@ require "./utils/element_matcher"
 require "./page/link"
 
 # This class represents the result of http response.  
-# If you send a request, it returns the instance of `MechanizeCr::Page`.  
+# If you send a request, it returns the instance of `Mechanize::Page`.  
 # You can get status code, title, and page body, and search html node using css selector from page instance.
-class MechanizeCr::Page < MechanizeCr::File
-  include MechanizeCr::ElementMatcher
+class Mechanize::Page < Mechanize::File
+  include Mechanize::ElementMatcher
 
   # look at lexbor document.(https://github.com/kostya/lexbor#readme)
   delegate :css, to: parser
 
   property mech : Mechanize
 
-  def initialize(uri, response, body, code, mech)
-    @mech = mech
-    super(uri, response, body, code)
-  end
+    property mech : Mechanize
 
-  # parser to parse response body.
-  # TODO: now it's Lexbor::Parser. I want to also support other parsers like JSON.
-  def parser : Lexbor::Parser
-    @parser ||= Lexbor::Parser.new(@body)
-  end
+    def initialize(uri, response, body, code, mech)
+      @mech = mech
+      super(uri, response, body, code)
+    end
 
   # return page title.
   # ```
@@ -35,13 +31,12 @@ class MechanizeCr::Page < MechanizeCr::File
     else
       title_node.first.inner_text
     end
-  end
 
-  # return all forms(`MechanizeCr::Form`) in the page.
+  # return all forms(`Mechanize::Form`) in the page.
   # ```
-  # page.forms # => Array(MechanizeCr::Form)
+  # page.forms # => Array(Mechanize::Form)
   # ```
-  def forms : Array(MechanizeCr::Form)
+  def forms : Array(Mechanize::Form)
     forms = css("form").map do |html_form|
       form = Form.new(html_form, self)
       form.action ||= @uri.to_s
@@ -49,11 +44,11 @@ class MechanizeCr::Page < MechanizeCr::File
     end.to_a
   end
 
-  # return all links(`MechanizeCr::PageContent::Link`) in the page.
+  # return all links(`Mechanize::PageContent::Link`) in the page.
   # ```
-  # page.links # => Array(MechanizeCr::PageContent::Link)
+  # page.links # => Array(Mechanize::PageContent::Link)
   # ```
-  def links : Array(MechanizeCr::PageContent::Link)
+  def links : Array(Mechanize::PageContent::Link)
     links = %w{a area}.map do |tag|
       css(tag).map do |node|
         PageContent::Link.new(node, @mech, self)
@@ -61,5 +56,6 @@ class MechanizeCr::Page < MechanizeCr::File
     end.flatten
   end
 
-  elements_with "form"
+    elements_with "form"
+  end
 end

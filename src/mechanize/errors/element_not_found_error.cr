@@ -1,6 +1,6 @@
 require "./base_error"
 
-class MechanizeCr::ElementNotFoundError < MechanizeCr::Error
+class Mechanize::ElementNotFoundError < Mechanize::Error
   getter element : Symbol
   getter conditions : String
 

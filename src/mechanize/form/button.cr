@@ -1,4 +1,4 @@
-class MechanizeCr::FormContent::Button < MechanizeCr::FormContent::Field
+class Mechanize::FormContent::Button < Mechanize::FormContent::Field
   getter form_node : Node | Lexbor::Node
 
   def initialize(node : Node | Lexbor::Node, form_node : Node | Lexbor::Node, value = nil)

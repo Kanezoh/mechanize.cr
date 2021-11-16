@@ -1,2 +1,2 @@
-class MechanizeCr::FormContent::ResetButton < MechanizeCr::FormContent::Button
+class Mechanize::FormContent::ResetButton < Mechanize::FormContent::Button
 end
