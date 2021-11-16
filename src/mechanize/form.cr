@@ -9,11 +9,11 @@ require "./form/select_list"
 require "./utils/element_matcher"
 
 # THis class represents the form tag of html.
-class MechanizeCr::Form
-  include MechanizeCr::ElementMatcher
+class Mechanize::Form
+  include Mechanize::ElementMatcher
 
   getter node : Node | Lexbor::Node
-  # returns an array of `MechanizeCr::FormContent::Field` in the form.
+  # returns an array of `Mechanize::FormContent::Field` in the form.
   getter fields : Array(FormContent::Field)
   # returns an array of input tags whose type is checkbox in the form.
   getter checkboxes : Array(FormContent::CheckBox)
