@@ -65,4 +65,18 @@ describe "Mechanize Agent test" do
     File.exists?("mechanizecr_example.html").should eq true
     File.delete("mechanizecr_example.html")
   end
+
+  it "should set referer header" do
+    page_url = "http://example.com/form"
+
+    agent = Mechanize.new
+    page = agent.get(page_url)
+    form = page.forms[0]
+    form.field_with("name").value = "foo"
+    form.field_with("email").value = "bar"
+    page = agent.submit(form)
+
+    page.not_nil!.code.should eq 200
+    agent.request_headers["Referer"].should eq(page_url)
+  end
 end
