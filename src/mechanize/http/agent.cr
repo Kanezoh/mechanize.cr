@@ -96,7 +96,7 @@ class Mechanize
       end
 
       # Sets a Referer header.
-      def set_request_referer(referer : MechanizeCr::Page?)
+      def set_request_referer(referer : Mechanize::Page?)
         return unless referer
 
         request_headers["Referer"] = referer.uri.to_s
