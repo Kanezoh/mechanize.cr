@@ -1,4 +1,4 @@
-class MechanizeCr::FormContent::Field
+class Mechanize::FormContent::Field
   property value : String?
   getter name : String
   getter type : String
@@ -29,7 +29,7 @@ class MechanizeCr::FormContent::Field
 
   def inspect # :nodoc:
     "[%s:0x%x type: %s name: %s value: %s]" % [
-      self.class.name.sub(/MechanizeCr::FormContent::/, "").downcase,
+      self.class.name.sub(/Mechanize::FormContent::/, "").downcase,
       object_id, type, name, value,
     ]
   end

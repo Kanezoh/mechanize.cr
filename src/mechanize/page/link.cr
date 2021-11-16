@@ -1,6 +1,6 @@
-class MechanizeCr::PageContent::Link
+class Mechanize::PageContent::Link
   getter node : Lexbor::Node
-  getter page : Page
+  getter page : Mechanize::Page
   getter mech : Mechanize
   getter href : String
   getter text : String

@@ -1,6 +1,6 @@
 require "./multi_select_list"
 
-class MechanizeCr::FormContent::SelectList < MechanizeCr::FormContent::MultiSelectList
+class Mechanize::FormContent::SelectList < Mechanize::FormContent::MultiSelectList
   def initialize(node)
     super node
     # only one selected option is allowed

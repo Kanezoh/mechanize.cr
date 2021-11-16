@@ -1,2 +1,2 @@
-class MechanizeCr::FormContent::ImageButton < MechanizeCr::FormContent::Button
+class Mechanize::FormContent::ImageButton < Mechanize::FormContent::Button
 end

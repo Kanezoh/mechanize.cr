@@ -8,33 +8,33 @@ require "./form/button"
 require "./form/select_list"
 require "./utils/element_matcher"
 
-class MechanizeCr::Form
-  include MechanizeCr::ElementMatcher
+class Mechanize::Form
+  include Mechanize::ElementMatcher
 
   getter node : Node | Lexbor::Node
-  getter fields : Array(FormContent::Field)
-  getter checkboxes : Array(FormContent::CheckBox)
-  getter radiobuttons : Array(FormContent::RadioButton)
-  getter selectboxes : Array(FormContent::MultiSelectList)
-  getter buttons : Array(FormContent::Button)
+  getter fields : Array(Mechanize::FormContent::Field)
+  getter checkboxes : Array(Mechanize::FormContent::CheckBox)
+  getter radiobuttons : Array(Mechanize::FormContent::RadioButton)
+  getter selectboxes : Array(Mechanize::FormContent::MultiSelectList)
+  getter buttons : Array(Mechanize::FormContent::Button)
   getter enctype : String
   getter method : String
   getter name : String
-  getter page : Page?
+  getter page : Mechanize::Page?
   property action : String
 
-  def initialize(node : Node | Lexbor::Node, page : Page? = nil)
+  def initialize(node : Node | Lexbor::Node, page : Mechanize::Page? = nil)
     @enctype = node.fetch("enctype", "application/x-www-form-urlencoded")
     @node = node
-    @fields = Array(FormContent::Field).new
-    @checkboxes = Array(FormContent::CheckBox).new
-    @radiobuttons = Array(FormContent::RadioButton).new
-    @selectboxes = Array(FormContent::MultiSelectList).new
-    @buttons = Array(FormContent::Button).new
+    @fields = Array(Mechanize::FormContent::Field).new
+    @checkboxes = Array(Mechanize::FormContent::CheckBox).new
+    @radiobuttons = Array(Mechanize::FormContent::RadioButton).new
+    @selectboxes = Array(Mechanize::FormContent::MultiSelectList).new
+    @buttons = Array(Mechanize::FormContent::Button).new
     @action = node.fetch("action", "")
     @method = node.fetch("method", "GET").upcase
     @name = node.fetch("name", "")
-    @clicked_buttons = Array(FormContent::Button).new
+    @clicked_buttons = Array(Mechanize::FormContent::Button).new
     @page = page
     # @mech             = mech
 
@@ -68,25 +68,25 @@ class MechanizeCr::Form
       type = (html_node["type"]? || "text").downcase
       case type
       when "checkbox"
-        checkboxes << FormContent::CheckBox.new(html_node, self)
+        checkboxes << Mechanize::FormContent::CheckBox.new(html_node, self)
       when "radio"
-        radiobuttons << FormContent::RadioButton.new(html_node, self)
+        radiobuttons << Mechanize::FormContent::RadioButton.new(html_node, self)
       when "button"
-        buttons << FormContent::Button.new(html_node, @node)
+        buttons << Mechanize::FormContent::Button.new(html_node, @node)
       when "submit"
-        buttons << FormContent::SubmitButton.new(html_node, @node)
+        buttons << Mechanize::FormContent::SubmitButton.new(html_node, @node)
       when "reset"
-        buttons << FormContent::ResetButton.new(html_node, @node)
+        buttons << Mechanize::FormContent::ResetButton.new(html_node, @node)
       when "image"
-        buttons << FormContent::ImageButton.new(html_node, @node)
+        buttons << Mechanize::FormContent::ImageButton.new(html_node, @node)
       when "text"
-        fields << FormContent::Text.new(html_node)
+        fields << Mechanize::FormContent::Text.new(html_node)
       when "hidden"
-        fields << FormContent::Hidden.new(html_node)
+        fields << Mechanize::FormContent::Hidden.new(html_node)
       when "textarea"
-        fields << FormContent::Textarea.new(html_node)
+        fields << Mechanize::FormContent::Textarea.new(html_node)
       else
-        fields << FormContent::Field.new(html_node)
+        fields << Mechanize::FormContent::Field.new(html_node)
       end
     end
 
@@ -149,7 +149,7 @@ class MechanizeCr::Form
         # raise Mechanize::Error,
         #      "radiobuttons #{values} are checked in the #{name} group, " \
         #      "only one is allowed"
-        raise MechanizeCr::Error.new
+        raise Mechanize::Error.new
       else
         successful_controls << checked.first unless checked.empty?
       end
