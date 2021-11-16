@@ -8,14 +8,20 @@ require "./form/button"
 require "./form/select_list"
 require "./utils/element_matcher"
 
+# THis class represents the form tag of html.
 class MechanizeCr::Form
   include MechanizeCr::ElementMatcher
 
   getter node : Node | Lexbor::Node
+  # returns an array of `MechanizeCr::FormContent::Field` in the form.
   getter fields : Array(FormContent::Field)
+  # returns an array of input tags whose type is checkbox in the form.
   getter checkboxes : Array(FormContent::CheckBox)
+  # returns an array of input tags whose type is radio in the form.
   getter radiobuttons : Array(FormContent::RadioButton)
+  # returns an array of input tags whose type is select in the form.
   getter selectboxes : Array(FormContent::MultiSelectList)
+  # returns an array of button tags and input tag whose type is button,submit,reset,image.
   getter buttons : Array(FormContent::Button)
   getter enctype : String
   getter method : String

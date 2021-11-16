@@ -6,11 +6,26 @@ module MechanizeCr::ElementMatcher
     # Examples
     # ```
     # # if you specify String like "foo", it searches form which name is "foo".
-    # # like &lt;{{ singular.id }} name="foo"&gt;&lt;/form&gt;
+    {% if ["form", "button"].includes?("#{singular.id}") %}
+      # # like <{{ singular.id }} name="foo"></{{ singular.id }}>
+    {% elsif "#{singular.id}" == "field" %}
+    # # like <input name="foo"></input>
+    {% elsif "#{singular.id}" == "radiobutton" %}
+    # # like <input type="radio" name="foo"></input>
+    {% else %}
+    # # like <input type="{{ singular.id }}" name="foo"></input>
+    {% end %}
     # page.{{ plural.id }}_with("foo")
-    # 
     # # you can also specify tag's attribute and its' value by NamedTuple or Hash(String, String).
-    # ex) &lt;{{ singular.id }} class="foo"&gt;&lt;/form&gt;
+    {% if ["form", "button"].includes?("#{singular.id}") %}
+    # # ex) <{{ singular.id }} class="foo"></{{ singular.id }}>
+    {% elsif "#{singular.id}" == "field" %}
+    # # ex) <input class="foo"></input>
+    {% elsif "#{singular.id}" == "radiobutton" %}
+    # # ex) <input type="radio" class="foo"></input>
+    {% else %}
+    # # ex) <input type="{{ singular.id }}" class="foo"></input>
+    {% end %}
     # page.{{ plural.id }}_with("class" => "foo")
     # page.{{ plural.id }}_with(class: "foo")
     # ```
