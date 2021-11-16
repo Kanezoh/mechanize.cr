@@ -8,6 +8,8 @@ require "./page/link"
 
 class MechanizeCr::Page < MechanizeCr::File
   include MechanizeCr::ElementMatcher
+
+  # look at lexbor document.(https://github.com/kostya/lexbor#readme)
   delegate :css, to: parser
 
   property mech : Mechanize
@@ -24,6 +26,9 @@ class MechanizeCr::Page < MechanizeCr::File
   end
 
   # return page title.
+  # ```
+  # page.title # => String
+  # ```
   def title : String
     title_node = css("title")
     if title_node.empty?
@@ -34,6 +39,9 @@ class MechanizeCr::Page < MechanizeCr::File
   end
 
   # return all forms(`MechanizeCr::Form`) in the page.
+  # ```
+  # page.forms # => Array(MechanizeCr::Form)
+  # ```
   def forms : Array(MechanizeCr::Form)
     forms = css("form").map do |html_form|
       form = Form.new(html_form, self)
@@ -42,7 +50,10 @@ class MechanizeCr::Page < MechanizeCr::File
     end.to_a
   end
 
-  # return all links(`MechanizeCr::PageContent::Link) in the page.
+  # return all links(`MechanizeCr::PageContent::Link`) in the page.
+  # ```
+  # page.links # => Array(MechanizeCr::PageContent::Link)
+  # ```
   def links : Array(MechanizeCr::PageContent::Link)
     links = %w{a area}.map do |tag|
       css(tag).map do |node|
