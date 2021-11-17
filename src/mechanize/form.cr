@@ -13,7 +13,7 @@ class Mechanize::Form
   include Mechanize::ElementMatcher
 
   getter node : Node | Lexbor::Node
-  # returns an array of `Mechanize::FormContent::Field` in the form.
+  # returns hoge array of `Mechanize::FormContent::Field` in the form.
   getter fields : Array(FormContent::Field)
   # returns an array of input tags whose type is checkbox in the form.
   getter checkboxes : Array(FormContent::CheckBox)
@@ -23,11 +23,16 @@ class Mechanize::Form
   getter selectboxes : Array(FormContent::MultiSelectList)
   # returns an array of button tags and input tag whose type is button,submit,reset,image.
   getter buttons : Array(FormContent::Button)
+  # returns form's 'enctype' attribute.
   getter enctype : String
+  # returns form's 'method' attribute.
   getter method : String
+  # returns form's 'name' attribute.
   getter name : String
-  getter page : Mechanize::Page?
+  # return form's 'action' attribute.
   property action : String
+  # returns the page which includes the form.
+  getter page : Mechanize::Page?
 
   def initialize(node : Node | Lexbor::Node, page : Mechanize::Page? = nil)
     @enctype = node.fetch("enctype", "application/x-www-form-urlencoded")

@@ -6,7 +6,7 @@ class Mechanize
       # 
       # Examples
       # ```
-      # # if you specify String like "foo", it searches form which name is "foo".
+      # # if you specify String like "foo", it searches {{ singular.id }} which name is "foo".
       {% if ["form", "button"].includes?("#{singular.id}") %}
         # # like <{{ singular.id }} name="foo"></{{ singular.id }}>
       {% elsif "#{singular.id}" == "field" %}
