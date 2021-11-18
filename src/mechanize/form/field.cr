@@ -1,4 +1,4 @@
-# This class represents <input> elements in the form.
+# This class represents &lt;input&gt; elements in the form.
 class Mechanize::FormContent::Field
   # returns field's 'value' attribute
   property value : String?

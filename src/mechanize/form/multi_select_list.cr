@@ -1,6 +1,6 @@
 require "./option"
 
-# This class represents <select multiple>
+# This class represents &lt;select multiple&gt;
 class Mechanize::FormContent::MultiSelectList
   getter node : Lexbor::Node
   getter name : String

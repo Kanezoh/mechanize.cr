@@ -1,4 +1,4 @@
-# This class represents <input type="radio">
+# This class represents &lt;input type="radio"&gt;
 class Mechanize::FormContent::RadioButton < Mechanize::FormContent::Field
   property :checked, :form
 

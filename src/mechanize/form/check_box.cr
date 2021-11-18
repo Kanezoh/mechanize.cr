@@ -1,4 +1,4 @@
-# This class represents <input type="checkbox">
+# This class represents &lt;input type="checkbox"&gt;
 class Mechanize::FormContent::CheckBox < Mechanize::FormContent::RadioButton
   # set checkbox checked
   def check

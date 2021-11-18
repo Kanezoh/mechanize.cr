@@ -68,7 +68,7 @@ class Mechanize::Form
   elements_with "checkbox", "checkboxes"
   elements_with "button"
 
-  # Returns all fields of <input type="textarea">
+  # Returns all fields of &lt;input type="textarea"&gt;
   def textareas
     fields.select { |f| f.class == FormContent::Textarea }.map &.as(FormContent::Textarea)
   end
