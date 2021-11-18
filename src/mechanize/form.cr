@@ -8,7 +8,7 @@ require "./form/button"
 require "./form/select_list"
 require "./utils/element_matcher"
 
-# THis class represents the form tag of html.
+# This class represents the form tag of html.
 class Mechanize::Form
   include Mechanize::ElementMatcher
 
@@ -68,7 +68,7 @@ class Mechanize::Form
   elements_with "checkbox", "checkboxes"
   elements_with "button"
 
-  # Returns all fields of type Textarea
+  # Returns all fields of <input type="textarea">
   def textareas
     fields.select { |f| f.class == FormContent::Textarea }.map &.as(FormContent::Textarea)
   end
