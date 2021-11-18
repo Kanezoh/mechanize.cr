@@ -1,3 +1,4 @@
+require "lexbor"
 require "./mechanize/http/agent"
 require "./mechanize/form"
 require "./mechanize/node"

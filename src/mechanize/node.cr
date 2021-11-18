@@ -1,5 +1,3 @@
-require "lexbor"
-
 class Mechanize
   # This is a fake node used when sending post request.
   class Node < Hash(String, String)
@@ -11,14 +9,4 @@ class Mechanize
       ""
     end
   end
-end
-
-# This is a real Node got from html.
-# TODO: create PR to https://github.com/kostya/lexbor
-struct Lexbor::Node
-  delegate :[], to: attributes
-  delegate :[]=, to: attributes
-  delegate :[]?, to: attributes
-  delegate :fetch, to: attributes
-  delegate :has_key?, to: attributes
 end
