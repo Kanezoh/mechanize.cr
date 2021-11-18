@@ -1,3 +1,5 @@
+# This class represents link element like <a> and <area>.
+# The instance of this class is clickable.
 class Mechanize::PageContent::Link
   getter node : Lexbor::Node
   getter page : Mechanize::Page

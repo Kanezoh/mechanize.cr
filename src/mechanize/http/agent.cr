@@ -6,12 +6,13 @@ require "../history"
 class Mechanize
   module HTTP
     class Agent
-      property :request_headers, :context
+      property request_headers : ::HTTP::Headers
+      property context : Mechanize?
       property history : Mechanize::History
       property user_agent : String
       property request_cookies : ::HTTP::Cookies
 
-      def initialize(@context : Mechanize | Nil = nil)
+      def initialize(@context : Mechanize? = nil)
         @history = Mechanize::History.new
         @request_headers = ::HTTP::Headers.new
         @context = context
@@ -19,6 +20,9 @@ class Mechanize
         @user_agent = ""
       end
 
+      # send http request and return page.
+      # This method is called from Mechanize#get, #post and other methods.
+      # There's no need to call this method directly.
       def fetch(uri, method = :get, headers = ::HTTP::Headers.new, params = Hash(String, String).new,
                 referer = (current_page unless history.empty?))
         uri = resolve_url(uri, referer)
@@ -51,7 +55,8 @@ class Mechanize
         fetch(uri)
       end
 
-      def http_request(uri, method, params)
+      # send http request
+      private def http_request(uri, method, params) : ::HTTP::Client::Response?
         case uri.scheme.not_nil!.downcase
         when "http", "https"
           case method
@@ -63,20 +68,34 @@ class Mechanize
         end
       end
 
-      def current_page
+      # returns the page now mechanize visiting.
+      # ```
+      # agent.current_page
+      # ```
+      def current_page : Mechanize::Page
         @history.last
       end
 
-      def back
+      # returns the page mechanize previous visited.
+      # ```
+      # agent.back
+      # ```
+      def back : Mechanize::Page
         @history.pop
       end
 
       # Get maximum number of items allowed in the history.  The default setting is 100 pages.
-      def max_history
+      # ```
+      # agent.max_history # => 100
+      # ```
+      def max_history : Int32
         @history.max_size
       end
 
       # Set maximum number of items allowed in the history.
+      # ```
+      # agent.max_history = 1000
+      # ```
       def max_history=(length)
         @history.max_size = length
       end

@@ -1,4 +1,6 @@
 class Mechanize
+  # This module is for macros making *_with methods.
+  # These methods are useful for searching elements by its' attribute.
   module ElementMatcher
     macro elements_with(singular, plural = "")
       {% plural = "#{singular.id}s" if plural.empty? %}
