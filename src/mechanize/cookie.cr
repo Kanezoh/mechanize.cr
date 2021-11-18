@@ -1,5 +1,6 @@
-# TODO: want to add methods with safe way like Ruby's refinement.
+# TODO: want to property's without open HTTP::Cookie class.
 
+# This class represents http cookie.
 # open HTTP::Cookie class to add origin property.
 # origin property represents the origin of the resource.
 # if cookie's domain attribute isn't designated,

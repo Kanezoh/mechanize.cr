@@ -8,20 +8,31 @@ require "./form/button"
 require "./form/select_list"
 require "./utils/element_matcher"
 
+# This class represents the form tag of html.
 class Mechanize::Form
   include Mechanize::ElementMatcher
 
   getter node : Node | Lexbor::Node
-  getter fields : Array(Mechanize::FormContent::Field)
-  getter checkboxes : Array(Mechanize::FormContent::CheckBox)
-  getter radiobuttons : Array(Mechanize::FormContent::RadioButton)
-  getter selectboxes : Array(Mechanize::FormContent::MultiSelectList)
-  getter buttons : Array(Mechanize::FormContent::Button)
+  # returns hoge array of `Mechanize::FormContent::Field` in the form.
+  getter fields : Array(FormContent::Field)
+  # returns an array of input tags whose type is checkbox in the form.
+  getter checkboxes : Array(FormContent::CheckBox)
+  # returns an array of input tags whose type is radio in the form.
+  getter radiobuttons : Array(FormContent::RadioButton)
+  # returns an array of input tags whose type is select in the form.
+  getter selectboxes : Array(FormContent::MultiSelectList)
+  # returns an array of button tags and input tag whose type is button,submit,reset,image.
+  getter buttons : Array(FormContent::Button)
+  # returns form's 'enctype' attribute.
   getter enctype : String
+  # returns form's 'method' attribute.
   getter method : String
+  # returns form's 'name' attribute.
   getter name : String
-  getter page : Mechanize::Page?
+  # return form's 'action' attribute.
   property action : String
+  # returns the page which includes the form.
+  getter page : Mechanize::Page?
 
   def initialize(node : Node | Lexbor::Node, page : Mechanize::Page? = nil)
     @enctype = node.fetch("enctype", "application/x-www-form-urlencoded")
@@ -57,7 +68,7 @@ class Mechanize::Form
   elements_with "checkbox", "checkboxes"
   elements_with "button"
 
-  # Returns all fields of type Textarea
+  # Returns all fields of <input type="textarea">
   def textareas
     fields.select { |f| f.class == FormContent::Textarea }.map &.as(FormContent::Textarea)
   end

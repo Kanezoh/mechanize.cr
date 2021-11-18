@@ -30,6 +30,7 @@ class Mechanize::FormContent::Option
     @selected = !@selected
   end
 
+  # returns option checked or not
   def selected?
     @selected
   end

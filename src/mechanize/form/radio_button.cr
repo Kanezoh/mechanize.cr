@@ -1,3 +1,4 @@
+# This class represents <input type="radio">
 class Mechanize::FormContent::RadioButton < Mechanize::FormContent::Field
   property :checked, :form
 
@@ -7,19 +8,23 @@ class Mechanize::FormContent::RadioButton < Mechanize::FormContent::Field
     super(node)
   end
 
+  # set radiobutton checked
   def check
     uncheck_peers
     @checked = true
   end
 
+  # set radiobutton checked
   def uncheck
     @checked = false
   end
 
+  # change radiobutton state checked or unchecked
   def click
     checked ? uncheck : check
   end
 
+  # returns radiobutton checked or not
   def checked?
     checked
   end

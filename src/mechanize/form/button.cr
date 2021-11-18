@@ -1,3 +1,5 @@
+# This class represents button related html element.
+# <button>, and <input> whose type is button, reset, image, submit.
 class Mechanize::FormContent::Button < Mechanize::FormContent::Field
   getter form_node : Node | Lexbor::Node
 
