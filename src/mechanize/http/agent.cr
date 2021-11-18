@@ -170,7 +170,11 @@ class Mechanize
           end
           # escape non-ascii character
           target_url = target_url.gsub(/[^#{0.chr}-#{126.chr}]/) { |match|
-            URI.encode(match)
+            {% if compare_versions(Crystal::VERSION, "1.1.1") > 0 %}
+              URI.encode_path(match)
+            {% else %}
+              URI.encode(match)
+            {% end %}
           }
           target_url = URI.parse(target_url)
         end
