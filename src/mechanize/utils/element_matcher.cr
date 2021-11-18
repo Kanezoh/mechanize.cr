@@ -65,7 +65,7 @@ class Mechanize
       def {{singular.id}}_with(criteria)
         f = {{plural.id}}_with(criteria)
         # TODO: Write correct error message.
-        raise Mechanize::ElementNotFoundError.new(:{{singular.id}}, "") if f.empty?
+        raise ElementNotFoundError.new(:{{singular.id}}, "") if f.empty?
         f.first
       end
     end
