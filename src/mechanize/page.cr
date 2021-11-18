@@ -2,10 +2,10 @@ require "./file"
 require "./utils/element_matcher"
 require "./page/link"
 
-# This class represents the result of http response.
-# If you send a request, it returns the instance of `Mechanize::Page`.
-# You can get status code, title, and page body, and search html node using css selector from page instance.
 class Mechanize
+  # This class represents the result of http response.
+  # If you send a request, it returns the instance of `Mechanize::Page`.
+  # You can get status code, title, and page body, and search html node using css selector from page instance.
   class Page < Mechanize::File
     include Mechanize::ElementMatcher
 

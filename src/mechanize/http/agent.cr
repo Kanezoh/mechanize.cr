@@ -5,6 +5,7 @@ require "../history"
 
 class Mechanize
   module HTTP
+    # This class handles web interation mechanize made.
     class Agent
       property request_headers : ::HTTP::Headers
       property context : Mechanize?
