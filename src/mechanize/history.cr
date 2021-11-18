@@ -1,17 +1,17 @@
 require "./page"
 
-# This class represents the history of http response you sent.
-# If you send a request, mechanize saves the history.
 class Mechanize
+  # This class represents the history of http response you sent.
+  # If you send a request, mechanize saves the history.
   class History
     # max page size history can save. default is 100.
     # as same as `agent.max_history`.
     property max_size : Int32
-    property array : Array(Mechanize::Page)
+    property array : Array(Page)
 
     delegate :size, :empty?, :last, to: array
 
-    def initialize(max_size = 100, array = Array(Mechanize::Page).new)
+    def initialize(max_size = 100, array = Array(Page).new)
       @max_size = max_size
       @array = array
     end

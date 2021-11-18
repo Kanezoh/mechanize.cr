@@ -5,15 +5,16 @@ require "../history"
 
 class Mechanize
   module HTTP
+    # This class handles web interation mechanize made.
     class Agent
       property request_headers : ::HTTP::Headers
       property context : Mechanize?
-      property history : Mechanize::History
+      property history : History
       property user_agent : String
       property request_cookies : ::HTTP::Cookies
 
       def initialize(@context : Mechanize? = nil)
-        @history = Mechanize::History.new
+        @history = History.new
         @request_headers = ::HTTP::Headers.new
         @context = context
         @request_cookies = ::HTTP::Cookies.new
@@ -72,7 +73,7 @@ class Mechanize
       # ```
       # agent.current_page
       # ```
-      def current_page : Mechanize::Page
+      def current_page : Page
         @history.last
       end
 
@@ -80,7 +81,7 @@ class Mechanize
       # ```
       # agent.back
       # ```
-      def back : Mechanize::Page
+      def back : Page
         @history.pop
       end
 
@@ -115,7 +116,7 @@ class Mechanize
       end
 
       # Sets a Referer header.
-      def set_request_referer(referer : Mechanize::Page?)
+      def set_request_referer(referer : Page?)
         return unless referer
 
         request_headers["Referer"] = referer.uri.to_s

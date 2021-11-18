@@ -1,3 +1,4 @@
+# This class represents &lt;option&gt; of &lt;select&gt;
 class Mechanize::FormContent::Option
   getter select_list : FormContent::MultiSelectList
   getter node : Lexbor::Node
