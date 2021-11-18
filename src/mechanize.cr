@@ -1,3 +1,5 @@
+require "uri"
+require "http/client"
 require "lexbor"
 require "./mechanize/http/agent"
 require "./mechanize/form"

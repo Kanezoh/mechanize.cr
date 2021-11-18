@@ -1,5 +1,3 @@
-require "http/client"
-
 class Mechanize
   abstract class File
     # property :filename

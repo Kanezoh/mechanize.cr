@@ -1,5 +1,3 @@
-require "uri"
-require "http/client"
 require "../cookie"
 require "../history"
 
