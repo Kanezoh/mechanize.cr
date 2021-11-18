@@ -1,5 +1,6 @@
 require "./option"
 
+# This class represents <select multiple>
 class Mechanize::FormContent::MultiSelectList
   getter node : Lexbor::Node
   getter name : String
@@ -18,32 +19,37 @@ class Mechanize::FormContent::MultiSelectList
     }
   end
 
+  # set all options unchecked
   def select_none
     @values = Array(String).new
     options.each &.unselect
   end
 
+  # set all options checked
   def select_all
     @values = Array(String).new
     options.each &.select
   end
 
+  # returns all checked options
   def selected_options
     options.select &.selected?
   end
 
+  # add new values to options
   def values=(new_values)
     select_none
     new_values.each do |value|
       option = options.find { |o| o.value == value }
       if option.nil?
-        @value.push(value)
+        @values.push(value)
       else
         option.select
       end
     end
   end
 
+  # return all option's values.
   def values
     @values + selected_options.map &.value
   end

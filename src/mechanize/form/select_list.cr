@@ -1,5 +1,6 @@
 require "./multi_select_list"
 
+# This class represents <select> which is not multiple
 class Mechanize::FormContent::SelectList < Mechanize::FormContent::MultiSelectList
   def initialize(node)
     super node

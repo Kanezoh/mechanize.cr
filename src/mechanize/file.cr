@@ -9,7 +9,7 @@ class Mechanize
     # returns http status code
     getter code : Int32
     # returns page uri
-    getter uri  : URI
+    getter uri : URI
 
     def initialize(uri : URI, response : ::HTTP::Client::Response, body : String, code : Int32)
       @uri = uri
