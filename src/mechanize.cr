@@ -1,3 +1,6 @@
+require "uri"
+require "http/client"
+require "lexbor"
 require "./mechanize/http/agent"
 require "./mechanize/form"
 require "./mechanize/node"
@@ -73,13 +76,13 @@ class Mechanize
   def post(uri : String | URI,
            headers = ::HTTP::Headers.new,
            query : Hash(String, String | Array(String)) = Hash(String, String).new) : Mechanize::Page
-    node = Node.new
+    node = Mechanize::Node.new
     node["method"] = "POST"
     node["enctype"] = "application/x-www-form-urlencoded"
 
     form = Mechanize::Form.new(node)
     query.each do |k, v|
-      node = Node.new
+      node = Mechanize::Node.new
       node["name"] = k
       form.fields << Mechanize::FormContent::Field.new(node, v)
     end

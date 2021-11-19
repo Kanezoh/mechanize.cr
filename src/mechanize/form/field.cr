@@ -9,9 +9,9 @@ class Mechanize::FormContent::Field
   # returns field's 'value' attribute.
   # value property is changeable, but this property stores raw value.
   getter raw_value : String?
-  getter node : Node | Lexbor::Node
+  getter node : Mechanize::Node | Lexbor::Node
 
-  def initialize(node : Node | Lexbor::Node, value = nil)
+  def initialize(node : Mechanize::Node | Lexbor::Node, value = nil)
     @node = node
     @name = node.fetch("name", "")
     @value = value || node.fetch("value", nil)

@@ -13,7 +13,7 @@ class Mechanize
   class Form
     include ElementMatcher
 
-    getter node : Node | Lexbor::Node
+    getter node : Mechanize::Node | Lexbor::Node
     # returns hoge array of `Mechanize::FormContent::Field` in the form.
     getter fields : Array(FormContent::Field)
     # returns an array of input tags whose type is checkbox in the form.
@@ -35,7 +35,7 @@ class Mechanize
     # returns the page which includes the form.
     getter page : Page?
 
-    def initialize(node : Node | Lexbor::Node, page : Page? = nil)
+    def initialize(node : Mechanize::Node | Lexbor::Node, page : Page? = nil)
       @enctype = node.fetch("enctype", "application/x-www-form-urlencoded")
       @node = node
       @fields = Array(FormContent::Field).new
