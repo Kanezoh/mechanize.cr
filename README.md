@@ -87,6 +87,14 @@ This method is from [lexbor](https://github.com/kostya/lexbor), so if you want t
 puts page.css("h1").first.inner_text
 ```
 
+### Logging
+
+For activation, simply setup the log to `:debug` level
+
+```crystal
+Log.setup("mechanize", :debug)
+```
+
 ## Contributing
 
 1. Fork it (<https://github.com/Kanezoh/mechanize.cr/fork>)

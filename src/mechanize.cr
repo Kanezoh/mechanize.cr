@@ -1,3 +1,4 @@
+require "log"
 require "uri"
 require "http/client"
 require "lexbor"
@@ -32,6 +33,7 @@ require "./mechanize/errors/*"
 # ```
 class Mechanize
   VERSION = "0.2.0"
+  Log     = ::Log.for(self)
 
   USER_AGENT = {
     "Mechanize" => "Mechanize/#{VERSION} Crystal/#{Crystal::VERSION} (https://github.com/Kanezoh/mechanize.cr)",
@@ -250,6 +252,9 @@ class Mechanize
     cur_page = form.page || (current_page unless history.empty?)
 
     request_data = form.request_data
+
+    Log.debug { "query: #{request_data.inspect}" }
+
     content_headers = ::HTTP::Headers{
       "Content-Type"   => form.enctype,
       "Content-Length" => request_data.size.to_s,

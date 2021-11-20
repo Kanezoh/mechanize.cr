@@ -32,6 +32,7 @@ class Mechanize
         response = http_request(uri, method, params)
         body = response.not_nil!.body
         page = response_parse(response, body, uri)
+        response_log(response)
         # save cookies
         save_response_cookies(response, uri, page)
 
@@ -46,6 +47,8 @@ class Mechanize
         redirect_url = response.headers["location"]
         uri = resolve_url(redirect_url, referer)
 
+        Log.debug { "follow redirect to: #{uri.to_s}" }
+
         # Make sure we are not copying over the POST headers from the original request
         headers.delete("Content-MD5")
         headers.delete("Content-Type")
@@ -56,6 +59,8 @@ class Mechanize
 
       # send http request
       private def http_request(uri, method, params) : ::HTTP::Client::Response?
+        request_log(uri, method)
+
         case uri.scheme.not_nil!.downcase
         when "http", "https"
           case method
@@ -206,6 +211,7 @@ class Mechanize
       private def save_cookies(uri, header_cookies)
         host = uri.host
         header_cookies.each do |cookie|
+          Log.debug { "saved cookie: #{cookie.name}=#{cookie.value}" }
           cookie.origin = host
           request_cookies << cookie
         end
@@ -219,6 +225,26 @@ class Mechanize
           valid_cookies << cookie if cookie.valid_cookie?(uri)
         end
         valid_cookies
+      end
+
+      private def request_log(uri, method)
+        Log.debug { "#{method.to_s.upcase}: #{uri.to_s}" }
+
+        request_headers.each do |key, values|
+          value = values.size == 1 ? values.first : values
+          Log.debug { "request-header: #{key} => #{value}" }
+        end
+      end
+
+      private def response_log(response)
+        return unless response
+
+        Log.debug { "status: #{response.version} #{response.status_code} #{response.status_message}" }
+
+        response.headers.each do |key, values|
+          value = values.size == 1 ? values.first : values
+          Log.debug { "response-header: #{key} => #{value}" }
+        end
       end
     end
   end
