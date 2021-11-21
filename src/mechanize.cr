@@ -11,8 +11,6 @@ require "./mechanize/errors/*"
 # This class is main class of Mechanize.cr,
 # using this class' instance to start web interaction.
 #
-# now only supports GET, POST. other HTTP methods will be implemented soon...
-#
 # Examples:
 #
 # ```
