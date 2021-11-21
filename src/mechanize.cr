@@ -91,6 +91,27 @@ class Mechanize
     post_form(uri, form, headers)
   end
 
+  # Send PUT request to specified uri with headers, and query.
+  #
+  # Examples (send post request whose post body is "foo=bar")
+  #
+  # ```
+  # agent = Mechanize.new
+  # agent.put("http://example.com",
+  #   body: "hello!",
+  #   headers: HTTP::Headers{"Foo" => "Bar"})
+  # ```
+  def put(uri : String | URI,
+          body : String?,
+          headers = ::HTTP::Headers.new) : Mechanize::Page
+
+    method = :put
+    page = @agent.fetch(uri, method, headers: headers, body: body)
+    add_to_history(page)
+    # yield page if block_given?
+    page
+  end
+
   # get the value of request headers.
   #
   # ```

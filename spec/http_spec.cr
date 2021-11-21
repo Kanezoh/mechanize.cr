@@ -6,6 +6,9 @@ WebMock.stub(:post, "http://example.com/post")
 WebMock.stub(:get, "example.com/%E3%81%82%E3%81%82%E3%81%82")
 WebMock.stub(:get, "https://example.com/")
 WebMock.stub(:get, "https://example.com/post")
+WebMock.stub(:put, "http://example.com/put").
+  with(body: "hello", headers: {"User-Agent" => "Mechanize/0.2.0 Crystal/1.1.1 (https://github.com/Kanezoh/mechanize.cr)"}).
+  to_return(body: "")
 
 describe "Mechanize HTTP test" do
   it "simple GET" do
@@ -33,6 +36,21 @@ describe "Mechanize HTTP test" do
     page.uri.to_s.should eq uri
   end
 
+  it "simple POST" do
+    agent = Mechanize.new
+    query = {"email" => "foobar"}
+    page = agent.post("http://example.com/post", query: query)
+    page.body.should eq "success"
+    page.code.should eq 200
+  end
+
+  it "simple PUT" do
+    agent = Mechanize.new
+    page = agent.put("http://example.com/put", body: "hello")
+    #page.body.should eq "success"
+    #page.code.should eq 200
+  end
+
   it "can escape non-ascii character" do
     agent = Mechanize.new
     page = agent.get("http://example.com/あああ")
@@ -47,14 +65,6 @@ describe "Mechanize HTTP test" do
     page = agent.get(uri, headers: headers)
     agent.request_headers.empty?.should eq false
     agent.request_headers["Foo"].should eq "Bar"
-  end
-
-  it "simple POST" do
-    agent = Mechanize.new
-    query = {"email" => "foobar"}
-    page = agent.post("http://example.com/post", query: query)
-    page.body.should eq "success"
-    page.code.should eq 200
   end
 
   it "can set user agent" do
