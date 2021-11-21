@@ -74,6 +74,8 @@ class Mechanize
             ::HTTP::Client.post(uri, headers: request_headers, form: params.not_nil!.fetch("value", ""))
           when :put
             ::HTTP::Client.put(uri, headers: request_headers, body: body)
+          when :delete
+            ::HTTP::Client.delete(uri, headers: request_headers, body: body)
           end
         end
       end

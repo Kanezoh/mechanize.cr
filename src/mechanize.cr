@@ -93,7 +93,7 @@ class Mechanize
 
   # Send PUT request to specified uri with headers, and body.
   #
-  # Examples (send put request whose post body is "hello")
+  # Examples (send put request whose body is "hello")
   #
   # ```
   # agent = Mechanize.new
@@ -112,6 +112,26 @@ class Mechanize
     page = @agent.fetch(uri, method, headers: headers, body: body)
     request_headers.delete("Content-Type")
     request_headers.delete("Content-Length")
+    add_to_history(page)
+    # yield page if block_given?
+    page
+  end
+
+  # Send DELETE request to specified uri with headers, and body.
+  #
+  # Examples (send delete request whose body is "hello")
+  #
+  # ```
+  # agent = Mechanize.new
+  # agent.delete("http://example.com",
+  #   body: "hello")
+  # ```
+  def delete(uri : String | URI,
+             body : String?,
+             headers = ::HTTP::Headers.new) : Mechanize::Page
+    method = :delete
+
+    page = @agent.fetch(uri, method, headers: headers, body: body)
     add_to_history(page)
     # yield page if block_given?
     page

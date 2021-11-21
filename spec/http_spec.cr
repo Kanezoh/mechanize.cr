@@ -9,6 +9,9 @@ WebMock.stub(:get, "https://example.com/post")
 WebMock.stub(:put, "http://example.com/put")
   .with(body: "hello")
   .to_return(body: "success")
+WebMock.stub(:delete, "http://example.com/delete")
+  .with(body: "hello")
+  .to_return(body: "success")
 
 describe "Mechanize HTTP test" do
   it "simple GET" do
@@ -44,10 +47,16 @@ describe "Mechanize HTTP test" do
     page.code.should eq 200
   end
 
-  it "simple PUT" do
+  it "PUT" do
     agent = Mechanize.new
     page = agent.put("http://example.com/put", body: "hello")
-    agent.get("http://example.com/")
+    page.body.should eq "success"
+    page.code.should eq 200
+  end
+
+  it "DELETE" do
+    agent = Mechanize.new
+    page = agent.delete("http://example.com/delete", body: "hello")
     page.body.should eq "success"
     page.code.should eq 200
   end
