@@ -6,9 +6,9 @@ WebMock.stub(:post, "http://example.com/post")
 WebMock.stub(:get, "example.com/%E3%81%82%E3%81%82%E3%81%82")
 WebMock.stub(:get, "https://example.com/")
 WebMock.stub(:get, "https://example.com/post")
-WebMock.stub(:put, "http://example.com/put").
-  with(body: "hello", headers: {"User-Agent" => "Mechanize/0.2.0 Crystal/1.1.1 (https://github.com/Kanezoh/mechanize.cr)"}).
-  to_return(body: "")
+WebMock.stub(:put, "http://example.com/put")
+  .with(body: "hello")
+  .to_return(body: "success")
 
 describe "Mechanize HTTP test" do
   it "simple GET" do
@@ -47,8 +47,9 @@ describe "Mechanize HTTP test" do
   it "simple PUT" do
     agent = Mechanize.new
     page = agent.put("http://example.com/put", body: "hello")
-    #page.body.should eq "success"
-    #page.code.should eq 200
+    agent.get("http://example.com/")
+    page.body.should eq "success"
+    page.code.should eq 200
   end
 
   it "can escape non-ascii character" do

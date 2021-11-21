@@ -91,22 +91,27 @@ class Mechanize
     post_form(uri, form, headers)
   end
 
-  # Send PUT request to specified uri with headers, and query.
+  # Send PUT request to specified uri with headers, and body.
   #
-  # Examples (send post request whose post body is "foo=bar")
+  # Examples (send put request whose post body is "hello")
   #
   # ```
   # agent = Mechanize.new
   # agent.put("http://example.com",
-  #   body: "hello!",
-  #   headers: HTTP::Headers{"Foo" => "Bar"})
+  #   body: "hello")
   # ```
   def put(uri : String | URI,
           body : String?,
           headers = ::HTTP::Headers.new) : Mechanize::Page
-
     method = :put
+    headers.merge!({
+      "Content-Type"   => "application/octet-stream",
+      "Content-Length" => body.size.to_s,
+    })
+
     page = @agent.fetch(uri, method, headers: headers, body: body)
+    request_headers.delete("Content-Type")
+    request_headers.delete("Content-Length")
     add_to_history(page)
     # yield page if block_given?
     page
@@ -284,8 +289,8 @@ class Mechanize
 
     # fetch the page
     page = @agent.fetch(uri, :post, headers: headers, params: {"value" => request_data}, referer: cur_page)
-    headers.delete("Content-Type")
-    headers.delete("Content-Length")
+    request_headers.delete("Content-Type")
+    request_headers.delete("Content-Length")
     add_to_history(page)
     page
   end
