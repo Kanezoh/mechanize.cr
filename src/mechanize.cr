@@ -11,8 +11,6 @@ require "./mechanize/errors/*"
 # This class is main class of Mechanize.cr,
 # using this class' instance to start web interaction.
 #
-# now only supports GET, POST. other HTTP methods will be implemented soon...
-#
 # Examples:
 #
 # ```
@@ -89,6 +87,52 @@ class Mechanize
       form.fields << Mechanize::FormContent::Field.new(node, v)
     end
     post_form(uri, form, headers)
+  end
+
+  # Send PUT request to specified uri with headers, and body.
+  #
+  # Examples (send put request whose body is "hello")
+  #
+  # ```
+  # agent = Mechanize.new
+  # agent.put("http://example.com",
+  #   body: "hello")
+  # ```
+  def put(uri : String | URI,
+          body : String?,
+          headers = ::HTTP::Headers.new) : Mechanize::Page
+    method = :put
+    headers.merge!({
+      "Content-Type"   => "application/octet-stream",
+      "Content-Length" => body.size.to_s,
+    })
+
+    page = @agent.fetch(uri, method, headers: headers, body: body)
+    request_headers.delete("Content-Type")
+    request_headers.delete("Content-Length")
+    add_to_history(page)
+    # yield page if block_given?
+    page
+  end
+
+  # Send DELETE request to specified uri with headers, and body.
+  #
+  # Examples (send delete request whose body is "hello")
+  #
+  # ```
+  # agent = Mechanize.new
+  # agent.delete("http://example.com",
+  #   body: "hello")
+  # ```
+  def delete(uri : String | URI,
+             body : String?,
+             headers = ::HTTP::Headers.new) : Mechanize::Page
+    method = :delete
+
+    page = @agent.fetch(uri, method, headers: headers, body: body)
+    add_to_history(page)
+    # yield page if block_given?
+    page
   end
 
   # get the value of request headers.
@@ -263,8 +307,8 @@ class Mechanize
 
     # fetch the page
     page = @agent.fetch(uri, :post, headers: headers, params: {"value" => request_data}, referer: cur_page)
-    headers.delete("Content-Type")
-    headers.delete("Content-Length")
+    request_headers.delete("Content-Type")
+    request_headers.delete("Content-Length")
     add_to_history(page)
     page
   end
