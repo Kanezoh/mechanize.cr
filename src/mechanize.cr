@@ -135,6 +135,23 @@ class Mechanize
     page
   end
 
+  # Send HEAD request to specified uri with headers.
+  #
+  # Examples (send HEAD request to http://example.com/)
+  #
+  # ```
+  # agent = Mechanize.new
+  # agent.head("http://example.com")
+  # ```
+  def head(uri : String | URI,
+           headers = ::HTTP::Headers.new) : Mechanize::Page
+    method = :head
+    page = @agent.fetch uri, method, headers
+    add_to_history(page)
+    # yield page if block_given?
+    page
+  end
+
   # get the value of request headers.
   #
   # ```

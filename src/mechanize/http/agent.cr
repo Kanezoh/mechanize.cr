@@ -76,6 +76,8 @@ class Mechanize
             ::HTTP::Client.put(uri, headers: request_headers, body: body)
           when :delete
             ::HTTP::Client.delete(uri, headers: request_headers, body: body)
+          when :head
+            ::HTTP::Client.head(uri, headers: request_headers)
           end
         end
       end
