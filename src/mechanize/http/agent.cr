@@ -1,5 +1,6 @@
 require "../cookie"
 require "../history"
+require "./auth_store"
 
 class Mechanize
   module HTTP
@@ -10,6 +11,7 @@ class Mechanize
       property history : History
       property user_agent : String
       property request_cookies : ::HTTP::Cookies
+      getter auth_store : AuthStore
 
       def initialize(@context : Mechanize? = nil)
         @history = History.new
@@ -17,6 +19,7 @@ class Mechanize
         @context = context
         @request_cookies = ::HTTP::Cookies.new
         @user_agent = ""
+        @auth_store = AuthStore.new
       end
 
       # send http request and return page.
@@ -133,6 +136,10 @@ class Mechanize
         return unless referer
 
         request_headers["Referer"] = referer.uri.to_s
+      end
+
+      def add_auth(uri, user, pass)
+        @auth_store.add_auth(uri, user, pass)
       end
 
       private def resolve_parameters(uri, method, params)

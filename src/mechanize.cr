@@ -296,6 +296,10 @@ class Mechanize
     end
   end
 
+  def add_auth(uri, user, pass)
+    @agent.add_auth(uri, user, pass)
+  end
+
   # Runs given block, then resets the page history as it was before.
   private def transact
     # save the previous history status.
