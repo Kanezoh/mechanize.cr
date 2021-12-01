@@ -47,6 +47,10 @@ class Mechanize
           return follow_redirect(response, headers, page)
         end
 
+        if response && response.status.unauthorized?
+          response_authenticate(response)
+        end
+
         page
       end
 
@@ -218,6 +222,10 @@ class Mechanize
           target_url.path = "/#{target_url.path}"
         end
         target_url
+      end
+
+      private def response_authenticate(response)
+        www_authenticate = response.headers["www-authenticate"]
       end
 
       # reset request cookie before setting headers.
