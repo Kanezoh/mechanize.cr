@@ -1,6 +1,7 @@
 require "../cookie"
 require "../history"
 require "./auth_store"
+require "./www_authenticate_parser"
 
 class Mechanize
   module HTTP
@@ -169,7 +170,7 @@ class Mechanize
       private def save_response_cookies(response, uri, page)
         if page.body =~ /Set-Cookie/
           page.css("head meta[http-equiv=\"Set-Cookie\"]").each do |meta|
-            cookie = meta["content"].split(";")[0]
+            cookie = meta["content"].split(";") # [0]
             key, value = cookie.split("=")
             cookie = ::HTTP::Cookie.new(name: key, value: value)
             save_cookies(uri, [cookie])
