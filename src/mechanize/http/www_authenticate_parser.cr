@@ -18,15 +18,16 @@ class Mechanize
       # Parsers the header.  Returns an Array of challenges as strings
 
       def parse(www_authenticate : String)
-        challenges = [Mechanize::HTTP::AuthChallenge]
-        scanner = StringScanner.new(www_authenticate)
+        challenges = [] of Mechanize::HTTP::AuthChallenge
+        @scanner = StringScanner.new(www_authenticate)
 
         loop do
           break if scanner.eos?
-          start = scanner.pos
+          start = scanner.offset
           challenge = Mechanize::HTTP::AuthChallenge.new
 
           scheme = auth_scheme
+
           if scheme == "Negotiate"
             scan_comma_spaces
           end
@@ -45,39 +46,38 @@ class Mechanize
             challenges << challenge
             next
           else
-            scheme.capitalize!
+            scheme = scheme.capitalize
           end
 
-          #  next unless space
-          #  params = {}
+          next unless space
+          params = Hash(String, String).new
 
-          #  while true do
-          #    pos = @scanner.pos
-          #    name, value = auth_param
+          loop do
+            offset = scanner.offset
+            param = auth_param
+            if param
+              name, value = param
+              name = name.downcase if name =~ /^realm$/i
+              params[name] = value
+            else
+              challenge.params = params
+              challenges << challenge
 
-          #    name.downcase! if name =~ /^realm$/i
+              if scanner.eos?
+                # challenge.raw = www_authenticate[start, scanner.offset]
+                break
+              end
 
-          #    unless name then
-          #      challenge.params = params
-          #      challenges << challenge
+              scanner.offset = offset # rewind
+              # challenge.raw = www_authenticate[start, scanner.offset].sub(/(,+)? *$/, "")
+              challenge = nil # a token should be next, new challenge
+              break
+            end
 
-          #      if @scanner.eos? then
-          #        challenge.raw = www_authenticate[start, @scanner.pos]
-          #        break
-          #      end
+            spaces
 
-          #      @scanner.pos = pos # rewind
-          #      challenge.raw = www_authenticate[start, @scanner.pos].sub(/(,+)? *$/, '')
-          #      challenge = nil # a token should be next, new challenge
-          #      break
-          #    else
-          #      params[name] = value
-          #    end
-
-          #    spaces
-
-          #    @scanner.scan(/(, *)+/)
-          #  end
+            scanner.scan(/(, *)+/)
+          end
         end
 
         challenges

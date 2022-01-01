@@ -5,14 +5,16 @@ class Mechanize
 
     class AuthChallenge
       property scheme : String?
-      property params : String?
+      property params : String? | Hash(String, String)?
 
       def initialize(scheme = nil, params = nil)
+        @scheme = scheme
+        @params = params
       end
 
-      # def [] param
-      #  params[param]
-      # end
+      def [](param)
+        params[param]
+      end
 
       ##
       # Constructs an AuthRealm for this challenge
