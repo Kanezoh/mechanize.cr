@@ -85,4 +85,55 @@ describe "Mechanize AuthStore test" do
     auth_store.credentials?(url, challenges).should eq true
     auth_store.credentials?("#{url}/path", challenges).should eq true
   end
+
+  it "test_credentials_for" do
+    auth_store = Mechanize::HTTP::AuthStore.new
+    url = URI.parse("http://example.com/")
+    auth_store.credentials_for(url, "realm").should eq nil
+
+    auth_store.add_auth url, "user", "pass", "realm"
+
+    auth_store.credentials_for(url, "realm").should eq ["user", "pass", ""]
+    auth_store.credentials_for(url.to_s, "realm").should eq ["user", "pass", ""]
+
+    auth_store.credentials_for(url, "other").should eq nil
+  end
+
+  it "test_credentials_for_no_realm" do
+    auth_store = Mechanize::HTTP::AuthStore.new
+    url = URI.parse("http://example.com/")
+    auth_store.add_auth url, "user", "pass" # no realm set
+
+    auth_store.credentials_for(url, "realm").should eq ["user", "pass", ""]
+  end
+
+  it "test_credentials_for_realm" do
+    auth_store = Mechanize::HTTP::AuthStore.new
+    url = URI.parse("http://example.com/")
+    auth_store.add_auth url, "user1", "pass"
+    auth_store.add_auth url, "user2", "pass", "realm"
+
+    auth_store.credentials_for(url, "realm").should eq ["user2", "pass", ""]
+    auth_store.credentials_for(url, "other").should eq ["user1", "pass", ""]
+  end
+
+  it "test_credentials_for_realm_case" do
+    auth_store = Mechanize::HTTP::AuthStore.new
+    url = URI.parse("http://example.com/")
+    auth_store.add_auth url, "user1", "pass", "realm"
+    auth_store.add_auth url, "user2", "pass", "Realm"
+
+    auth_store.credentials_for(url, "realm").should eq ["user1", "pass", ""]
+    auth_store.credentials_for(url, "Realm").should eq ["user2", "pass", ""]
+  end
+
+  it "test_credentials_for_path" do
+    auth_store = Mechanize::HTTP::AuthStore.new
+    url = URI.parse("http://example.com/")
+    auth_store.add_auth url, "user", "pass", "realm"
+
+    url = url.to_s + "/path"
+
+    auth_store.credentials_for(url, "realm").should eq ["user", "pass", ""]
+  end
 end
