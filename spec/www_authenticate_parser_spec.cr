@@ -65,12 +65,10 @@ describe "Mechanize HTTP Authentication test" do
     result[1].raw.should eq expect[1].raw
   end
 
-
-
   it "test_parse_multiple_without_comma_delimiter" do
     expect = [
-      challenge("Basic",  { "realm" => "foo" }, "Basic realm=foo"),
-      challenge("Digest", { "realm" => "bar" }, "Digest realm=bar"),
+      challenge("Basic", {"realm" => "foo"}, "Basic realm=foo"),
+      challenge("Digest", {"realm" => "bar"}, "Digest realm=bar"),
     ]
 
     parser = Mechanize::HTTP::WWWAuthenticateParser.new
@@ -85,8 +83,8 @@ describe "Mechanize HTTP Authentication test" do
 
   it "test_parse_multiple_blank" do
     expect = [
-      challenge("Basic",  { "realm" => "foo" }, "Basic realm=foo"),
-      challenge("Digest", { "realm" => "bar" }, "Digest realm=bar"),
+      challenge("Basic", {"realm" => "foo"}, "Basic realm=foo"),
+      challenge("Digest", {"realm" => "bar"}, "Digest realm=bar"),
     ]
 
     parser = Mechanize::HTTP::WWWAuthenticateParser.new
@@ -111,7 +109,7 @@ describe "Mechanize HTTP Authentication test" do
     result[0].raw.should eq expect[0].raw
   end
 
-   it "test_parse_ntlm_type_2_3" do
+  it "test_parse_ntlm_type_2_3" do
     expect = [
       challenge("NTLM", "foo=", "NTLM foo="),
     ]
@@ -125,7 +123,7 @@ describe "Mechanize HTTP Authentication test" do
 
   it "test_parse_realm_uppercase" do
     expect = [
-      challenge("Basic", { "realm" => "foo" }, "Basic ReAlM=foo"),
+      challenge("Basic", {"realm" => "foo"}, "Basic ReAlM=foo"),
     ]
 
     parser = Mechanize::HTTP::WWWAuthenticateParser.new
@@ -137,7 +135,7 @@ describe "Mechanize HTTP Authentication test" do
 
   it "test_parse_realm_value_case" do
     expect = [
-      challenge("Basic", { "realm" => "Foo" }, "Basic realm=Foo"),
+      challenge("Basic", {"realm" => "Foo"}, "Basic realm=Foo"),
     ]
 
     parser = Mechanize::HTTP::WWWAuthenticateParser.new
@@ -149,7 +147,7 @@ describe "Mechanize HTTP Authentication test" do
 
   it "test_parse_scheme_uppercase" do
     expect = [
-      challenge("Basic", { "realm" => "foo" }, "BaSiC realm=foo"),
+      challenge("Basic", {"realm" => "foo"}, "BaSiC realm=foo"),
     ]
 
     parser = Mechanize::HTTP::WWWAuthenticateParser.new
@@ -159,9 +157,9 @@ describe "Mechanize HTTP Authentication test" do
     result[0].raw.should eq expect[0].raw
   end
 
-   it "test_parse_bad_whitespace_around_auth_param" do
+  it "test_parse_bad_whitespace_around_auth_param" do
     expect = [
-      challenge("Basic", { "realm" => "foo" }, "Basic realm = \"foo\""),
+      challenge("Basic", {"realm" => "foo"}, "Basic realm = \"foo\""),
     ]
 
     parser = Mechanize::HTTP::WWWAuthenticateParser.new
@@ -173,7 +171,7 @@ describe "Mechanize HTTP Authentication test" do
 
   it "test_parse_bad_single_quote" do
     expect = [
-      challenge("Basic", { "realm" => "'foo" }, "Basic realm='foo"),
+      challenge("Basic", {"realm" => "'foo"}, "Basic realm='foo"),
     ]
 
     parser = Mechanize::HTTP::WWWAuthenticateParser.new
@@ -205,7 +203,7 @@ describe "Mechanize HTTP Authentication test" do
     parser = Mechanize::HTTP::WWWAuthenticateParser.new
     parser.scanner = StringScanner.new "\"escaped \\\" here\""
 
-      string = parser.quoted_string
+    string = parser.quoted_string
 
     string.should eq "escaped \\\" here"
   end

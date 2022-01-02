@@ -6,12 +6,12 @@ class Mechanize
     class AuthChallenge
       property scheme : String?
       property params : String? | Hash(String, String)?
-      property raw    : String
+      property raw : String
 
       def initialize(scheme = nil, params = nil, raw = "")
         @scheme = scheme
         @params = params
-        @raw    = raw
+        @raw = raw
       end
 
       def [](param)
@@ -37,7 +37,12 @@ class Mechanize
       # The name of the realm for this challenge
 
       def realm_name
-        params["realm"] if Hash === params # NTLM has a string for params
+        params_value = params
+        if params_value.is_a?(Hash)
+          params_value["realm"] # NTLM has a string for params
+        else
+          nil
+        end
       end
 
       ##
