@@ -6,10 +6,12 @@ class Mechanize
     class AuthChallenge
       property scheme : String?
       property params : String? | Hash(String, String)?
+      property raw    : String
 
-      def initialize(scheme = nil, params = nil)
+      def initialize(scheme = nil, params = nil, raw = "")
         @scheme = scheme
         @params = params
+        @raw    = raw
       end
 
       def [](param)

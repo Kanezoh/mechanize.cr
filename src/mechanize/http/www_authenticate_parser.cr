@@ -42,11 +42,11 @@ class Mechanize
               challenge.params = scanner.scan(/.*/)
             end
 
-            # challenge.raw = www_authenticate[start, @scanner.pos]
+            challenge.raw = www_authenticate[start, scanner.offset]
             challenges << challenge
             next
           else
-            scheme = scheme.capitalize
+            challenge.scheme = scheme.capitalize
           end
 
           next unless space
@@ -64,12 +64,12 @@ class Mechanize
               challenges << challenge
 
               if scanner.eos?
-                # challenge.raw = www_authenticate[start, scanner.offset]
+                challenge.raw = www_authenticate[start, scanner.offset]
                 break
               end
 
               scanner.offset = offset # rewind
-              # challenge.raw = www_authenticate[start, scanner.offset].sub(/(,+)? *$/, "")
+              challenge.raw = www_authenticate[start, scanner.offset].sub(/(,+)? *$/, "")
               challenge = nil # a token should be next, new challenge
               break
             end
