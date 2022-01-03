@@ -1,8 +1,8 @@
 # This class represents realm attribute of www-authenticate header.
 class Mechanize::HTTP::AuthRealm
-  getter scheme : String
+  getter scheme : String?
   getter uri : URI
-  getter realm : String
+  getter realm : String?
 
   def initialize(scheme, uri, realm)
     @scheme = scheme
@@ -11,10 +11,10 @@ class Mechanize::HTTP::AuthRealm
   end
 
   def ==(other)
-    self.class === other and
-    @scheme == other.scheme and
-    @uri == other.uri and
-    @realm == other.realm
+    self.class === other &&
+      @scheme == other.scheme &&
+      @uri == other.uri &&
+      @realm == other.realm
   end
 
   def hash # :nodoc:

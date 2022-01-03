@@ -1,3 +1,5 @@
+require "./auth_realm"
+
 class Mechanize
   module HTTP
     ##
@@ -15,19 +17,25 @@ class Mechanize
       end
 
       def [](param)
-        params[param]
+        params_value = params
+        if params_value.is_a?(Hash)
+          params_value[param] # NTLM has a string for params
+        else
+          nil
+        end
       end
 
       ##
       # Constructs an AuthRealm for this challenge
 
       def realm(uri)
+        uri.path = "/"
         case scheme
         when "Basic"
           # raise ArgumentError, "provide uri for Basic authentication" unless uri
-          Mechanize::HTTP::AuthRealm.new scheme, uri + '/', self["realm"]
+          Mechanize::HTTP::AuthRealm.new scheme, uri, self["realm"]
         when "Digest"
-          Mechanize::HTTP::AuthRealm.new scheme, uri + '/', self["realm"]
+          Mechanize::HTTP::AuthRealm.new scheme, uri, self["realm"]
         else
           # raise Mechanize::Error, "unknown HTTP authentication scheme #{scheme}"
         end

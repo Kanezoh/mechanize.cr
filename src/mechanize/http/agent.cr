@@ -13,6 +13,8 @@ class Mechanize
       property user_agent : String
       property request_cookies : ::HTTP::Cookies
       getter auth_store : AuthStore
+      getter authenticate_methods : Hash(URI, Hash(String, Array(AuthRealm)))
+      getter authenticate_parser : WWWAuthenticateParser
 
       def initialize(@context : Mechanize? = nil)
         @history = History.new
@@ -21,6 +23,8 @@ class Mechanize
         @request_cookies = ::HTTP::Cookies.new
         @user_agent = ""
         @auth_store = AuthStore.new
+        @authenticate_methods = Hash(URI, Hash(String, Array(AuthRealm))).new
+        @authenticate_parser = WWWAuthenticateParser.new
       end
 
       # send http request and return page.
@@ -38,9 +42,11 @@ class Mechanize
         set_request_referer(referer)
         uri, params = resolve_parameters(uri, method, params)
         response = http_request(uri, method, params, body)
+        request_auth response, uri
         body = response.not_nil!.body
         page = response_parse(response, body, uri)
         response_log(response)
+
         # save cookies
         save_response_cookies(response, uri, page)
 
@@ -49,7 +55,7 @@ class Mechanize
         end
 
         if response && response.status.unauthorized?
-          response_authenticate(response)
+          response_authenticate(response, page, uri, params, referer)
         end
 
         page
@@ -88,6 +94,34 @@ class Mechanize
             ::HTTP::Client.head(uri, headers: request_headers)
           end
         end
+      end
+
+      def request_auth(request, uri)
+        base_uri = uri.dup
+        base_uri.path = "/"
+        base_uri.user &&= nil
+        base_uri.password &&= nil
+        schemes = @authenticate_methods.fetch(base_uri, nil)
+        return if schemes.nil?
+
+        if realm = schemes["basic"].find { |r| r.uri == base_uri }
+          res = @auth_store.credentials_for uri, realm.realm
+          if res
+            user, password = res
+            # p user
+            # p password
+            # request.basic_auth user, password
+          end
+        end
+
+        # if realm = schemes[:digest].find { |r| r.uri == base_uri } then
+        #  request_auth_digest request, uri, realm, base_uri, false
+        # elsif realm = schemes[:iis_digest].find { |r| r.uri == base_uri } then
+        #  request_auth_digest request, uri, realm, base_uri, true
+        # elsif realm = schemes[:basic].find { |r| r.uri == base_uri } then
+        #  user, password, = @auth_store.credentials_for uri, realm.realm
+        #  request.basic_auth user, password
+        # end
       end
 
       # returns the page now mechanize visiting.
@@ -150,7 +184,7 @@ class Mechanize
       private def resolve_parameters(uri, method, params)
         case method
         when :get
-          return uri, nil if params.empty?
+          return uri, nil if params.nil? || params.empty?
           query = URI::Params.encode(params)
           uri.query = query
           return uri, nil
@@ -225,8 +259,39 @@ class Mechanize
         target_url
       end
 
-      private def response_authenticate(response)
+      private def response_authenticate(response, page, uri, params, referer)
         www_authenticate = response.headers["www-authenticate"]
+
+        unless www_authenticate = response.headers["www-authenticate"]
+          # TODO: raise error
+        end
+
+        challenges = @authenticate_parser.parse(www_authenticate)
+
+        unless @auth_store.credentials?(uri, challenges)
+          # TODO: raise error
+        end
+
+        if challenge = challenges.find { |c| c.scheme =~ /^Digest$/i }
+          # TODO implement Digest Auth
+        elsif challenge = challenges.find { |c| c.scheme == "NTLM" }
+          # TODO implement Digest Auth
+        elsif challenge = challenges.find { |c| c.scheme == "Basic" }
+          realm = challenge.realm uri
+          if realm
+            @authenticate_methods[realm.uri] = Hash(String, Array(AuthRealm)).new([] of AuthRealm) unless @authenticate_methods.has_key?(realm.uri)
+            existing_realms = @authenticate_methods[realm.uri]["basic"]
+
+            if existing_realms && existing_realms.includes? realm
+              # TODO: raise error
+            end
+
+            existing_realms << realm
+          end
+        else
+          # TODO: raise error
+        end
+        fetch(uri, headers: request_headers, params: params, referer: referer)
       end
 
       # reset request cookie before setting headers.
