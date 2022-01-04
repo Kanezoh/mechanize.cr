@@ -14,6 +14,7 @@ class BasicAuthHandler < Kemal::BasicAuth::Handler
     super
   end
 end
+
 add_handler BasicAuthHandler.new("username", "password")
 
 get "/secret" do

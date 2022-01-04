@@ -41,8 +41,9 @@ class Mechanize
         set_user_agent
         set_request_referer(referer)
         uri, params = resolve_parameters(uri, method, params)
-        response = http_request(uri, method, params, body)
-        request_auth response, uri
+        client = ::HTTP::Client.new(uri)
+        request_auth client, uri
+        response = http_request(client, uri, method, params, body)
         body = response.not_nil!.body
         page = response_parse(response, body, uri)
         response_log(response)
@@ -55,7 +56,7 @@ class Mechanize
         end
 
         if response && response.status.unauthorized?
-          response_authenticate(response, page, uri, params, referer)
+          return response_authenticate(response, page, uri, params, referer)
         end
 
         page
@@ -76,27 +77,28 @@ class Mechanize
       end
 
       # send http request
-      private def http_request(uri, method, params, body) : ::HTTP::Client::Response?
+      private def http_request(client, uri, method, params, body) : ::HTTP::Client::Response?
         request_log(uri, method)
+        path = uri.path
 
         case uri.scheme.not_nil!.downcase
         when "http", "https"
           case method
           when :get
-            ::HTTP::Client.get(uri, headers: request_headers)
+            client.get(path, headers: request_headers)
           when :post
-            ::HTTP::Client.post(uri, headers: request_headers, form: params.not_nil!.fetch("value", ""))
+            client.post(path, headers: request_headers, form: params.not_nil!.fetch("value", ""))
           when :put
-            ::HTTP::Client.put(uri, headers: request_headers, body: body)
+            client.put(path, headers: request_headers, body: body)
           when :delete
-            ::HTTP::Client.delete(uri, headers: request_headers, body: body)
+            client.delete(uri, headers: request_headers, body: body)
           when :head
-            ::HTTP::Client.head(uri, headers: request_headers)
+            client.head(uri, headers: request_headers)
           end
         end
       end
 
-      def request_auth(request, uri)
+      def request_auth(client, uri)
         base_uri = uri.dup
         base_uri.path = "/"
         base_uri.user &&= nil
@@ -108,9 +110,7 @@ class Mechanize
           res = @auth_store.credentials_for uri, realm.realm
           if res
             user, password = res
-            # p user
-            # p password
-            # request.basic_auth user, password
+            client.basic_auth user, password
           end
         end
 
@@ -270,13 +270,10 @@ class Mechanize
 
         unless @auth_store.credentials?(uri, challenges)
           # TODO: raise error
+          return page
         end
 
-        if challenge = challenges.find { |c| c.scheme =~ /^Digest$/i }
-          # TODO implement Digest Auth
-        elsif challenge = challenges.find { |c| c.scheme == "NTLM" }
-          # TODO implement Digest Auth
-        elsif challenge = challenges.find { |c| c.scheme == "Basic" }
+        if challenge = challenges.find { |c| c.scheme == "Basic" }
           realm = challenge.realm uri
           if realm
             @authenticate_methods[realm.uri] = Hash(String, Array(AuthRealm)).new([] of AuthRealm) unless @authenticate_methods.has_key?(realm.uri)
@@ -288,10 +285,11 @@ class Mechanize
 
             existing_realms << realm
           end
+          fetch(uri, headers: request_headers, params: params, referer: referer)
         else
           # TODO: raise error
+          raise Exception.new("error")
         end
-        fetch(uri, headers: request_headers, params: params, referer: referer)
       end
 
       # reset request cookie before setting headers.

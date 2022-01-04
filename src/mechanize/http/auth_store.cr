@@ -9,20 +9,22 @@ class Mechanize
       end
 
       def add_auth(uri : String | URI, user : String, pass : String, realm : String? = nil, domain : String? = nil)
+        target_uri = uri.dup
         unless uri.is_a?(URI)
-          uri = URI.parse(uri)
+          target_uri = URI.parse(uri)
         end
-        uri.path = "/"
-        uri.user = nil
-        uri.password = nil
+        target_uri = target_uri.as(URI)
+        target_uri.path = "/"
+        target_uri.user = nil
+        target_uri.password = nil
         realm = "" if realm.nil?
         domain = "" if domain.nil?
 
         realm_hash = {realm => [user, pass, domain]}
-        if auth_accounts.has_key?(uri)
-          auth_accounts[uri].merge!(realm_hash)
+        if auth_accounts.has_key?(target_uri)
+          auth_accounts[target_uri].merge!(realm_hash)
         else
-          auth_accounts[uri] = realm_hash
+          auth_accounts[target_uri] = realm_hash
         end
       end
 
@@ -38,15 +40,17 @@ class Mechanize
 
       # Retrieves credentials for +realm+ on the server at +uri+.
       def credentials_for(uri : String | URI, realm : String?) : Array(String)?
+        target_uri = uri.dup
         unless uri.is_a?(URI)
-          uri = URI.parse(uri)
+          target_uri = URI.parse(uri)
         end
-        uri.path = "/"
-        uri.user = nil
-        uri.password = nil
+        target_uri = target_uri.as(URI)
+        target_uri.path = "/"
+        target_uri.user = nil
+        target_uri.password = nil
         realm = "" if realm.nil?
 
-        realms = auth_accounts.fetch(uri, nil)
+        realms = auth_accounts.fetch(target_uri, nil)
         return nil if realms.nil?
 
         realms.fetch(realm, nil) || realms.fetch("", nil)

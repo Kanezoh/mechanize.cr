@@ -29,13 +29,14 @@ class Mechanize
       # Constructs an AuthRealm for this challenge
 
       def realm(uri)
-        uri.path = "/"
+        target_uri = uri.dup
+        target_uri.path = "/"
         case scheme
         when "Basic"
           # raise ArgumentError, "provide uri for Basic authentication" unless uri
-          Mechanize::HTTP::AuthRealm.new scheme, uri, self["realm"]
+          Mechanize::HTTP::AuthRealm.new scheme, target_uri, self["realm"]
         when "Digest"
-          Mechanize::HTTP::AuthRealm.new scheme, uri, self["realm"]
+          Mechanize::HTTP::AuthRealm.new scheme, target_uri, self["realm"]
         else
           # raise Mechanize::Error, "unknown HTTP authentication scheme #{scheme}"
         end
