@@ -91,9 +91,9 @@ class Mechanize
           when :put
             client.put(path, headers: request_headers, body: body)
           when :delete
-            client.delete(uri, headers: request_headers, body: body)
+            client.delete(path, headers: request_headers, body: body)
           when :head
-            client.head(uri, headers: request_headers)
+            client.head(path, headers: request_headers)
           end
         end
       end
