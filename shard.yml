@@ -16,3 +16,8 @@ development_dependencies:
   webmock:
     github: manastech/webmock.cr
     branch: master
+  kemal:
+    github: kemalcr/kemal
+    version: ~> 1.0.0
+  kemal-basic-auth:
+    github: kemalcr/kemal-basic-auth
