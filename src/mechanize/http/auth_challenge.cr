@@ -39,6 +39,7 @@ class Mechanize
           Mechanize::HTTP::AuthRealm.new scheme, target_uri, self["realm"]
         else
           # raise Mechanize::Error, "unknown HTTP authentication scheme #{scheme}"
+          raise Exception.new("unknown HTTP authentication scheme #{scheme}")
         end
       end
 
