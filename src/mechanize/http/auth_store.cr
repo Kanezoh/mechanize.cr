@@ -32,7 +32,7 @@ class Mechanize
       # Returns true if credentials exist for the +challenges+ from the server at
       # +uri+.
 
-      def credentials?(uri, challenges)
+      def credentials?(uri, challenges) : Bool
         challenges.any? do |challenge|
           credentials_for uri, challenge.realm_name
         end

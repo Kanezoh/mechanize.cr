@@ -259,7 +259,7 @@ class Mechanize
         target_url
       end
 
-      private def response_authenticate(response, page, uri, params, referer)
+      private def response_authenticate(response, page, uri, params, referer) : Page
         www_authenticate = response.headers["www-authenticate"]
 
         unless www_authenticate = response.headers["www-authenticate"]

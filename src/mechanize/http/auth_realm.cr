@@ -10,18 +10,10 @@ class Mechanize::HTTP::AuthRealm
     @realm = realm if realm
   end
 
-  def ==(other)
+  def ==(other) : Bool
     self.class === other &&
       @scheme == other.scheme &&
       @uri == other.uri &&
       @realm == other.realm
-  end
-
-  def hash # :nodoc:
-    [@scheme, @uri, @realm].hash
-  end
-
-  def inspect # :nodoc:
-    "#<AuthRealm %s %p \"%s\">" % [@scheme, @uri, @realm]
   end
 end

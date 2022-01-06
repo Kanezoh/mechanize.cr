@@ -17,14 +17,14 @@ class Mechanize
 
       # Parsers the header.  Returns an Array of challenges as strings
 
-      def parse(www_authenticate : String)
-        challenges = [] of Mechanize::HTTP::AuthChallenge
+      def parse(www_authenticate : String) : Array(AuthChallenge)
+        challenges = [] of AuthChallenge
         @scanner = StringScanner.new(www_authenticate)
 
         loop do
           break if scanner.eos?
           start = scanner.offset
-          challenge = Mechanize::HTTP::AuthChallenge.new
+          challenge = AuthChallenge.new
 
           scheme = auth_scheme
 
@@ -86,7 +86,7 @@ class Mechanize
       # scans a comma followed by spaces
       # needed for Negotiation, NTLM
 
-      def scan_comma_spaces
+      private def scan_comma_spaces
         scanner.scan(/, +/)
       end
 
@@ -98,7 +98,7 @@ class Mechanize
         scanner.scan(/[^\000-\037\177()<>@,;:\\"\/\[\]?={} ]+/)
       end
 
-      def auth_scheme
+      private def auth_scheme
         token
       end
 
@@ -107,7 +107,7 @@ class Mechanize
       #
       # Parses spaces
 
-      def spaces
+      private def spaces
         scanner.scan(/ +/)
       end
 
@@ -137,7 +137,7 @@ class Mechanize
       #
       # For TEXT, the rules of RFC 2047 are ignored.
 
-      def quoted_string
+      def quoted_string : String?
         return nil unless @scanner.scan(/"/)
 
         text = String.new
