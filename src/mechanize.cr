@@ -296,6 +296,15 @@ class Mechanize
     end
   end
 
+  # set basic auth credentials.
+  # ```
+  # # make download.html whose content is http://example.com's html.
+  # agent.add_auth("http://example.com", "username", "password")
+  # ```
+  def add_auth(uri : String, user : String, pass : String)
+    @agent.add_auth(uri, user, pass)
+  end
+
   # Runs given block, then resets the page history as it was before.
   private def transact
     # save the previous history status.
