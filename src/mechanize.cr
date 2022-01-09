@@ -296,7 +296,12 @@ class Mechanize
     end
   end
 
-  def add_auth(uri, user, pass)
+  # set basic auth credentials.
+  # ```
+  # # make download.html whose content is http://example.com's html.
+  # agent.add_auth("http://example.com", "username", "password")
+  # ```
+  def add_auth(uri : String, user : String, pass : String)
     @agent.add_auth(uri, user, pass)
   end
 

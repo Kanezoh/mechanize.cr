@@ -77,7 +77,11 @@ class Mechanize
       end
 
       # send http request
-      private def http_request(client, uri, method, params, body) : ::HTTP::Client::Response?
+      private def http_request(client : ::HTTP::Client,
+                               uri : URI,
+                               method : Symbol,
+                               params : Hash(String, String)?,
+                               body : String?) : ::HTTP::Client::Response?
         request_log(uri, method)
         path = uri.path
 
@@ -98,7 +102,7 @@ class Mechanize
         end
       end
 
-      def request_auth(client, uri)
+      private def request_auth(client : ::HTTP::Client, uri : URI)
         base_uri = uri.dup
         base_uri.path = "/"
         base_uri.user &&= nil
@@ -156,6 +160,15 @@ class Mechanize
         @history.max_size = length
       end
 
+      # set basic auth credentials.
+      # ```
+      # # make download.html whose content is http://example.com's html.
+      # agent.add_auth("http://example.com", "username", "password")
+      # ```
+      def add_auth(uri : String, user : String, pass : String)
+        @auth_store.add_auth(uri, user, pass)
+      end
+
       private def set_request_headers(uri, headers)
         reset_request_header_cookies
         headers.each do |k, v|
@@ -171,14 +184,10 @@ class Mechanize
       end
 
       # Sets a Referer header.
-      def set_request_referer(referer : Page?)
+      private def set_request_referer(referer : Page?)
         return unless referer
 
         request_headers["Referer"] = referer.uri.to_s
-      end
-
-      def add_auth(uri, user, pass)
-        @auth_store.add_auth(uri, user, pass)
       end
 
       private def resolve_parameters(uri, method, params)
