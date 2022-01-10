@@ -84,6 +84,7 @@ class Mechanize
                                body : String?) : ::HTTP::Client::Response?
         request_log(uri, method)
         path = uri.path
+        path += "?#{uri.query.not_nil!}" if uri.query
 
         case uri.scheme.not_nil!.downcase
         when "http", "https"
