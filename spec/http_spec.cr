@@ -1,5 +1,6 @@
 require "./spec_helper"
 WebMock.stub(:get, "http://example.com/?foo=bar&foo1=bar2")
+WebMock.stub(:get, "http://example.com/path?foo=bar&foo1=bar2")
 WebMock.stub(:post, "http://example.com/post")
   .with(body: "email=foobar", headers: {"Content-Type" => "application/x-www-form-urlencoded"})
   .to_return(body: "success")
@@ -35,6 +36,14 @@ describe "Mechanize HTTP test" do
   it "GET with query parameter as URL string" do
     agent = Mechanize.new
     uri = "http://example.com/?foo=bar&foo1=bar2"
+    page = agent.get(uri)
+    page.code.should eq 200
+    page.uri.to_s.should eq uri
+  end
+
+  it "GET with query parameter with path" do
+    agent = Mechanize.new
+    uri = "http://example.com/path?foo=bar&foo1=bar2"
     page = agent.get(uri)
     page.code.should eq 200
     page.uri.to_s.should eq uri
