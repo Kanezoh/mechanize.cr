@@ -8,6 +8,7 @@ class Mechanize
         @auth_accounts = Hash(URI, Hash(String, Array(String))).new
       end
 
+      # set an auth credential with a specific url.
       def add_auth(uri : String | URI, user : String, pass : String, realm : String? = nil, domain : String? = nil)
         target_uri = uri.dup
         unless uri.is_a?(URI)
@@ -28,7 +29,6 @@ class Mechanize
         end
       end
 
-      ##
       # Returns true if credentials exist for the +challenges+ from the server at
       # +uri+.
 
