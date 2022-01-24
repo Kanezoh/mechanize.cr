@@ -4,7 +4,8 @@
 
 This project is inspired by Ruby's [mechanize](https://github.com/sparklemotion/mechanize).
 The purpose is to cover all the features of original one.
-Now, mechanize.cr can automatically store and send cookies, fill and submit forms.
+
+[API Documentation](https://kanezoh.github.io/mechanize.cr/)
 
 ## Installation
 
@@ -20,7 +21,7 @@ Now, mechanize.cr can automatically store and send cookies, fill and submit form
 
 ## Usage
 
-### simple GET request
+### GET request
 
 ```crystal
 require "mechanize"
@@ -94,6 +95,17 @@ For activation, simply setup the log to `:debug` level
 ```crystal
 Log.setup("mechanize", :debug)
 ```
+
+### Basic auth
+
+You can access a page which is protected by basic auth, setting username and password for the url.
+
+```crystal
+agent = Mechanize.new
+agent.add_auth("http://example.com", "username", "password")
+agent.get("http://example.com")
+```
+
 
 ## Contributing
 
