@@ -43,11 +43,11 @@ class Mechanize
     # page.forms # => Array(Mechanize::Form)
     # ```
     def forms : Array(Form)
-      forms = css("form").map do |html_form|
+      css("form").map do |html_form|
         form = Form.new(html_form, self)
         form.action ||= @uri.to_s
         form
-      end.to_a
+      end
     end
 
     # return all links(`Mechanize::PageContent::Link`) in the page.
@@ -55,11 +55,11 @@ class Mechanize
     # page.links # => Array(Mechanize::PageContent::Link)
     # ```
     def links : Array(PageContent::Link)
-      links = %w{a area}.map do |tag|
+      %w{a area}.flat_map do |tag|
         css(tag).map do |node|
           PageContent::Link.new(node, @mech, self)
         end
-      end.flatten
+      end
     end
 
     elements_with "form"

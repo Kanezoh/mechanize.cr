@@ -318,7 +318,6 @@ class Mechanize
 
       # extract valid cookies according to URI
       private def valid_cookies(uri)
-        host = uri.host
         valid_cookies = ::HTTP::Cookies.new
         request_cookies.each do |cookie|
           valid_cookies << cookie if cookie.valid_cookie?(uri)

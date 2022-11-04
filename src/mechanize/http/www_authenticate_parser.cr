@@ -127,7 +127,7 @@ class Mechanize
 
         return nil unless value
 
-        return [name, value]
+        [name, value]
       end
 
       ##
