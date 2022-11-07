@@ -30,7 +30,7 @@ class Mechanize
       if size == 0
         # TODO: raise error
       end
-      page = @array.pop
+      @array.pop
     end
   end
 end

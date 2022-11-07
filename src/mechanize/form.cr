@@ -193,7 +193,6 @@ class Mechanize
     # submitted with multiple buttons, pass each button to this method.
     def add_button_to_query(button)
       unless button.form_node == @node
-        message = ""
         "#{button.inspect} does not belong to the same page as " \
         "the form #{@name.inspect} in #{@page.try &.uri}"
         message = "not a valid button"

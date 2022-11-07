@@ -5,7 +5,7 @@ class Mechanize
     macro elements_with(singular, plural = "")
       {% plural = "#{singular.id}s" if plural.empty? %}
       # search {{ plural.id }} which match condition.
-      # 
+      #
       # Examples
       # ```
       # # if you specify String like "foo", it searches {{ singular.id }} which name is "foo".

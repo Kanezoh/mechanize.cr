@@ -66,7 +66,7 @@ class Mechanize
         redirect_url = response.headers["location"]
         uri = resolve_url(redirect_url, referer)
 
-        Log.debug { "follow redirect to: #{uri.to_s}" }
+        Log.debug { "follow redirect to: #{uri}" }
 
         # Make sure we are not copying over the POST headers from the original request
         headers.delete("Content-MD5")
@@ -318,7 +318,6 @@ class Mechanize
 
       # extract valid cookies according to URI
       private def valid_cookies(uri)
-        host = uri.host
         valid_cookies = ::HTTP::Cookies.new
         request_cookies.each do |cookie|
           valid_cookies << cookie if cookie.valid_cookie?(uri)
@@ -327,7 +326,7 @@ class Mechanize
       end
 
       private def request_log(uri, method)
-        Log.debug { "#{method.to_s.upcase}: #{uri.to_s}" }
+        Log.debug { "#{method.to_s.upcase}: #{uri}" }
 
         request_headers.each do |key, values|
           value = values.size == 1 ? values.first : values

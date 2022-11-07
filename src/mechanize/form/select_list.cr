@@ -23,10 +23,14 @@ class Mechanize::FormContent::SelectList < Mechanize::FormContent::MultiSelectLi
   end
 
   def value=(new_value)
-    values = new_value
+    @values = new_value
   end
 
   def query_value
-    value ? [[name, value.not_nil!]] : nil
+    if v = value
+      [[name, v]]
+    else
+      nil
+    end
   end
 end
