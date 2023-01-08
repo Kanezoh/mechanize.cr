@@ -2,6 +2,7 @@ require "log"
 require "uri"
 require "http/client"
 require "lexbor"
+require "http_proxy"
 require "./mechanize/http/agent"
 require "./mechanize/form"
 require "./mechanize/node"
@@ -303,6 +304,11 @@ class Mechanize
   # ```
   def add_auth(uri : String, user : String, pass : String)
     @agent.add_auth(uri, user, pass)
+  end
+
+  # Sets the proxy +address+ at +port+ with an optional +user+ and +password+
+  def set_proxy(address : String, port : Int32, user : String? = nil, password : String? = nil)
+    @agent.set_proxy(address, port, user, password)
   end
 
   # Runs given block, then resets the page history as it was before.

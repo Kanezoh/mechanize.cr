@@ -11,6 +11,8 @@ license: MIT
 dependencies:
   lexbor:
     github: kostya/lexbor
+  http_proxy:
+    github: mamantoha/http_proxy
 
 development_dependencies:
   webmock:
