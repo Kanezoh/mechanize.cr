@@ -16,6 +16,8 @@ class Mechanize
       getter authenticate_methods : Hash(URI, Hash(String, Array(AuthRealm)))
       getter authenticate_parser : WWWAuthenticateParser
 
+      @proxy : ::HTTP::Proxy::Client?
+
       def initialize(@context : Mechanize? = nil)
         @history = History.new
         @request_headers = ::HTTP::Headers.new
@@ -43,6 +45,7 @@ class Mechanize
         uri, params = resolve_parameters(uri, method, params)
         client = ::HTTP::Client.new(uri)
         request_auth client, uri
+        client.set_proxy(@proxy) if @proxy
         response = http_request(client, uri, method, params, body)
         body = response.not_nil!.body
         page = response_parse(response, body, uri)
@@ -168,6 +171,10 @@ class Mechanize
       # ```
       def add_auth(uri : String, user : String, pass : String)
         @auth_store.add_auth(uri, user, pass)
+      end
+
+      def set_proxy(address : String, port : Int32, user : String? = nil, password : String? = nil)
+        @proxy = ::HTTP::Proxy::Client.new(address, port, username: user, password: password)
       end
 
       private def set_request_headers(uri, headers)
