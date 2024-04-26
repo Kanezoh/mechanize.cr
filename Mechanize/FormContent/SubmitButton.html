@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Crystal Docs 1.12.1">
+<meta name="crystal_docs.project_version" content="master">
+<meta name="crystal_docs.project_name" content="mechanize">
+
+
+
+<link href="../../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../../js/doc.js"></script>
+
+  <meta name="repository-name" content="mechanize">
+  <title>Mechanize::FormContent::SubmitButton - mechanize master</title>
+  <script type="text/javascript">
+    CrystalDocs.base_path = "../../";
+  </script>
+</head>
+<body>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill="currentColor" fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+<input type="checkbox" id="sidebar-btn">
+<label for="sidebar-btn" id="sidebar-btn-label">
+  <svg class="open" xmlns="http://www.w3.org/2000/svg" height="2em" width="2em" viewBox="0 0 512 512"><title>Open Sidebar</title><path fill="currentColor" d="M80 96v64h352V96H80zm0 112v64h352v-64H80zm0 112v64h352v-64H80z"></path></svg>
+  <svg class="close" xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 512 512"><title>Close Sidebar</title><path fill="currentColor" d="m118.6 73.4-45.2 45.2L210.7 256 73.4 393.4l45.2 45.2L256 301.3l137.4 137.3 45.2-45.2L301.3 256l137.3-137.4-45.2-45.2L256 210.7Z"></path></svg>
+</label>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="../../index.html">
+          mechanize
+        </a>
+      </h1>
+
+      <span class="project-version">
+        master
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="mechanize/Mechanize" data-name="mechanize">
+      <a href="../../Mechanize.html">Mechanize</a>
+      
+        <ul>
+  
+  <li class=" " data-id="mechanize/Mechanize/ElementMatcher" data-name="mechanize::elementmatcher">
+      <a href="../../Mechanize/ElementMatcher.html">ElementMatcher</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/ElementNotFoundError" data-name="mechanize::elementnotfounderror">
+      <a href="../../Mechanize/ElementNotFoundError.html">ElementNotFoundError</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/Error" data-name="mechanize::error">
+      <a href="../../Mechanize/Error.html">Error</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/File" data-name="mechanize::file">
+      <a href="../../Mechanize/File.html">File</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/Form" data-name="mechanize::form">
+      <a href="../../Mechanize/Form.html">Form</a>
+      
+    </li>
+  
+  <li class="parent open current" data-id="mechanize/Mechanize/FormContent" data-name="mechanize::formcontent">
+      <a href="../../Mechanize/FormContent.html">FormContent</a>
+      
+        <ul>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/Button" data-name="mechanize::formcontent::button">
+      <a href="../../Mechanize/FormContent/Button.html">Button</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/CheckBox" data-name="mechanize::formcontent::checkbox">
+      <a href="../../Mechanize/FormContent/CheckBox.html">CheckBox</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/Field" data-name="mechanize::formcontent::field">
+      <a href="../../Mechanize/FormContent/Field.html">Field</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/Hidden" data-name="mechanize::formcontent::hidden">
+      <a href="../../Mechanize/FormContent/Hidden.html">Hidden</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/ImageButton" data-name="mechanize::formcontent::imagebutton">
+      <a href="../../Mechanize/FormContent/ImageButton.html">ImageButton</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/MultiSelectList" data-name="mechanize::formcontent::multiselectlist">
+      <a href="../../Mechanize/FormContent/MultiSelectList.html">MultiSelectList</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/Option" data-name="mechanize::formcontent::option">
+      <a href="../../Mechanize/FormContent/Option.html">Option</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/RadioButton" data-name="mechanize::formcontent::radiobutton">
+      <a href="../../Mechanize/FormContent/RadioButton.html">RadioButton</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/ResetButton" data-name="mechanize::formcontent::resetbutton">
+      <a href="../../Mechanize/FormContent/ResetButton.html">ResetButton</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/SelectList" data-name="mechanize::formcontent::selectlist">
+      <a href="../../Mechanize/FormContent/SelectList.html">SelectList</a>
+      
+    </li>
+  
+  <li class=" current" data-id="mechanize/Mechanize/FormContent/SubmitButton" data-name="mechanize::formcontent::submitbutton">
+      <a href="../../Mechanize/FormContent/SubmitButton.html">SubmitButton</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/Text" data-name="mechanize::formcontent::text">
+      <a href="../../Mechanize/FormContent/Text.html">Text</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/Textarea" data-name="mechanize::formcontent::textarea">
+      <a href="../../Mechanize/FormContent/Textarea.html">Textarea</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/History" data-name="mechanize::history">
+      <a href="../../Mechanize/History.html">History</a>
+      
+    </li>
+  
+  <li class="parent " data-id="mechanize/Mechanize/HTTP" data-name="mechanize::http">
+      <a href="../../Mechanize/HTTP.html">HTTP</a>
+      
+        <ul>
+  
+  <li class=" " data-id="mechanize/Mechanize/HTTP/Agent" data-name="mechanize::http::agent">
+      <a href="../../Mechanize/HTTP/Agent.html">Agent</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/HTTP/AuthChallenge" data-name="mechanize::http::authchallenge">
+      <a href="../../Mechanize/HTTP/AuthChallenge.html">AuthChallenge</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/HTTP/AuthRealm" data-name="mechanize::http::authrealm">
+      <a href="../../Mechanize/HTTP/AuthRealm.html">AuthRealm</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/HTTP/AuthStore" data-name="mechanize::http::authstore">
+      <a href="../../Mechanize/HTTP/AuthStore.html">AuthStore</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/HTTP/WWWAuthenticateParser" data-name="mechanize::http::wwwauthenticateparser">
+      <a href="../../Mechanize/HTTP/WWWAuthenticateParser.html">WWWAuthenticateParser</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/Node" data-name="mechanize::node">
+      <a href="../../Mechanize/Node.html">Node</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/Page" data-name="mechanize::page">
+      <a href="../../Mechanize/Page.html">Page</a>
+      
+    </li>
+  
+  <li class="parent " data-id="mechanize/Mechanize/PageContent" data-name="mechanize::pagecontent">
+      <a href="../../Mechanize/PageContent.html">PageContent</a>
+      
+        <ul>
+  
+  <li class=" " data-id="mechanize/Mechanize/PageContent/Link" data-name="mechanize::pagecontent::link">
+      <a href="../../Mechanize/PageContent/Link.html">Link</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Mechanize::<wbr>FormContent::<wbr>SubmitButton
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Mechanize/FormContent/SubmitButton.html">Mechanize::FormContent::SubmitButton</a></li><li class="superclass"><a href="../../Mechanize/FormContent/Button.html">Mechanize::FormContent::Button</a></li><li class="superclass"><a href="../../Mechanize/FormContent/Field.html">Mechanize::FormContent::Field</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
+
+  <p>This class represents &lt;input type=&quot;submit&quot;&gt;</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+    
+      <a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form/submit_button.cr#L2" target="_blank">
+        mechanize/form/submit_button.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+  <h3>Instance methods inherited from class <code><a href="../../Mechanize/FormContent/Button.html">Mechanize::FormContent::Button</a></code></h3>
+  
+  
+    <a href="../../Mechanize/FormContent/Button.html#form_node%3AMechanize%3A%3ANode%7CLexbor%3A%3ANode-instance-method" class="tooltip">
+      <span>form_node : Mechanize::Node | Lexbor::Node</span>
+    form_node</a>
+    
+  
+
+
+    
+
+  <h3>Constructor methods inherited from class <code><a href="../../Mechanize/FormContent/Button.html">Mechanize::FormContent::Button</a></code></h3>
+  
+  
+    <a href="../../Mechanize/FormContent/Button.html#new%28node%3AMechanize%3A%3ANode%7CLexbor%3A%3ANode%2Cform_node%3AMechanize%3A%3ANode%7CLexbor%3A%3ANode%2Cvalue%3Dnil%29-class-method" class="tooltip">
+      <span>new(node : Mechanize::Node | Lexbor::Node, form_node : Mechanize::Node | Lexbor::Node, value = <span class="n">nil</span>)</span>
+    new</a>
+    
+  
+
+
+    
+
+
+    
+
+
+  
+    
+
+  <h3>Instance methods inherited from class <code><a href="../../Mechanize/FormContent/Field.html">Mechanize::FormContent::Field</a></code></h3>
+  
+  
+    <a href="../../Mechanize/FormContent/Field.html#dom_class-instance-method" class="tooltip">
+      <span>dom_class</span>
+    dom_class</a>, 
+    
+  
+    <a href="../../Mechanize/FormContent/Field.html#dom_id-instance-method" class="tooltip">
+      <span>dom_id</span>
+    dom_id</a>, 
+    
+  
+    <a href="../../Mechanize/FormContent/Field.html#inspect-instance-method" class="tooltip">
+      <span>inspect</span>
+    inspect</a>, 
+    
+  
+    <a href="../../Mechanize/FormContent/Field.html#name%3AString-instance-method" class="tooltip">
+      <span>name : String</span>
+    name</a>, 
+    
+  
+    <a href="../../Mechanize/FormContent/Field.html#node%3AMechanize%3A%3ANode%7CLexbor%3A%3ANode-instance-method" class="tooltip">
+      <span>node : Mechanize::Node | Lexbor::Node</span>
+    node</a>, 
+    
+  
+    <a href="../../Mechanize/FormContent/Field.html#query_value-instance-method" class="tooltip">
+      <span>query_value</span>
+    query_value</a>, 
+    
+  
+    <a href="../../Mechanize/FormContent/Field.html#raw_value%3AString%7CNil-instance-method" class="tooltip">
+      <span>raw_value : String | Nil</span>
+    raw_value</a>, 
+    
+  
+    <a href="../../Mechanize/FormContent/Field.html#type%3AString-instance-method" class="tooltip">
+      <span>type : String</span>
+    type</a>, 
+    
+  
+    <a href="../../Mechanize/FormContent/Field.html#value%3AString%7CNil-instance-method" class="tooltip">
+      <span>value : String | Nil</span>
+    value</a>, 
+    
+  
+    <a href="../../Mechanize/FormContent/Field.html#value%3D%28value%3AString%7CNil%29-instance-method" class="tooltip">
+      <span>value=(value : String | Nil)</span>
+    value=</a>
+    
+  
+
+
+    
+
+  <h3>Constructor methods inherited from class <code><a href="../../Mechanize/FormContent/Field.html">Mechanize::FormContent::Field</a></code></h3>
+  
+  
+    <a href="../../Mechanize/FormContent/Field.html#new%28node%3AMechanize%3A%3ANode%7CLexbor%3A%3ANode%2Cvalue%3Dnil%29-class-method" class="tooltip">
+      <span>new(node : Mechanize::Node | Lexbor::Node, value = <span class="n">nil</span>)</span>
+    new</a>
+    
+  
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+</div>
+
+</body>
+</html>

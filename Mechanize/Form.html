@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Crystal Docs 1.12.1">
+<meta name="crystal_docs.project_version" content="master">
+<meta name="crystal_docs.project_name" content="mechanize">
+
+
+
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/doc.js"></script>
+
+  <meta name="repository-name" content="mechanize">
+  <title>Mechanize::Form - mechanize master</title>
+  <script type="text/javascript">
+    CrystalDocs.base_path = "../";
+  </script>
+</head>
+<body>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill="currentColor" fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+<input type="checkbox" id="sidebar-btn">
+<label for="sidebar-btn" id="sidebar-btn-label">
+  <svg class="open" xmlns="http://www.w3.org/2000/svg" height="2em" width="2em" viewBox="0 0 512 512"><title>Open Sidebar</title><path fill="currentColor" d="M80 96v64h352V96H80zm0 112v64h352v-64H80zm0 112v64h352v-64H80z"></path></svg>
+  <svg class="close" xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 512 512"><title>Close Sidebar</title><path fill="currentColor" d="m118.6 73.4-45.2 45.2L210.7 256 73.4 393.4l45.2 45.2L256 301.3l137.4 137.3 45.2-45.2L301.3 256l137.3-137.4-45.2-45.2L256 210.7Z"></path></svg>
+</label>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="../index.html">
+          mechanize
+        </a>
+      </h1>
+
+      <span class="project-version">
+        master
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="mechanize/Mechanize" data-name="mechanize">
+      <a href="../Mechanize.html">Mechanize</a>
+      
+        <ul>
+  
+  <li class=" " data-id="mechanize/Mechanize/ElementMatcher" data-name="mechanize::elementmatcher">
+      <a href="../Mechanize/ElementMatcher.html">ElementMatcher</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/ElementNotFoundError" data-name="mechanize::elementnotfounderror">
+      <a href="../Mechanize/ElementNotFoundError.html">ElementNotFoundError</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/Error" data-name="mechanize::error">
+      <a href="../Mechanize/Error.html">Error</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/File" data-name="mechanize::file">
+      <a href="../Mechanize/File.html">File</a>
+      
+    </li>
+  
+  <li class=" current" data-id="mechanize/Mechanize/Form" data-name="mechanize::form">
+      <a href="../Mechanize/Form.html">Form</a>
+      
+    </li>
+  
+  <li class="parent " data-id="mechanize/Mechanize/FormContent" data-name="mechanize::formcontent">
+      <a href="../Mechanize/FormContent.html">FormContent</a>
+      
+        <ul>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/Button" data-name="mechanize::formcontent::button">
+      <a href="../Mechanize/FormContent/Button.html">Button</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/CheckBox" data-name="mechanize::formcontent::checkbox">
+      <a href="../Mechanize/FormContent/CheckBox.html">CheckBox</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/Field" data-name="mechanize::formcontent::field">
+      <a href="../Mechanize/FormContent/Field.html">Field</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/Hidden" data-name="mechanize::formcontent::hidden">
+      <a href="../Mechanize/FormContent/Hidden.html">Hidden</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/ImageButton" data-name="mechanize::formcontent::imagebutton">
+      <a href="../Mechanize/FormContent/ImageButton.html">ImageButton</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/MultiSelectList" data-name="mechanize::formcontent::multiselectlist">
+      <a href="../Mechanize/FormContent/MultiSelectList.html">MultiSelectList</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/Option" data-name="mechanize::formcontent::option">
+      <a href="../Mechanize/FormContent/Option.html">Option</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/RadioButton" data-name="mechanize::formcontent::radiobutton">
+      <a href="../Mechanize/FormContent/RadioButton.html">RadioButton</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/ResetButton" data-name="mechanize::formcontent::resetbutton">
+      <a href="../Mechanize/FormContent/ResetButton.html">ResetButton</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/SelectList" data-name="mechanize::formcontent::selectlist">
+      <a href="../Mechanize/FormContent/SelectList.html">SelectList</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/SubmitButton" data-name="mechanize::formcontent::submitbutton">
+      <a href="../Mechanize/FormContent/SubmitButton.html">SubmitButton</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/Text" data-name="mechanize::formcontent::text">
+      <a href="../Mechanize/FormContent/Text.html">Text</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/Textarea" data-name="mechanize::formcontent::textarea">
+      <a href="../Mechanize/FormContent/Textarea.html">Textarea</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/History" data-name="mechanize::history">
+      <a href="../Mechanize/History.html">History</a>
+      
+    </li>
+  
+  <li class="parent " data-id="mechanize/Mechanize/HTTP" data-name="mechanize::http">
+      <a href="../Mechanize/HTTP.html">HTTP</a>
+      
+        <ul>
+  
+  <li class=" " data-id="mechanize/Mechanize/HTTP/Agent" data-name="mechanize::http::agent">
+      <a href="../Mechanize/HTTP/Agent.html">Agent</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/HTTP/AuthChallenge" data-name="mechanize::http::authchallenge">
+      <a href="../Mechanize/HTTP/AuthChallenge.html">AuthChallenge</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/HTTP/AuthRealm" data-name="mechanize::http::authrealm">
+      <a href="../Mechanize/HTTP/AuthRealm.html">AuthRealm</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/HTTP/AuthStore" data-name="mechanize::http::authstore">
+      <a href="../Mechanize/HTTP/AuthStore.html">AuthStore</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/HTTP/WWWAuthenticateParser" data-name="mechanize::http::wwwauthenticateparser">
+      <a href="../Mechanize/HTTP/WWWAuthenticateParser.html">WWWAuthenticateParser</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/Node" data-name="mechanize::node">
+      <a href="../Mechanize/Node.html">Node</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/Page" data-name="mechanize::page">
+      <a href="../Mechanize/Page.html">Page</a>
+      
+    </li>
+  
+  <li class="parent " data-id="mechanize/Mechanize/PageContent" data-name="mechanize::pagecontent">
+      <a href="../Mechanize/PageContent.html">PageContent</a>
+      
+        <ul>
+  
+  <li class=" " data-id="mechanize/Mechanize/PageContent/Link" data-name="mechanize::pagecontent::link">
+      <a href="../Mechanize/PageContent/Link.html">Link</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Mechanize::<wbr>Form
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Mechanize/Form.html">Mechanize::Form</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
+
+  <p>This class represents the form tag of html.</p>
+
+
+
+
+
+  <h2>
+    <a id="included-modules" class="anchor" href="#included-modules">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Included Modules
+  </h2>
+  <ul class="other-types-list">
+    
+      <li class="other-type"><a href="../Mechanize/ElementMatcher.html">Mechanize::ElementMatcher</a></li>
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+    
+      <a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form.cr#L13" target="_blank">
+        mechanize/form.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28node%3AMechanize%3A%3ANode%7CLexbor%3A%3ANode%2Cpage%3APage%7CNil%3Dnil%29-class-method" class="signature"><strong>.new</strong>(node : Mechanize::Node | Lexbor::Node, page : Page | Nil = <span class="n">nil</span>)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+
+
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#action%3AString-instance-method" class="signature"><strong>#action</strong> : String</a>
+        
+          <div class="summary"><p>return form's 'action' attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#action%3D%28action%3AString%29-instance-method" class="signature"><strong>#action=</strong>(action : String)</a>
+        
+          <div class="summary"><p>return form's 'action' attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#add_button_to_query%28button%29-instance-method" class="signature"><strong>#add_button_to_query</strong>(button)</a>
+        
+          <div class="summary"><p>This method adds a button to the query.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#button_with%28criteria%29-instance-method" class="signature"><strong>#button_with</strong>(criteria)</a>
+        
+          <div class="summary"><p>returns first element of <code><a href="../Mechanize/Form.html#buttons_with%28criteria%3AString%7CNamedTuple%7CHash%28String%2CString%29%29-instance-method">#buttons_with</a></code></p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#buttons%3AArray%28FormContent%3A%3AButton%29-instance-method" class="signature"><strong>#buttons</strong> : Array(FormContent::Button)</a>
+        
+          <div class="summary"><p>returns an array of button tags and input tag whose type is button,submit,reset,image.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#buttons_with%28criteria%3AString%7CNamedTuple%7CHash%28String%2CString%29%29-instance-method" class="signature"><strong>#buttons_with</strong>(criteria : String | NamedTuple | Hash(String, String))</a>
+        
+          <div class="summary"><p>search buttons which match condition.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#buttons_with%28criteria%2C%26%29-instance-method" class="signature"><strong>#buttons_with</strong>(criteria, &)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#checkbox_with%28criteria%29-instance-method" class="signature"><strong>#checkbox_with</strong>(criteria)</a>
+        
+          <div class="summary"><p>returns first element of <code><a href="../Mechanize/Form.html#checkboxes_with%28criteria%3AString%7CNamedTuple%7CHash%28String%2CString%29%29-instance-method">#checkboxes_with</a></code></p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#checkboxes%3AArray%28FormContent%3A%3ACheckBox%29-instance-method" class="signature"><strong>#checkboxes</strong> : Array(FormContent::CheckBox)</a>
+        
+          <div class="summary"><p>returns an array of input tags whose type is checkbox in the form.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#checkboxes_with%28criteria%3AString%7CNamedTuple%7CHash%28String%2CString%29%29-instance-method" class="signature"><strong>#checkboxes_with</strong>(criteria : String | NamedTuple | Hash(String, String))</a>
+        
+          <div class="summary"><p>search checkboxes which match condition.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#checkboxes_with%28criteria%2C%26%29-instance-method" class="signature"><strong>#checkboxes_with</strong>(criteria, &)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#enctype%3AString-instance-method" class="signature"><strong>#enctype</strong> : String</a>
+        
+          <div class="summary"><p>returns form's 'enctype' attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#field_with%28criteria%29-instance-method" class="signature"><strong>#field_with</strong>(criteria)</a>
+        
+          <div class="summary"><p>returns first element of <code><a href="../Mechanize/Form.html#fields_with%28criteria%3AString%7CNamedTuple%7CHash%28String%2CString%29%29-instance-method">#fields_with</a></code></p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#fields%3AArray%28FormContent%3A%3AField%29-instance-method" class="signature"><strong>#fields</strong> : Array(FormContent::Field)</a>
+        
+          <div class="summary"><p>returns hoge array of <code><a href="../Mechanize/FormContent/Field.html">Mechanize::FormContent::Field</a></code> in the form.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#fields_with%28criteria%3AString%7CNamedTuple%7CHash%28String%2CString%29%29-instance-method" class="signature"><strong>#fields_with</strong>(criteria : String | NamedTuple | Hash(String, String))</a>
+        
+          <div class="summary"><p>search fields which match condition.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#fields_with%28criteria%2C%26%29-instance-method" class="signature"><strong>#fields_with</strong>(criteria, &)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#method%3AString-instance-method" class="signature"><strong>#method</strong> : String</a>
+        
+          <div class="summary"><p>returns form's 'method' attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#name%3AString-instance-method" class="signature"><strong>#name</strong> : String</a>
+        
+          <div class="summary"><p>returns form's 'name' attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#node%3AMechanize%3A%3ANode%7CLexbor%3A%3ANode-instance-method" class="signature"><strong>#node</strong> : Mechanize::Node | Lexbor::Node</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#page%3APage%7CNil-instance-method" class="signature"><strong>#page</strong> : Page | Nil</a>
+        
+          <div class="summary"><p>returns the page which includes the form.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#radiobutton_with%28criteria%29-instance-method" class="signature"><strong>#radiobutton_with</strong>(criteria)</a>
+        
+          <div class="summary"><p>returns first element of <code><a href="../Mechanize/Form.html#radiobuttons_with%28criteria%3AString%7CNamedTuple%7CHash%28String%2CString%29%29-instance-method">#radiobuttons_with</a></code></p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#radiobuttons%3AArray%28FormContent%3A%3ARadioButton%29-instance-method" class="signature"><strong>#radiobuttons</strong> : Array(FormContent::RadioButton)</a>
+        
+          <div class="summary"><p>returns an array of input tags whose type is radio in the form.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#radiobuttons_with%28criteria%3AString%7CNamedTuple%7CHash%28String%2CString%29%29-instance-method" class="signature"><strong>#radiobuttons_with</strong>(criteria : String | NamedTuple | Hash(String, String))</a>
+        
+          <div class="summary"><p>search radiobuttons which match condition.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#radiobuttons_with%28criteria%2C%26%29-instance-method" class="signature"><strong>#radiobuttons_with</strong>(criteria, &)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#request_data-instance-method" class="signature"><strong>#request_data</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#selectboxes%3AArray%28FormContent%3A%3AMultiSelectList%29-instance-method" class="signature"><strong>#selectboxes</strong> : Array(FormContent::MultiSelectList)</a>
+        
+          <div class="summary"><p>returns an array of input tags whose type is select in the form.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#textareas-instance-method" class="signature"><strong>#textareas</strong></a>
+        
+          <div class="summary"><p>Returns all fields of &lt;input type=&quot;textarea&quot;&gt;</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+    
+
+  <h3>Macros inherited from module <code><a href="../Mechanize/ElementMatcher.html">Mechanize::ElementMatcher</a></code></h3>
+  
+  
+    <a href="../Mechanize/ElementMatcher.html#elements_with%28singular%2Cplural%3D%22%22%29-macro" class="tooltip">
+      <span>elements_with(singular, plural = <span class="s">&quot;&quot;</span>)</span>
+    elements_with</a>
+    
+  
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="new(node:Mechanize::Node|Lexbor::Node,page:Page|Nil=nil)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(node : <a href="../Mechanize/Node.html">Mechanize::Node</a> | Lexbor::Node, page : <a href="../Mechanize/Page.html">Page</a> | Nil = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#new%28node%3AMechanize%3A%3ANode%7CLexbor%3A%3ANode%2Cpage%3APage%7CNil%3Dnil%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form.cr#L38" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="action:String-instance-method">
+      <div class="signature">
+        
+        def <strong>action</strong> : String
+
+        <a class="method-permalink" href="#action%3AString-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>return form's 'action' attribute.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form.cr#L34" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="action=(action:String)-instance-method">
+      <div class="signature">
+        
+        def <strong>action=</strong>(action : String)
+
+        <a class="method-permalink" href="#action%3D%28action%3AString%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>return form's 'action' attribute.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form.cr#L34" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="add_button_to_query(button)-instance-method">
+      <div class="signature">
+        
+        def <strong>add_button_to_query</strong>(button)
+
+        <a class="method-permalink" href="#add_button_to_query%28button%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>This method adds a button to the query.  If the form needs to be
+submitted with multiple buttons, pass each button to this method.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form.cr#L194" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="button_with(criteria)-instance-method">
+      <div class="signature">
+        
+        def <strong>button_with</strong>(criteria)
+
+        <a class="method-permalink" href="#button_with%28criteria%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>returns first element of <code><a href="../Mechanize/Form.html#buttons_with%28criteria%3AString%7CNamedTuple%7CHash%28String%2CString%29%29-instance-method">#buttons_with</a></code></p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form.cr#L70" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="buttons:Array(FormContent::Button)-instance-method">
+      <div class="signature">
+        
+        def <strong>buttons</strong> : Array(<a href="../Mechanize/FormContent/Button.html">FormContent::Button</a>)
+
+        <a class="method-permalink" href="#buttons%3AArray%28FormContent%3A%3AButton%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>returns an array of button tags and input tag whose type is button,submit,reset,image.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form.cr#L26" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="buttons_with(criteria:String|NamedTuple|Hash(String,String))-instance-method">
+      <div class="signature">
+        
+        def <strong>buttons_with</strong>(criteria : String | NamedTuple | Hash(String, String))
+
+        <a class="method-permalink" href="#buttons_with%28criteria%3AString%7CNamedTuple%7CHash%28String%2CString%29%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>search buttons which match condition.</p>
+<p>Examples</p>
+<pre><code class="language-crystal"><span class="c"># if you specify String like &quot;foo&quot;, it searches button which name is &quot;foo&quot;.</span>
+<span class="c"># like &lt;button name=&quot;foo&quot;&gt;&lt;/button&gt;</span>
+page.buttons_with(<span class="s">&quot;foo&quot;</span>)
+<span class="c"># you can also specify tag&#39;s attribute and its&#39; value by NamedTuple or Hash(String, String).</span>
+<span class="c"># ex) &lt;button class=&quot;foo&quot;&gt;&lt;/button&gt;</span>
+page.buttons_with(<span class="s">&quot;class&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;foo&quot;</span>)
+page.buttons_with(<span class="k">class</span>: <span class="s">&quot;foo&quot;</span>)</code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form.cr#L70" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="buttons_with(criteria,&amp;)-instance-method">
+      <div class="signature">
+        
+        def <strong>buttons_with</strong>(criteria, &)
+
+        <a class="method-permalink" href="#buttons_with%28criteria%2C%26%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form.cr#L70" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="checkbox_with(criteria)-instance-method">
+      <div class="signature">
+        
+        def <strong>checkbox_with</strong>(criteria)
+
+        <a class="method-permalink" href="#checkbox_with%28criteria%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>returns first element of <code><a href="../Mechanize/Form.html#checkboxes_with%28criteria%3AString%7CNamedTuple%7CHash%28String%2CString%29%29-instance-method">#checkboxes_with</a></code></p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form.cr#L69" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="checkboxes:Array(FormContent::CheckBox)-instance-method">
+      <div class="signature">
+        
+        def <strong>checkboxes</strong> : Array(<a href="../Mechanize/FormContent/CheckBox.html">FormContent::CheckBox</a>)
+
+        <a class="method-permalink" href="#checkboxes%3AArray%28FormContent%3A%3ACheckBox%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>returns an array of input tags whose type is checkbox in the form.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form.cr#L20" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="checkboxes_with(criteria:String|NamedTuple|Hash(String,String))-instance-method">
+      <div class="signature">
+        
+        def <strong>checkboxes_with</strong>(criteria : String | NamedTuple | Hash(String, String))
+
+        <a class="method-permalink" href="#checkboxes_with%28criteria%3AString%7CNamedTuple%7CHash%28String%2CString%29%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>search checkboxes which match condition.</p>
+<p>Examples</p>
+<pre><code class="language-crystal"><span class="c"># if you specify String like &quot;foo&quot;, it searches checkbox which name is &quot;foo&quot;.</span>
+<span class="c"># like &lt;input type=&quot;checkbox&quot; name=&quot;foo&quot;&gt;&lt;/input&gt;</span>
+page.checkboxes_with(<span class="s">&quot;foo&quot;</span>)
+<span class="c"># you can also specify tag&#39;s attribute and its&#39; value by NamedTuple or Hash(String, String).</span>
+<span class="c"># ex) &lt;input type=&quot;checkbox&quot; class=&quot;foo&quot;&gt;&lt;/input&gt;</span>
+page.checkboxes_with(<span class="s">&quot;class&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;foo&quot;</span>)
+page.checkboxes_with(<span class="k">class</span>: <span class="s">&quot;foo&quot;</span>)</code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form.cr#L69" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="checkboxes_with(criteria,&amp;)-instance-method">
+      <div class="signature">
+        
+        def <strong>checkboxes_with</strong>(criteria, &)
+
+        <a class="method-permalink" href="#checkboxes_with%28criteria%2C%26%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form.cr#L69" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="enctype:String-instance-method">
+      <div class="signature">
+        
+        def <strong>enctype</strong> : String
+
+        <a class="method-permalink" href="#enctype%3AString-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>returns form's 'enctype' attribute.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form.cr#L28" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="field_with(criteria)-instance-method">
+      <div class="signature">
+        
+        def <strong>field_with</strong>(criteria)
+
+        <a class="method-permalink" href="#field_with%28criteria%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>returns first element of <code><a href="../Mechanize/Form.html#fields_with%28criteria%3AString%7CNamedTuple%7CHash%28String%2CString%29%29-instance-method">#fields_with</a></code></p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form.cr#L67" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="fields:Array(FormContent::Field)-instance-method">
+      <div class="signature">
+        
+        def <strong>fields</strong> : Array(<a href="../Mechanize/FormContent/Field.html">FormContent::Field</a>)
+
+        <a class="method-permalink" href="#fields%3AArray%28FormContent%3A%3AField%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>returns hoge array of <code><a href="../Mechanize/FormContent/Field.html">Mechanize::FormContent::Field</a></code> in the form.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form.cr#L18" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="fields_with(criteria:String|NamedTuple|Hash(String,String))-instance-method">
+      <div class="signature">
+        
+        def <strong>fields_with</strong>(criteria : String | NamedTuple | Hash(String, String))
+
+        <a class="method-permalink" href="#fields_with%28criteria%3AString%7CNamedTuple%7CHash%28String%2CString%29%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>search fields which match condition.</p>
+<p>Examples</p>
+<pre><code class="language-crystal"><span class="c"># if you specify String like &quot;foo&quot;, it searches field which name is &quot;foo&quot;.</span>
+<span class="c"># like &lt;input name=&quot;foo&quot;&gt;&lt;/input&gt;</span>
+page.fields_with(<span class="s">&quot;foo&quot;</span>)
+<span class="c"># you can also specify tag&#39;s attribute and its&#39; value by NamedTuple or Hash(String, String).</span>
+<span class="c"># ex) &lt;input class=&quot;foo&quot;&gt;&lt;/input&gt;</span>
+page.fields_with(<span class="s">&quot;class&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;foo&quot;</span>)
+page.fields_with(<span class="k">class</span>: <span class="s">&quot;foo&quot;</span>)</code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form.cr#L67" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="fields_with(criteria,&amp;)-instance-method">
+      <div class="signature">
+        
+        def <strong>fields_with</strong>(criteria, &)
+
+        <a class="method-permalink" href="#fields_with%28criteria%2C%26%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form.cr#L67" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="method:String-instance-method">
+      <div class="signature">
+        
+        def <strong>method</strong> : String
+
+        <a class="method-permalink" href="#method%3AString-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>returns form's 'method' attribute.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form.cr#L30" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="name:String-instance-method">
+      <div class="signature">
+        
+        def <strong>name</strong> : String
+
+        <a class="method-permalink" href="#name%3AString-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>returns form's 'name' attribute.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form.cr#L32" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="node:Mechanize::Node|Lexbor::Node-instance-method">
+      <div class="signature">
+        
+        def <strong>node</strong> : <a href="../Mechanize/Node.html">Mechanize::Node</a> | Lexbor::Node
+
+        <a class="method-permalink" href="#node%3AMechanize%3A%3ANode%7CLexbor%3A%3ANode-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form.cr#L16" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="page:Page|Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>page</strong> : <a href="../Mechanize/Page.html">Page</a> | Nil
+
+        <a class="method-permalink" href="#page%3APage%7CNil-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>returns the page which includes the form.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form.cr#L36" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="radiobutton_with(criteria)-instance-method">
+      <div class="signature">
+        
+        def <strong>radiobutton_with</strong>(criteria)
+
+        <a class="method-permalink" href="#radiobutton_with%28criteria%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>returns first element of <code><a href="../Mechanize/Form.html#radiobuttons_with%28criteria%3AString%7CNamedTuple%7CHash%28String%2CString%29%29-instance-method">#radiobuttons_with</a></code></p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form.cr#L68" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="radiobuttons:Array(FormContent::RadioButton)-instance-method">
+      <div class="signature">
+        
+        def <strong>radiobuttons</strong> : Array(<a href="../Mechanize/FormContent/RadioButton.html">FormContent::RadioButton</a>)
+
+        <a class="method-permalink" href="#radiobuttons%3AArray%28FormContent%3A%3ARadioButton%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>returns an array of input tags whose type is radio in the form.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form.cr#L22" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="radiobuttons_with(criteria:String|NamedTuple|Hash(String,String))-instance-method">
+      <div class="signature">
+        
+        def <strong>radiobuttons_with</strong>(criteria : String | NamedTuple | Hash(String, String))
+
+        <a class="method-permalink" href="#radiobuttons_with%28criteria%3AString%7CNamedTuple%7CHash%28String%2CString%29%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>search radiobuttons which match condition.</p>
+<p>Examples</p>
+<pre><code class="language-crystal"><span class="c"># if you specify String like &quot;foo&quot;, it searches radiobutton which name is &quot;foo&quot;.</span>
+<span class="c"># like &lt;input type=&quot;radio&quot; name=&quot;foo&quot;&gt;&lt;/input&gt;</span>
+page.radiobuttons_with(<span class="s">&quot;foo&quot;</span>)
+<span class="c"># you can also specify tag&#39;s attribute and its&#39; value by NamedTuple or Hash(String, String).</span>
+<span class="c"># ex) &lt;input type=&quot;radio&quot; class=&quot;foo&quot;&gt;&lt;/input&gt;</span>
+page.radiobuttons_with(<span class="s">&quot;class&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;foo&quot;</span>)
+page.radiobuttons_with(<span class="k">class</span>: <span class="s">&quot;foo&quot;</span>)</code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form.cr#L68" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="radiobuttons_with(criteria,&amp;)-instance-method">
+      <div class="signature">
+        
+        def <strong>radiobuttons_with</strong>(criteria, &)
+
+        <a class="method-permalink" href="#radiobuttons_with%28criteria%2C%26%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form.cr#L68" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="request_data-instance-method">
+      <div class="signature">
+        
+        def <strong>request_data</strong>
+
+        <a class="method-permalink" href="#request_data-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form.cr#L58" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="selectboxes:Array(FormContent::MultiSelectList)-instance-method">
+      <div class="signature">
+        
+        def <strong>selectboxes</strong> : Array(<a href="../Mechanize/FormContent/MultiSelectList.html">FormContent::MultiSelectList</a>)
+
+        <a class="method-permalink" href="#selectboxes%3AArray%28FormContent%3A%3AMultiSelectList%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>returns an array of input tags whose type is select in the form.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form.cr#L24" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="textareas-instance-method">
+      <div class="signature">
+        
+        def <strong>textareas</strong>
+
+        <a class="method-permalink" href="#textareas-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns all fields of &lt;input type=&quot;textarea&quot;&gt;</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form.cr#L73" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+</div>
+
+</body>
+</html>

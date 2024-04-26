@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Crystal Docs 1.12.1">
+<meta name="crystal_docs.project_version" content="master">
+<meta name="crystal_docs.project_name" content="mechanize">
+
+
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/doc.js"></script>
+
+  <meta name="repository-name" content="mechanize">
+  <title>Mechanize - mechanize master</title>
+  <script type="text/javascript">
+    CrystalDocs.base_path = "";
+  </script>
+</head>
+<body>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill="currentColor" fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+<input type="checkbox" id="sidebar-btn">
+<label for="sidebar-btn" id="sidebar-btn-label">
+  <svg class="open" xmlns="http://www.w3.org/2000/svg" height="2em" width="2em" viewBox="0 0 512 512"><title>Open Sidebar</title><path fill="currentColor" d="M80 96v64h352V96H80zm0 112v64h352v-64H80zm0 112v64h352v-64H80z"></path></svg>
+  <svg class="close" xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 512 512"><title>Close Sidebar</title><path fill="currentColor" d="m118.6 73.4-45.2 45.2L210.7 256 73.4 393.4l45.2 45.2L256 301.3l137.4 137.3 45.2-45.2L301.3 256l137.3-137.4-45.2-45.2L256 210.7Z"></path></svg>
+</label>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="index.html">
+          mechanize
+        </a>
+      </h1>
+
+      <span class="project-version">
+        master
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="mechanize/Mechanize" data-name="mechanize">
+      <a href="Mechanize.html">Mechanize</a>
+      
+        <ul>
+  
+  <li class=" " data-id="mechanize/Mechanize/ElementMatcher" data-name="mechanize::elementmatcher">
+      <a href="Mechanize/ElementMatcher.html">ElementMatcher</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/ElementNotFoundError" data-name="mechanize::elementnotfounderror">
+      <a href="Mechanize/ElementNotFoundError.html">ElementNotFoundError</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/Error" data-name="mechanize::error">
+      <a href="Mechanize/Error.html">Error</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/File" data-name="mechanize::file">
+      <a href="Mechanize/File.html">File</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/Form" data-name="mechanize::form">
+      <a href="Mechanize/Form.html">Form</a>
+      
+    </li>
+  
+  <li class="parent " data-id="mechanize/Mechanize/FormContent" data-name="mechanize::formcontent">
+      <a href="Mechanize/FormContent.html">FormContent</a>
+      
+        <ul>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/Button" data-name="mechanize::formcontent::button">
+      <a href="Mechanize/FormContent/Button.html">Button</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/CheckBox" data-name="mechanize::formcontent::checkbox">
+      <a href="Mechanize/FormContent/CheckBox.html">CheckBox</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/Field" data-name="mechanize::formcontent::field">
+      <a href="Mechanize/FormContent/Field.html">Field</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/Hidden" data-name="mechanize::formcontent::hidden">
+      <a href="Mechanize/FormContent/Hidden.html">Hidden</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/ImageButton" data-name="mechanize::formcontent::imagebutton">
+      <a href="Mechanize/FormContent/ImageButton.html">ImageButton</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/MultiSelectList" data-name="mechanize::formcontent::multiselectlist">
+      <a href="Mechanize/FormContent/MultiSelectList.html">MultiSelectList</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/Option" data-name="mechanize::formcontent::option">
+      <a href="Mechanize/FormContent/Option.html">Option</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/RadioButton" data-name="mechanize::formcontent::radiobutton">
+      <a href="Mechanize/FormContent/RadioButton.html">RadioButton</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/ResetButton" data-name="mechanize::formcontent::resetbutton">
+      <a href="Mechanize/FormContent/ResetButton.html">ResetButton</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/SelectList" data-name="mechanize::formcontent::selectlist">
+      <a href="Mechanize/FormContent/SelectList.html">SelectList</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/SubmitButton" data-name="mechanize::formcontent::submitbutton">
+      <a href="Mechanize/FormContent/SubmitButton.html">SubmitButton</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/Text" data-name="mechanize::formcontent::text">
+      <a href="Mechanize/FormContent/Text.html">Text</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/FormContent/Textarea" data-name="mechanize::formcontent::textarea">
+      <a href="Mechanize/FormContent/Textarea.html">Textarea</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/History" data-name="mechanize::history">
+      <a href="Mechanize/History.html">History</a>
+      
+    </li>
+  
+  <li class="parent " data-id="mechanize/Mechanize/HTTP" data-name="mechanize::http">
+      <a href="Mechanize/HTTP.html">HTTP</a>
+      
+        <ul>
+  
+  <li class=" " data-id="mechanize/Mechanize/HTTP/Agent" data-name="mechanize::http::agent">
+      <a href="Mechanize/HTTP/Agent.html">Agent</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/HTTP/AuthChallenge" data-name="mechanize::http::authchallenge">
+      <a href="Mechanize/HTTP/AuthChallenge.html">AuthChallenge</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/HTTP/AuthRealm" data-name="mechanize::http::authrealm">
+      <a href="Mechanize/HTTP/AuthRealm.html">AuthRealm</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/HTTP/AuthStore" data-name="mechanize::http::authstore">
+      <a href="Mechanize/HTTP/AuthStore.html">AuthStore</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/HTTP/WWWAuthenticateParser" data-name="mechanize::http::wwwauthenticateparser">
+      <a href="Mechanize/HTTP/WWWAuthenticateParser.html">WWWAuthenticateParser</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/Node" data-name="mechanize::node">
+      <a href="Mechanize/Node.html">Node</a>
+      
+    </li>
+  
+  <li class=" " data-id="mechanize/Mechanize/Page" data-name="mechanize::page">
+      <a href="Mechanize/Page.html">Page</a>
+      
+    </li>
+  
+  <li class="parent " data-id="mechanize/Mechanize/PageContent" data-name="mechanize::pagecontent">
+      <a href="Mechanize/PageContent.html">PageContent</a>
+      
+        <ul>
+  
+  <li class=" " data-id="mechanize/Mechanize/PageContent/Link" data-name="mechanize::pagecontent::link">
+      <a href="Mechanize/PageContent/Link.html">Link</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Mechanize
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="Mechanize.html">Mechanize</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
+
+  <p>This class is main class of Mechanize.cr,
+using this class' instance to start web interaction.</p>
+<p>Examples:</p>
+<pre><code class="language-crystal"><span class="c"># GET</span>
+agent <span class="o">=</span> <span class="t">Mechanize</span>.new
+<span class="c"># send GET request to http://example.com/?foo=bar</span>
+agent.get(<span class="s">&quot;http://example.com&quot;</span>,
+  params: {<span class="s">&quot;foo&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;bar&quot;</span>},
+  headers: <span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>{<span class="s">&quot;Foo&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;Bar&quot;</span>})</code></pre>
+<pre><code class="language-crystal"><span class="c"># POST</span>
+<span class="c"># send POST request whose post body is &quot;foo=bar&quot;</span>
+agent <span class="o">=</span> <span class="t">Mechanize</span>.new
+agent.post(<span class="s">&quot;http://example.com&quot;</span>,
+  query: {<span class="s">&quot;foo&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;bar&quot;</span>})</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+    
+      <a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize.cr#L33" target="_blank">
+        mechanize.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/errors/base_error.cr#L2" target="_blank">
+        mechanize/errors/base_error.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/file.cr#L1" target="_blank">
+        mechanize/file.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/form.cr#L11" target="_blank">
+        mechanize/form.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/history.cr#L3" target="_blank">
+        mechanize/history.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/http/agent.cr#L6" target="_blank">
+        mechanize/http/agent.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/http/auth_challenge.cr#L3" target="_blank">
+        mechanize/http/auth_challenge.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/http/auth_store.cr#L1" target="_blank">
+        mechanize/http/auth_store.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/http/www_authenticate_parser.cr#L7" target="_blank">
+        mechanize/http/www_authenticate_parser.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/node.cr#L1" target="_blank">
+        mechanize/node.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/page.cr#L5" target="_blank">
+        mechanize/page.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/page/link.cr#L3" target="_blank">
+        mechanize/page/link.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize/utils/element_matcher.cr#L1" target="_blank">
+        mechanize/utils/element_matcher.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+  
+    <h2>
+      <a id="constant-summary" class="anchor" href="#constant-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+      Constant Summary
+    </h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="Log">
+        <strong>Log</strong> = <code><span class="t">::</span><span class="t">Log</span>.<span class="k">for</span>(<span class="k">self</span>)</code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="USER_AGENT">
+        <strong>USER_AGENT</strong> = <code>{<span class="s">&quot;Mechanize&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;Mechanize/</span><span class="i">#{</span><span class="t">VERSION</span><span class="i">}</span><span class="s"> Crystal/</span><span class="i">#{</span><span class="t">Crystal</span><span class="t">::</span><span class="t">VERSION</span><span class="i">}</span><span class="s"> (https://github.com/Kanezoh/mechanize.cr)&quot;</span>}</code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="VERSION">
+        <strong>VERSION</strong> = <code><span class="s">&quot;0.2.0&quot;</span></code>
+      </dt>
+      
+    
+  </dl>
+
+
+
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new-class-method" class="signature"><strong>.new</strong></a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+
+
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#add_auth%28uri%3AString%2Cuser%3AString%2Cpass%3AString%29-instance-method" class="signature"><strong>#add_auth</strong>(uri : String, user : String, pass : String)</a>
+        
+          <div class="summary"><p>set basic auth credentials.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#add_to_history%28page%29-instance-method" class="signature"><strong>#add_to_history</strong>(page)</a>
+        
+          <div class="summary"><p>add page to history (<code><a href="Mechanize/History.html">Mechanize::History</a></code>).</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#back%3AMechanize%3A%3APage-instance-method" class="signature"><strong>#back</strong> : Mechanize::Page</a>
+        
+          <div class="summary"><p>get the latest page recorded in history, and the page is deleted from history.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#click%28link%3AMechanize%3A%3APageContent%3A%3ALink%29%3AMechanize%3A%3APage-instance-method" class="signature"><strong>#click</strong>(link : Mechanize::PageContent::Link) : Mechanize::Page</a>
+        
+          <div class="summary"><p>click link, and transit page.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#current_page%3AMechanize%3A%3APage-instance-method" class="signature"><strong>#current_page</strong> : Mechanize::Page</a>
+        
+          <div class="summary"><p>get the page mechanize last visited.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#delete%28uri%3AString%7CURI%2Cbody%3AString%7CNil%2Cheaders%3D%3A%3AHTTP%3A%3AHeaders.new%29%3AMechanize%3A%3APage-instance-method" class="signature"><strong>#delete</strong>(uri : String | URI, body : String | Nil, headers = <span class="t">::</span><span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>.new) : Mechanize::Page</a>
+        
+          <div class="summary"><p>Send DELETE request to specified uri with headers, and body.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#download%28uri%3AURI%7CString%2Cfilename%3AString%2Cheaders%3D%3A%3AHTTP%3A%3AHeaders.new%2Cparams%3AHash%28String%2CString%7CArray%28String%29%29%3DHash%28String%2CString%29.new%29-instance-method" class="signature"><strong>#download</strong>(uri : URI | String, filename : String, headers = <span class="t">::</span><span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>.new, params : Hash(String, String | Array(String)) = <span class="t">Hash</span>(<span class="t">String</span>, <span class="t">String</span>).new)</a>
+        
+          <div class="summary"><p>download page body from given uri.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#get%28uri%3AString%7CURI%2Cheaders%3D%3A%3AHTTP%3A%3AHeaders.new%2Cparams%3AHash%28String%2CString%7CArray%28String%29%29%3DHash%28String%2CString%29.new%29%3AMechanize%3A%3APage-instance-method" class="signature"><strong>#get</strong>(uri : String | URI, headers = <span class="t">::</span><span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>.new, params : Hash(String, String | Array(String)) = <span class="t">Hash</span>(<span class="t">String</span>, <span class="t">String</span>).new) : Mechanize::Page</a>
+        
+          <div class="summary"><p>Send GET request to specified uri with headers, and parameters.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#head%28uri%3AString%7CURI%2Cheaders%3D%3A%3AHTTP%3A%3AHeaders.new%29%3AMechanize%3A%3APage-instance-method" class="signature"><strong>#head</strong>(uri : String | URI, headers = <span class="t">::</span><span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>.new) : Mechanize::Page</a>
+        
+          <div class="summary"><p>Send HEAD request to specified uri with headers.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#history%3AMechanize%3A%3AHistory-instance-method" class="signature"><strong>#history</strong> : Mechanize::History</a>
+        
+          <div class="summary"><p>get the history (<code><a href="Mechanize/History.html">Mechanize::History</a></code>).</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#max_history%3AInt32-instance-method" class="signature"><strong>#max_history</strong> : Int32</a>
+        
+          <div class="summary"><p>Get maximum number of pages allowed in the history.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#max_history%3D%28length%3AInt32%29-instance-method" class="signature"><strong>#max_history=</strong>(length : Int32)</a>
+        
+          <div class="summary"><p>set maximum number of pages allowed in the history.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parse%28uri%2Cresponse%2Cbody%29-instance-method" class="signature"><strong>#parse</strong>(uri, response, body)</a>
+        
+          <div class="summary"><p>parse response.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#post%28uri%3AString%7CURI%2Cheaders%3D%3A%3AHTTP%3A%3AHeaders.new%2Cquery%3AHash%28String%2CString%7CArray%28String%29%29%3DHash%28String%2CString%29.new%29%3AMechanize%3A%3APage-instance-method" class="signature"><strong>#post</strong>(uri : String | URI, headers = <span class="t">::</span><span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>.new, query : Hash(String, String | Array(String)) = <span class="t">Hash</span>(<span class="t">String</span>, <span class="t">String</span>).new) : Mechanize::Page</a>
+        
+          <div class="summary"><p>Send POST request to specified uri with headers, and query.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#put%28uri%3AString%7CURI%2Cbody%3AString%7CNil%2Cheaders%3D%3A%3AHTTP%3A%3AHeaders.new%29%3AMechanize%3A%3APage-instance-method" class="signature"><strong>#put</strong>(uri : String | URI, body : String | Nil, headers = <span class="t">::</span><span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>.new) : Mechanize::Page</a>
+        
+          <div class="summary"><p>Send PUT request to specified uri with headers, and body.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#request_headers%3A%3A%3AHTTP%3A%3AHeaders-instance-method" class="signature"><strong>#request_headers</strong> : ::HTTP::Headers</a>
+        
+          <div class="summary"><p>get the value of request headers.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#request_headers%3D%28request_headers%3A%3A%3AHTTP%3A%3AHeaders%29-instance-method" class="signature"><strong>#request_headers=</strong>(request_headers : ::HTTP::Headers)</a>
+        
+          <div class="summary"><p>set the value of request headers.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#set_proxy%28address%3AString%2Cport%3AInt32%2Cuser%3AString%7CNil%3Dnil%2Cpassword%3AString%7CNil%3Dnil%29-instance-method" class="signature"><strong>#set_proxy</strong>(address : String, port : Int32, user : String | Nil = <span class="n">nil</span>, password : String | Nil = <span class="n">nil</span>)</a>
+        
+          <div class="summary"><p>Sets the proxy +address+ at +port+ with an optional +user+ and +password+</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#submit%28form%2Cbutton%3Dnil%29%3AMechanize%3A%3APage%7CNil-instance-method" class="signature"><strong>#submit</strong>(form, button = <span class="n">nil</span>) : Mechanize::Page | Nil</a>
+        
+          <div class="summary"><p>send request from form.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#user_agent%3AString-instance-method" class="signature"><strong>#user_agent</strong> : String</a>
+        
+          <div class="summary"><p>get the value of user agent.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#user_agent%3D%28user_agent%3AString%29-instance-method" class="signature"><strong>#user_agent=</strong>(user_agent : String)</a>
+        
+          <div class="summary"><p>set the value of user agent.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="new-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>
+
+        <a class="method-permalink" href="#new-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize.cr#L41" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="add_auth(uri:String,user:String,pass:String)-instance-method">
+      <div class="signature">
+        
+        def <strong>add_auth</strong>(uri : String, user : String, pass : String)
+
+        <a class="method-permalink" href="#add_auth%28uri%3AString%2Cuser%3AString%2Cpass%3AString%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>set basic auth credentials.</p>
+<pre><code class="language-crystal"><span class="c"># set an auth credential with a specific url.</span>
+agent.add_auth(<span class="s">&quot;http://example.com&quot;</span>, <span class="s">&quot;username&quot;</span>, <span class="s">&quot;password&quot;</span>)</code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize.cr#L305" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="add_to_history(page)-instance-method">
+      <div class="signature">
+        
+        def <strong>add_to_history</strong>(page)
+
+        <a class="method-permalink" href="#add_to_history%28page%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>add page to history (<code><a href="Mechanize/History.html">Mechanize::History</a></code>).</p>
+<p>if you send request, mechanize calls this method and records page,
+so you don't need to call this on your own.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize.cr#L248" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="back:Mechanize::Page-instance-method">
+      <div class="signature">
+        
+        def <strong>back</strong> : <a href="Mechanize/Page.html">Mechanize::Page</a>
+
+        <a class="method-permalink" href="#back%3AMechanize%3A%3APage-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>get the latest page recorded in history, and the page is deleted from history.</p>
+<pre><code class="language-crystal">agent.back <span class="o">=&gt;</span> <span class="c">#&lt;Mechanize::Page&gt;</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize.cr#L206" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="click(link:Mechanize::PageContent::Link):Mechanize::Page-instance-method">
+      <div class="signature">
+        
+        def <strong>click</strong>(link : <a href="Mechanize/PageContent/Link.html">Mechanize::PageContent::Link</a>) : <a href="Mechanize/Page.html">Mechanize::Page</a>
+
+        <a class="method-permalink" href="#click%28link%3AMechanize%3A%3APageContent%3A%3ALink%29%3AMechanize%3A%3APage-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>click link, and transit page.</p>
+<pre><code class="language-crystal">page <span class="o">=</span> agent.get(<span class="s">&quot;http://example.com&quot;</span>)
+link <span class="o">=</span> page.links.first
+page2 <span class="o">=</span> agent.click(link)</code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize.cr#L277" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="current_page:Mechanize::Page-instance-method">
+      <div class="signature">
+        
+        def <strong>current_page</strong> : <a href="Mechanize/Page.html">Mechanize::Page</a>
+
+        <a class="method-permalink" href="#current_page%3AMechanize%3A%3APage-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>get the page mechanize last visited.</p>
+<pre><code class="language-crystal">agent.current_page <span class="o">=&gt;</span> <span class="c">#&lt;Mechanize::Page&gt;</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize.cr#L197" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="delete(uri:String|URI,body:String|Nil,headers=::HTTP::Headers.new):Mechanize::Page-instance-method">
+      <div class="signature">
+        
+        def <strong>delete</strong>(uri : String | URI, body : String | Nil, headers = <span class="t">::</span><span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>.new) : <a href="Mechanize/Page.html">Mechanize::Page</a>
+
+        <a class="method-permalink" href="#delete%28uri%3AString%7CURI%2Cbody%3AString%7CNil%2Cheaders%3D%3A%3AHTTP%3A%3AHeaders.new%29%3AMechanize%3A%3APage-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Send DELETE request to specified uri with headers, and body.</p>
+<p>Examples (send delete request whose body is &quot;hello&quot;)</p>
+<pre><code class="language-crystal">agent <span class="o">=</span> <span class="t">Mechanize</span>.new
+agent.delete(<span class="s">&quot;http://example.com&quot;</span>,
+  body: <span class="s">&quot;hello&quot;</span>)</code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize.cr#L128" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="download(uri:URI|String,filename:String,headers=::HTTP::Headers.new,params:Hash(String,String|Array(String))=Hash(String,String).new)-instance-method">
+      <div class="signature">
+        
+        def <strong>download</strong>(uri : URI | String, filename : String, headers = <span class="t">::</span><span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>.new, params : Hash(String, String | Array(String)) = <span class="t">Hash</span>(<span class="t">String</span>, <span class="t">String</span>).new)
+
+        <a class="method-permalink" href="#download%28uri%3AURI%7CString%2Cfilename%3AString%2Cheaders%3D%3A%3AHTTP%3A%3AHeaders.new%2Cparams%3AHash%28String%2CString%7CArray%28String%29%29%3DHash%28String%2CString%29.new%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>download page body from given uri.</p>
+<pre><code class="language-crystal"><span class="c"># make download.html whose content is http://example.com&#39;s html.</span>
+agent.download(<span class="s">&quot;http://example.com&quot;</span>, <span class="s">&quot;download.html&quot;</span>)</code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize.cr#L287" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="get(uri:String|URI,headers=::HTTP::Headers.new,params:Hash(String,String|Array(String))=Hash(String,String).new):Mechanize::Page-instance-method">
+      <div class="signature">
+        
+        def <strong>get</strong>(uri : String | URI, headers = <span class="t">::</span><span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>.new, params : Hash(String, String | Array(String)) = <span class="t">Hash</span>(<span class="t">String</span>, <span class="t">String</span>).new) : <a href="Mechanize/Page.html">Mechanize::Page</a>
+
+        <a class="method-permalink" href="#get%28uri%3AString%7CURI%2Cheaders%3D%3A%3AHTTP%3A%3AHeaders.new%2Cparams%3AHash%28String%2CString%7CArray%28String%29%29%3DHash%28String%2CString%29.new%29%3AMechanize%3A%3APage-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Send GET request to specified uri with headers, and parameters.</p>
+<p>Examples (send request to http://example.com/?foo=bar)</p>
+<pre><code class="language-crystal">agent <span class="o">=</span> <span class="t">Mechanize</span>.new
+agent.get(<span class="s">&quot;http://example.com&quot;</span>,
+  params: {<span class="s">&quot;foo&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;bar&quot;</span>},
+  headers: <span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>{<span class="s">&quot;Foo&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;Bar&quot;</span>})</code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize.cr#L57" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="head(uri:String|URI,headers=::HTTP::Headers.new):Mechanize::Page-instance-method">
+      <div class="signature">
+        
+        def <strong>head</strong>(uri : String | URI, headers = <span class="t">::</span><span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>.new) : <a href="Mechanize/Page.html">Mechanize::Page</a>
+
+        <a class="method-permalink" href="#head%28uri%3AString%7CURI%2Cheaders%3D%3A%3AHTTP%3A%3AHeaders.new%29%3AMechanize%3A%3APage-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Send HEAD request to specified uri with headers.</p>
+<p>Examples (send HEAD request to http://example.com/)</p>
+<pre><code class="language-crystal">agent <span class="o">=</span> <span class="t">Mechanize</span>.new
+agent.head(<span class="s">&quot;http://example.com&quot;</span>)</code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize.cr#L147" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="history:Mechanize::History-instance-method">
+      <div class="signature">
+        
+        def <strong>history</strong> : <a href="Mechanize/History.html">Mechanize::History</a>
+
+        <a class="method-permalink" href="#history%3AMechanize%3A%3AHistory-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>get the history (<code><a href="Mechanize/History.html">Mechanize::History</a></code>).
+the requests mechanize send is recorded in this history.</p>
+<pre><code class="language-crystal">agent.history <span class="o">=&gt;</span> <span class="c">#&lt;Mechanize::History&gt;</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize.cr#L240" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="max_history:Int32-instance-method">
+      <div class="signature">
+        
+        def <strong>max_history</strong> : Int32
+
+        <a class="method-permalink" href="#max_history%3AInt32-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Get maximum number of pages allowed in the history.
+The default setting is 100 pages.</p>
+<pre><code class="language-crystal">agent.max_history <span class="c"># =&gt; 100</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize.cr#L257" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="max_history=(length:Int32)-instance-method">
+      <div class="signature">
+        
+        def <strong>max_history=</strong>(length : Int32)
+
+        <a class="method-permalink" href="#max_history%3D%28length%3AInt32%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>set maximum number of pages allowed in the history.
+the default value is 100.</p>
+<pre><code class="language-crystal">agent.max_history <span class="o">=</span> <span class="n">150</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize.cr#L266" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parse(uri,response,body)-instance-method">
+      <div class="signature">
+        
+        def <strong>parse</strong>(uri, response, body)
+
+        <a class="method-permalink" href="#parse%28uri%2Cresponse%2Cbody%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>parse response. it is used internally.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize.cr#L230" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="post(uri:String|URI,headers=::HTTP::Headers.new,query:Hash(String,String|Array(String))=Hash(String,String).new):Mechanize::Page-instance-method">
+      <div class="signature">
+        
+        def <strong>post</strong>(uri : String | URI, headers = <span class="t">::</span><span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>.new, query : Hash(String, String | Array(String)) = <span class="t">Hash</span>(<span class="t">String</span>, <span class="t">String</span>).new) : <a href="Mechanize/Page.html">Mechanize::Page</a>
+
+        <a class="method-permalink" href="#post%28uri%3AString%7CURI%2Cheaders%3D%3A%3AHTTP%3A%3AHeaders.new%2Cquery%3AHash%28String%2CString%7CArray%28String%29%29%3DHash%28String%2CString%29.new%29%3AMechanize%3A%3APage-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Send POST request to specified uri with headers, and query.</p>
+<p>Examples (send post request whose post body is &quot;foo=bar&quot;)</p>
+<pre><code class="language-crystal">agent <span class="o">=</span> <span class="t">Mechanize</span>.new
+agent.post(<span class="s">&quot;http://example.com&quot;</span>,
+  query: {<span class="s">&quot;foo&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;bar&quot;</span>},
+  headers: <span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>{<span class="s">&quot;Foo&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;Bar&quot;</span>})</code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize.cr#L77" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="put(uri:String|URI,body:String|Nil,headers=::HTTP::Headers.new):Mechanize::Page-instance-method">
+      <div class="signature">
+        
+        def <strong>put</strong>(uri : String | URI, body : String | Nil, headers = <span class="t">::</span><span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>.new) : <a href="Mechanize/Page.html">Mechanize::Page</a>
+
+        <a class="method-permalink" href="#put%28uri%3AString%7CURI%2Cbody%3AString%7CNil%2Cheaders%3D%3A%3AHTTP%3A%3AHeaders.new%29%3AMechanize%3A%3APage-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Send PUT request to specified uri with headers, and body.</p>
+<p>Examples (send put request whose body is &quot;hello&quot;)</p>
+<pre><code class="language-crystal">agent <span class="o">=</span> <span class="t">Mechanize</span>.new
+agent.put(<span class="s">&quot;http://example.com&quot;</span>,
+  body: <span class="s">&quot;hello&quot;</span>)</code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize.cr#L102" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="request_headers:::HTTP::Headers-instance-method">
+      <div class="signature">
+        
+        def <strong>request_headers</strong> : ::HTTP::Headers
+
+        <a class="method-permalink" href="#request_headers%3A%3A%3AHTTP%3A%3AHeaders-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>get the value of request headers.</p>
+<pre><code class="language-crystal">agent.request_headers <span class="c"># =&gt; HTTP::Headers{&quot;Foo&quot; =&gt; &quot;Bar&quot;}</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize.cr#L161" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="request_headers=(request_headers:::HTTP::Headers)-instance-method">
+      <div class="signature">
+        
+        def <strong>request_headers=</strong>(request_headers : ::HTTP::Headers)
+
+        <a class="method-permalink" href="#request_headers%3D%28request_headers%3A%3A%3AHTTP%3A%3AHeaders%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>set the value of request headers.</p>
+<pre><code class="language-crystal">agent.request_headers <span class="o">=</span> <span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>{<span class="s">&quot;Foo&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;Bar&quot;</span>}</code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize.cr#L170" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="set_proxy(address:String,port:Int32,user:String|Nil=nil,password:String|Nil=nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>set_proxy</strong>(address : String, port : Int32, user : String | Nil = <span class="n">nil</span>, password : String | Nil = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#set_proxy%28address%3AString%2Cport%3AInt32%2Cuser%3AString%7CNil%3Dnil%2Cpassword%3AString%7CNil%3Dnil%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Sets the proxy +address+ at +port+ with an optional +user+ and +password+</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize.cr#L310" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="submit(form,button=nil):Mechanize::Page|Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>submit</strong>(form, button = <span class="n">nil</span>) : <a href="Mechanize/Page.html">Mechanize::Page</a> | Nil
+
+        <a class="method-permalink" href="#submit%28form%2Cbutton%3Dnil%29%3AMechanize%3A%3APage%7CNil-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>send request from form. 'form' args is necessary, but 'button' is optional.
+you can specify button if you want to use other button which is not in the form.</p>
+<p><span class="flag orange">TODO</span>  now only supports POST. other HTTP methods should be supported.</p>
+<pre><code class="language-crystal">page <span class="o">=</span> agent.get(<span class="s">&quot;http://example.com&quot;</span>)
+form <span class="o">=</span> page.forms[<span class="n">0</span>]
+<span class="c"># set field value</span>
+form.field_with(<span class="s">&quot;foo&quot;</span>).value <span class="o">=</span> <span class="s">&quot;bar&quot;</span>
+agent.submit(form)</code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize.cr#L221" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="user_agent:String-instance-method">
+      <div class="signature">
+        
+        def <strong>user_agent</strong> : String
+
+        <a class="method-permalink" href="#user_agent%3AString-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>get the value of user agent.</p>
+<pre><code class="language-crystal">agent.user_agent <span class="c"># =&gt; &quot;Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; NP06; rv:11.0) like Gecko&quot;</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize.cr#L179" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="user_agent=(user_agent:String)-instance-method">
+      <div class="signature">
+        
+        def <strong>user_agent=</strong>(user_agent : String)
+
+        <a class="method-permalink" href="#user_agent%3D%28user_agent%3AString%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>set the value of user agent.</p>
+<pre><code class="language-crystal">agent.user_agent <span class="o">=</span> <span class="s">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; NP06; rv:11.0) like Gecko&quot;</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/Kanezoh/mechanize.cr/blob/d4f7054a88ac56310381235d398960cd7ee3c2c7/src/mechanize.cr#L188" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+</div>
+
+</body>
+</html>
