@@ -1,5 +1,6 @@
 require "spec"
 require "webmock"
+require "http_proxy"
 require "../src/mechanize"
 
 WebMock.stub(:get, "example.com")
@@ -46,3 +47,22 @@ WebMock.stub(:post, "example.com/post_path")
 WebMock.stub(:post, "example.com/post_path")
   .with(body: "name=foo&email=bar&commit=submit", headers: {"Content-Type" => "application/x-www-form-urlencoded"})
   .to_return(body: "success with button")
+
+def with_proxy_server(host = "127.0.0.1", port = 8080, &)
+  wants_close = Channel(Nil).new
+  server = HTTP::Proxy::Server.new
+
+  spawn do
+    server.bind_tcp(host, port)
+    server.listen
+  end
+
+  spawn do
+    wants_close.receive
+    server.close
+  end
+
+  Fiber.yield
+
+  yield host, port, wants_close
+end
