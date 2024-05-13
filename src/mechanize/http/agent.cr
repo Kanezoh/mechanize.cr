@@ -45,7 +45,7 @@ class Mechanize
         uri, params = resolve_parameters(uri, method, params)
         client = ::HTTP::Client.new(uri)
         request_auth client, uri
-        client.set_proxy(@proxy) if @proxy
+        @proxy.try { |proxy| client.proxy = proxy }
         response = http_request(client, uri, method, params, body)
         body = response.not_nil!.body
         page = response_parse(response, body, uri)
