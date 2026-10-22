@@ -228,7 +228,8 @@ class Mechanize
 
   # parse response. it is used internally.
   def parse(uri, response, body)
-    code = response.not_nil!.status_code
+    response = response.not_nil!
+    code = response.status_code
     Mechanize::Page.new(uri, response, body, code, self)
   end
 
@@ -312,7 +313,7 @@ class Mechanize
   end
 
   # Runs given block, then resets the page history as it was before.
-  private def transact
+  private def transact(&)
     # save the previous history status.
     history_backup = Mechanize::History.new(@agent.history.max_size, @agent.history.array.dup)
     begin

@@ -15,7 +15,7 @@ class BasicAuthHandler < Kemal::BasicAuth::Handler
   end
 end
 
-add_handler BasicAuthHandler.new("username", "password")
+use BasicAuthHandler.new("username", "password")
 
 get "/secret" do
   "Authorized"
@@ -29,7 +29,7 @@ spawn do
   Kemal.run(port: TEST_SERVER_PORT)
 end
 spawn do
-  sleep 300000
+  sleep 300000.seconds
 end
 
 until Kemal.config.running
